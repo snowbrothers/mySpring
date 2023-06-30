@@ -1,6 +1,5 @@
-package com.momo.ex;
+package com.momo.ex03;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.sql.Connection;
@@ -11,24 +10,10 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-public class TestOjdbc {
-	
-	@Test
-	public void calcTest() {
-		Clac clac = new Clac();
-		
-		int res = clac.add(18, 28);
-		
-		System.out.println(res);
-		
-		// 두 숫자의 결과 값이 같은지
-		// assertEquals(예상 결과값, 실제값);
-		assertEquals(46, res);
-	}
-	
+public class OjdbcTest {
 
 	@Test
-	public void ojdbcTest() {
+	public void test() {
 		
 		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 		String id = "library";
@@ -73,6 +58,7 @@ public class TestOjdbc {
 		
 		
 	}
+	
 	
 	
 }
