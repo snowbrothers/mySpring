@@ -43,9 +43,9 @@ board 출력 : ${board }
 		<tr>
 			<td colspan="4" align="center">
 				<button type="button" onclick="confirmEdit()" >수정하기</button>
-				<button type="reset" onclick="confirmDelete()">다시작성</button>
+				<button type="reset" >다시작성</button>
 			
-				<button type="button" onclick="location.href='/board/list'">목록 보기</button>
+				<button type="button" onclick="location.href='/board/list_bs'">목록 보기</button>
 			</td>
 		</tr>
 		<tr></tr>

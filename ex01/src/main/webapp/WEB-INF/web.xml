@@ -38,6 +38,8 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<!-- 필터를 활용한 인코딩 설정 -->
+	<!-- 톰캣에 의한 설정 -->
 	<filter>
 		<filter-name>SetCharacterEncodingFilter</filter-name>
 		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
@@ -47,6 +49,7 @@
 		</init-param>
 	</filter>
 
+	<!-- 지정해놓은 Url 패턴을 거칠때만 설정이 적용 -->
 	<filter-mapping>
 		<filter-name>SetCharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>

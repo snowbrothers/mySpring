@@ -22,7 +22,7 @@
 
 	<!-- resultType : List에 담겨있는 VO 의 풀경로 -->
 	<select id="getListXml" resultType="com.momo.vo.BoardVO">
-		select * from tbl_board
+		select * from tbl_board order by bno desc
 	</select>
 
 	<!-- 동적인 쿼리 작성 ) mybatis는 내부적으로 preparedStatement를 활용합니다. > -> #{속성} 쿼리 

@@ -9,6 +9,15 @@
 </head>
 <body>
 
+<!-- 메세지 alert 창으로 띄우고 이전창으로 .. -->
+<script type="text/javascript">
+	let msg = '${msg}'
+	if(msg != ''){
+		alert(msg);
+		
+	}
+</script>
+
 	<h3>게시판</h3>
 
 	${list }

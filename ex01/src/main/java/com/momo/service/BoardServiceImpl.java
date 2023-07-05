@@ -59,7 +59,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertSelectKey(BoardVO board) {
 		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		res = boardMapper.insertSelectKey(board);
+		
+		return res;
 	}
 
 	/**
