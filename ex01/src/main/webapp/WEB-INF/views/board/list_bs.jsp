@@ -66,9 +66,7 @@ crossorigin="anonymous">
 			
 			
 		}
-		
-	</script>
-    
+	</script>    
   </head>
   <body>
    
@@ -80,7 +78,7 @@ crossorigin="anonymous">
     <p class="lead">부트스트랩을 이용한 게시판 만들기</p>
     <a class="btn btn-lg btn-primary" href="../board/write" role="button">글쓰기 &raquo;</a>
   </div>
-
+<%@include file ="../common/searchForm.jsp"%>
   <p></p>
   <br>
 
@@ -100,7 +98,8 @@ crossorigin="anonymous">
     </c:forEach>
   </div>
 
-
+		<!-- 페이징 include -->
+		<%@include file ="../common/pageNavi.jsp"%>
 </main>
 
 <!-- Modal -->
@@ -121,6 +120,10 @@ crossorigin="anonymous">
     </div>
   </div>
 </div>
+
+
+	
+
 
 <script
 src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

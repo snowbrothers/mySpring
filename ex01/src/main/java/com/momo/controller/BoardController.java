@@ -1,5 +1,6 @@
 package com.momo.controller;
 
+import java.awt.print.Book;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.momo.service.BoardService;
 import com.momo.vo.BoardVO;
+import com.momo.vo.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -37,31 +39,31 @@ public class BoardController {
 	}
 	
 	@GetMapping("list_bs")
-	public void list_bs(Model model) {
-		List<BoardVO> list = boardService.getListXml();
-		 log.info("=============================");
-		 log.info(list);
-		 log.info("=============================");
-		 model.addAttribute("list",boardService.getListXml());
+	public void list_bs(Model model, Criteria cri) {
+		boardService.getListXml(cri, model);
+		 
 	}
 	
 	@Autowired
 	BoardService boardService;
 	
-	@GetMapping("list")
-	public void getList(Model model) {
-		
-		 List<BoardVO> list = boardService.getListXml();
-		 log.info("=============================");
-		 log.info(list);
-		 log.info("=============================");
-		 model.addAttribute("list",boardService.getListXml());
-		 
-		 
-	}
+//	@GetMapping("list")
+//	public void getList(Model model) {
+//		
+//		 List<BoardVO> list = boardService.getListXml(cri, model);
+//		 log.info("=============================");
+//		 log.info(list);
+//		 log.info("=============================");
+//		 model.addAttribute("list",boardService.getListXml());
+//		 
+//		 
+//	}
 	
 	@GetMapping("view")
-	public void getOne(int bno, Model model) {
+	public void getOne(@RequestParam ("bno") int bno
+						, Model model) {
+		
+		System.out.println(bno+"++++++++");
 		
 		 model.addAttribute("board",boardService.getOne(bno));
 		
@@ -135,17 +137,26 @@ public class BoardController {
 	
 	
 	@GetMapping("delete")
-	public String delete(@RequestParam("bno") int bno,
-						Model model) {
+	public String delete(@RequestParam("bno") int bno
+						,RedirectAttributes rttr
+						,Model model) {
 		
-		model.addAttribute(boardService.delete(bno));
-			
-		return "redirect:/board/list_bs";
+		
+		int res = boardService.delete(bno);
+		
+		if(res > 0) {
+			rttr.addFlashAttribute("삭제되었습니다.");
+			return "redirect:/board/list_bs";
+		}else {
+			model.addAttribute("msg","삭제중 예외가 발생 하였습니다.");
+			return "/board/message";
+		}
+	
 	}
 	
 	// 수정하기
 	@GetMapping("edit")
-	public void edit(BoardVO board, Model model, RedirectAttributes rttr) {
+	public String edit(BoardVO board, Model model, RedirectAttributes rttr) {
 		
 		 model.addAttribute("board",boardService.getOne(board.getBno()));
 		
@@ -153,16 +164,36 @@ public class BoardController {
 		 
 		 rttr.addFlashAttribute("board", board);
 		 
+		 /*
+		  * 수정하기
+		  *  - bno 를 파라메터로 받아야함,
+		  *  - 버튼, 버튼의 액션이 달라짐
+		  * */
+		 
+		 return "/board/write";
+		 
 	}
 	
-	@PostMapping("edit")
-	public String editAction(BoardVO board, Model model) {
+	@PostMapping("editAction")
+	public String editAction(BoardVO board
+								, Model model) {
 		
-		model.addAttribute("board",boardService.update(board));
+		int res = boardService.update(board);
 		
+		//model.addAttribute("board",Boo)
+		 
 		System.err.println("수정하기 post 실행");
+		System.err.println(board.getBno());
+		System.out.println(res+"rerererererer");
+		if(res > 0) {
+			
+			return "redirect:/board/view?bno="+board.getBno();
+		}else {
+
+			model.addAttribute("msg","수정 중 예외 사항이 발생하였습니다.");
+			return "/board/message";	
+		}
 		
-		return "redirect:/board/view?bno="+board.getBno();
 	}
 	
 	

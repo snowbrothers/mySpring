@@ -18,6 +18,7 @@ function confirmEdit() {
 
 <h3>게시판 상세보기</h3>
 
+여기아니죠??
 board 출력 : ${board }
 
 <form method="post">

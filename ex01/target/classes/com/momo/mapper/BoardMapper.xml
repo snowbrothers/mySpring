@@ -22,7 +22,21 @@
 
 	<!-- resultType : List에 담겨있는 VO 의 풀경로 -->
 	<select id="getListXml" resultType="com.momo.vo.BoardVO">
-		select * from tbl_board order by bno desc
+	<![CDATA[
+	select * 
+		from(
+			select t.*, rownum rn 
+			 from(		
+		select * 
+			from tbl_board 
+			where bno>0
+			]]>
+			<include refid="criteria"/>
+			order by bno desc
+			) t
+		)
+     where rn between #{startNo} and #{endNo}
+     							
 	</select>
 
 	<!-- 동적인 쿼리 작성 ) mybatis는 내부적으로 preparedStatement를 활용합니다. > -> #{속성} 쿼리 
@@ -64,7 +78,33 @@
 	
 	<select id="getTotalCnt" resultType="int">
 		select count(*) from tbl_board
+		where 1 = 1
+		<include refid="criteria"/>
 	</select>
 	
+	<!-- 
+		반복되는 쿼리를 미리 작성해 놓고 재활용.
+	    	반복할 쿼리 선언 : <sql id="">
+	    	선언한 쿼리 사용 : <include refID = "criteria">
+	    	변수 사용 방법 : <property name ="">
+	    	
+	    	refId = reference id
+		
+	 -->
+	
+	<sql id="criteria">
+			<choose>
+			<when test="searchField =='title'">
+				and title like '%' || #{searchWord} || '%'
+			</when>
+			<when test="searchField =='writer'">
+				and title like '%' || #{searchWord} || '%'
+			</when>
+			
+			<when test="searchField =='content'">
+				and title like '%' || #{searchWord} || '%'
+			</when>
+			</choose>
+	</sql>
 
 </mapper>
