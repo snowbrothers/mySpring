@@ -24,7 +24,7 @@
 	}
 	
 	
-	
+	// 테스트
 	
 	// 2. 리스트를 화면에 출력
 	function replyView(list){
