@@ -133,7 +133,10 @@ public class BoardController {
 	@PostMapping("editAction")
 	public String editAction(BoardVO board
 								, RedirectAttributes rttr
-								, Model model) {
+								, Model model
+								, int pageNo) {
+
+		System.err.println("pageNo :" + pageNo);
 		// 수정
 		int res = boardService.update(board);
 		
@@ -142,9 +145,10 @@ public class BoardController {
 			// RedirectAttributes를 이용 합니다. 
 			//model.addAttribute("msg", "수정 되었습니다.");
 			rttr.addFlashAttribute("msg", "수정되었습니다.");
-			
+			rttr.addAttribute("pageNo", pageNo);
+			rttr.addAttribute("bno", board.getBno());
 			// 상세페이지로 이동
-			return "redirect:/board/view?bno=" + board.getBno();			
+			return "redirect:/board/view";			
 		} else {
 			model.addAttribute("msg", "수정중 예외사항이 발생 하였습니다.");
 			return "/board/message";

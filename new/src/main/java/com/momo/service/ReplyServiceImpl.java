@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.momo.mapper.ReplyMapper;
+import com.momo.vo.Criteria;
 import com.momo.vo.ReplyVo;
 
 @Service
@@ -48,6 +49,18 @@ public class ReplyServiceImpl implements ReplyService {
 		res = replyMapper.update(vo);
 		
 		return res;
+	}
+
+	@Override
+	public List<ReplyVo> NewGetList(int bno, Criteria cri) {
+		// TODO Auto-generated method stub
+		return replyMapper.NewGetList(bno, cri);
+	}
+
+	@Override
+	public int totalCnt(int bno) {
+		// TODO Auto-generated method stub
+		return replyMapper.totalCnt(bno);
 	}
 
 }

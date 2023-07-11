@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.momo.service.ReplyService;
+import com.momo.vo.Criteria;
+import com.momo.vo.PageDto;
 import com.momo.vo.ReplyVo;
 
 import lombok.extern.log4j.Log4j;
@@ -35,10 +37,36 @@ public class ReplyController {
 
 		return "test";
 	}
+	
+	@GetMapping("/reply/NewList/{bno}/{page}")
+	public Map<String, Object> NewGetList(@PathVariable("bno") int bno
+				, @PathVariable("page") int page){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		log.info("bno : " + bno );
+		
+		
+		Criteria cri = new Criteria();
+		cri.setPageNo(page);
+		
+		// 페이지 처리(시작번호 ~ 끝번호) 
+		List<ReplyVo> list = service.NewGetList(bno, cri);
+		int totalCnt = service.totalCnt(bno);
+		// 페이지 블럭 생성
+		PageDto pageDto = new PageDto(cri, totalCnt);
+		
+		map.put("list",list);
+		map.put("pageDto",pageDto);
+		
+		
+		return map;
+	}
 
 	/**
 	 * PathVariable URL 경로에 있는 값을 파라메터로 추출하려고 할 때 사용한다.
 	 * 
+	 *  URL 경로의 일부를 변수로 사용.
+	 *  
 	 * @return
 	 */
 	@GetMapping("/reply/list/{bno}")
@@ -51,6 +79,8 @@ public class ReplyController {
 
 	/**
 	 * RequestBody JSON 데이터를 원하는 타입으로 바인딩 처리
+	 * 
+	 * JSON 형식의 문자열을 받음 -> 내가 원하는 타입의 객체에 저장 가능 ^^v
 	 * 
 	 * @param vo
 	 * @return

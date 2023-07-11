@@ -42,6 +42,7 @@
   <!-- 글쓰기 -->
   <div class="list-group w-auto">
     <form method="post" action="/board/write" name="viewForm">
+    <input type="text" name="pageNo" value="${param.pageNo }">
 	<div class="mb-3">
 	  <label for="title" class="form-label">제목</label>
 	  <input name="title" id="title" 
