@@ -58,6 +58,7 @@ public class ReplyController {
 		map.put("list",list);
 		map.put("pageDto",pageDto);
 		
+		System.err.println("실행 ================================ Controller");
 		
 		return map;
 	}
@@ -90,21 +91,33 @@ public class ReplyController {
 
 		log.info("============================== insert");
 		log.info("replyVo : " + vo);
-
-		int res = service.insert(vo);
-
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		if (res > 0) {
+		try {
+			
+			int res = service.insert(vo);
 
-			map.put("result", "success");
-
-		} else {
-
+			if (res > 0) {
+				
+				map.put("result", "success");
+				
+			} else {
+				
+				map.put("result", "fail");
+				map.put("message", "댓글 등록중 예외사항 발생");
+				
+			}
+			
+		} catch (Exception e) {
 			map.put("result", "fail");
-			map.put("message", "댓글 등록중 예외사항 발생");
-
+			map.put("message", e.getMessage());
+			
 		}
+
+		
+		
+		
+		
 
 		return map;
 	}

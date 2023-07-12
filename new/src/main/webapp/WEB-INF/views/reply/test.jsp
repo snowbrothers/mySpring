@@ -11,14 +11,17 @@
 	
 // 페이지가 다 불러들여 온 후 실행하는 함수
 // window.onload
-window.onload = function(){
+
+
+window.addEventListener("load",function(){
+	
+
 	
 	// 리스트 조회 및 출력
+
 	
+	getReplyList();
 	
-	
-	
-	NewGetList(1);
 	
 	btnWrite.addEventListener('click', function(){
 		
@@ -50,16 +53,12 @@ window.onload = function(){
 		// 4. 서버에 요청
 		fetchPost('/reply/insert', replyObj,replyWriteRes);
 		
-		fetch('/reply/insert'
-				,{method : 'post'
-					,headers : {'Content-type' : 'application/json'}
-					,body : replyJson})
-			.then(response => response.json())
-			.then(map => replyWriteRes(map));
+		
 		
 	})
 
-}
+
+})
 	
 	//btnEdit.addEventListener('click', function(){
 		
@@ -92,7 +91,7 @@ window.onload = function(){
 	}
 	
 	
-	// 1. 서버에 댓글리스트 요청
+	/*/ 1. 서버에 댓글리스트 요청
 	function getList(){
 		
 	let bno = document.querySelector("#bno").value;
@@ -103,20 +102,20 @@ window.onload = function(){
 	// 반환받은 오브젝트를 이용하여 화면에 출력
 	.then(list => replyView(list));
 	
-	}
+	}*/
 	
 	function getPage(page){
 		
 		localStorage.setItem('pageNo', page);
 		document.querySelector("#page").value = page;
-		NewGetList(page);
+		getReplyList();
 	}
 	
 	
 	// 테스트
 	
 	// 2. 리스트를 화면에 출력
-	function replyView(map){
+	/*function replyView(map){
 		// 콘솔차에 리스트 출력
 		// map 으로부터 꺼내올 수 있음.
 		let list = map.list;
@@ -139,7 +138,7 @@ window.onload = function(){
 			replyDiv.innerHTML += '<br>' + reply.rno;
 			replyDiv.innerHTML += '<br>' + reply.reply;
 			replyDiv.innerHTML += '<br>' + reply.replyer;
-			replyDiv.innerHTML += '<br>' + reply.replyDate + '<p></p>';*/
+			replyDiv.innerHTML += '<br>' + reply.replyDate + '<p></p>';
 			
 			replyDiv.innerHTML += 
 				
@@ -184,7 +183,7 @@ window.onload = function(){
 			
 			let activeStr =  (pageDto.cri.pageNo == i)?'active':'';
 				 
-		pageBlock += ' <li class="page-item ' +activeStr+ '" onclick="getPage('+i+')"><a class="page-link" onclick="NewGetList('+i+')">'+i+'</a></li>';
+		pageBlock += ' <li class="page-item ' +activeStr+ '" onclick="getPage('+i+')"><a class="page-link" onclick="getReplyList('+i+')">'+i+'</a></li>';
 			 
 			 }
 			 
@@ -207,7 +206,7 @@ window.onload = function(){
 		
 		replyDiv.innerHTML += pageBlock;
 		
-	}
+	}*/
 	
 	
 	
@@ -220,7 +219,7 @@ window.onload = function(){
 			if(map.result == 'success'){
 				// 등록성공
 				// 리스트 조회및 출력
-				NewGetList(1);
+				getReplyList();
 			}else{
 				alert(map.message);
 			}
@@ -232,7 +231,7 @@ window.onload = function(){
 		    .then(map => {
 		        if (map.result === 'success') {
 		            // Deletion successful
-		            NewGetList(1); // Refresh the reply list
+		           getReplyList(); // Refresh the reply list
 		        } else {
 		            alert(map.message);
 		        }
@@ -287,33 +286,6 @@ window.onload = function(){
 			
 		}
 		
-		function fetchGet(url, callback){
-			fetch(url)
-			// 요청결과 json 문자열을 javascript 객체로 반환
-			.then(response => response.json())
-			// 콜백함수 실행
-			.then(map => callback(map));
-		}
-		
-		// 데이터를 함께 전송하고싶당 ㅇㅅㅇ
-		function fetchPost(url, obj, callback){
-			
-		try {
-			
-			fetch(url
-					,{method : 'post'
-					, headers : {'Content-Type' : 'application/json'}
-					, body : JSON.stringify(obj)
-			})
-			// 요청결과 json 문자열을 javascript 객체로 반환
-			.then(response => response.json())
-			// 콜백함수 실행
-			.then(map => callback(map));
-			
-		} catch (e) {
-			console.log(e);
-		}	
-	}
 	
 	
 </script>
@@ -331,7 +303,12 @@ window.onload = function(){
   <button class="btn btn-outline-secondary" type="button" id="btnWrite">댓글작성</button>
 </div>
 
-<div id="replyDiv"></div>
+
+
+
+<!-- 댓글리스트  -->
+<div id="replyDiv">
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
