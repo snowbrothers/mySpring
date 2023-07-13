@@ -1,5 +1,7 @@
 package com.momo.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,6 +134,7 @@ public class BoardController {
 	
 	@PostMapping("editAction")
 	public String editAction(BoardVO board
+								, Criteria cri
 								, RedirectAttributes rttr
 								, Model model
 								, int pageNo) {
@@ -139,6 +142,10 @@ public class BoardController {
 		System.err.println("pageNo :" + pageNo);
 		// 수정
 		int res = boardService.update(board);
+		
+		rttr.addAttribute("pageNo", cri.getPageNo());
+		rttr.addAttribute("searchField", cri.getSearchField());
+		rttr.addAttribute("searchWord", cri.getSearchWord());
 		
 		if(res > 0) {
 			// redirect시 request 영역이 공유 되지 않으므로 
@@ -158,12 +165,25 @@ public class BoardController {
 	
 	@GetMapping("delete")
 	public String delete(BoardVO board
+							, Criteria cri
 							, RedirectAttributes rttr
 							, Model model) {
 		
+		// request.getParm("pageNo");
+		// request.setAttr("")
+		// requset.getAttribute(" ");
+		// session.setAttribute
+		
+		// 화면에 넘겨주고자 할때 
+		// page, request, session, application ) 4가지 영역중에 어디에 저장되어 있는지 이해가 필요함니다...
+		
 		int res = boardService.delete(board.getBno());
+		
+		
+		
 		if(res > 0) {			
 			rttr.addFlashAttribute("msg", "삭제되었습니다.");
+			// rttr.addAttribute();
 			return "redirect:/board/list";
 		} else {
 			model.addAttribute("msg", "삭제중 예외가 발생 하였습니다.");

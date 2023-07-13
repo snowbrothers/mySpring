@@ -4,14 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- mapper의 namespace속성은 연결할 mapper의 interface 풀 경로로 작성  -->
-<mapper namespace="com.board.mapper.BoardMapper">
+<mapper namespace="com.momo.mapper.MemberMapper">
 
-
-<select id="login" resultType="com.board.vo.MemberVo">
-
-	select * from member_ex 
+	<select id="login" resultType="com.momo.vo.Member">
+	
+	select * from member 
 	where id = #{id} and pw = #{pw}
-	  
+	
 </select>
 
 </mapper>

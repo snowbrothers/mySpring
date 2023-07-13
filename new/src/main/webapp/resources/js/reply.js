@@ -49,7 +49,7 @@ function getReplyList(page){
 	
 	console.log('bno :', bno);
 	
-	// 변수를  (+)로 연결하지 않는 방법;
+	// 변수를 (+)로 연결하지 않는 방법;
 	
 	console.log('/reply/Newlist/' + bno + '/' + page);
 	console.log(`/reply/list/${bno}/${page}`);
@@ -119,15 +119,16 @@ function replyView(map){
 	+'  <ul class="pagination justify-content-center">                                             ';
 	
 	if(pageDto.prev){
-	
+	// prev 버튼
 		pageBlock+=
 	'    <li class="page-item disabled" onclick="getPage('+ (pageDto.startNo-1) +')">                                   '
 	+'      <a class="page-link">Previous</a>                               '
-	+'    </li> ;                                                            ';
+	+'    </li>                                                           ';
 		}
 	
 	
 	 for(let i = pageDto.startNo; i <= pageDto.endNo; i++){
+		 
 		 let activeStr =  (pageDto.cri.pageNo == i)?'active':'';
 	 
 	pageBlock +=
@@ -135,11 +136,11 @@ function replyView(map){
 	 }
 	 
 	 if(pageDto.next){
-		 
+		 // next 버튼
 		 pageBlock +=
 		 '    <li class="page-item" onclick="getPage('+ (pageDto.endNo+1) +')">                                            '
 		 +'      <a class="page-link" href="#">Next</a>                          '
-		 +'    </li>  ;                                                           '
+		 +'    </li>                                                           ';
 	 }
 	
 	pageBlock +=

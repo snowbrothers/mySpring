@@ -7,8 +7,11 @@
 <mapper namespace="com.board.mapper.BoardMapper">
 
 
-<select id="login" resultType="com.board.vo.MemberVo"></select>
+<select id="login" resultType="com.board.vo.MemberVo">
 
-	
+	select * from member_ex 
+	where id = #{id} and pw = #{pw}
+	  
+</select>
 
 </mapper>

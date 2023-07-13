@@ -27,7 +27,7 @@ import lombok.extern.log4j.Log4j;
  */
 @RestController
 @Log4j
-public class ReplyController {
+public class ReplyController extends CommonRestController {
 
 	@Autowired
 	ReplyService service;
@@ -37,37 +37,37 @@ public class ReplyController {
 
 		return "test";
 	}
-	
+
 	@GetMapping("/reply/NewList/{bno}/{page}")
-	public Map<String, Object> NewGetList(@PathVariable("bno") int bno
-				, @PathVariable("page") int page){
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		log.info("bno : " + bno );
-		
-		
+	public Map<String, Object> NewGetList(@PathVariable("bno") int bno, @PathVariable("page") int page) {
+
+		log.info("bno : " + bno);
+
 		Criteria cri = new Criteria();
 		cri.setPageNo(page);
-		
-		// 페이지 처리(시작번호 ~ 끝번호) 
+
+		// 페이지 처리(시작번호 ~ 끝번호)
 		List<ReplyVo> list = service.NewGetList(bno, cri);
 		int totalCnt = service.totalCnt(bno);
 		// 페이지 블럭 생성
 		PageDto pageDto = new PageDto(cri, totalCnt);
+
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("list", list);
+//		map.put("pageDto", pageDto);
+//
+//		System.err.println("실행 ================================ Controller");
+//
+//		return map;
 		
-		map.put("list",list);
-		map.put("pageDto",pageDto);
-		
-		System.err.println("실행 ================================ Controller");
-		
-		return map;
+		return responseListMap(list, pageDto);
 	}
 
 	/**
 	 * PathVariable URL 경로에 있는 값을 파라메터로 추출하려고 할 때 사용한다.
 	 * 
-	 *  URL 경로의 일부를 변수로 사용.
-	 *  
+	 * URL 경로의 일부를 변수로 사용.
+	 * 
 	 * @return
 	 */
 	@GetMapping("/reply/list/{bno}")
@@ -94,72 +94,86 @@ public class ReplyController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		try {
-			
+
 			int res = service.insert(vo);
 
-			if (res > 0) {
-				
-				map.put("result", "success");
-				
-			} else {
-				
-				map.put("result", "fail");
-				map.put("message", "댓글 등록중 예외사항 발생");
-				
-			}
-			
+			return map = responseWriteMap(res);
+
 		} catch (Exception e) {
 			map.put("result", "fail");
 			map.put("message", e.getMessage());
-			
+
 		}
-
-		
-		
-		
-		
-
 		return map;
 	}
 
-	//삭제 ~ 
+	// 삭제 ~
 	@GetMapping("/reply/delete/{rno}")
 	public Map<String, Object> delete(@PathVariable int rno) {
 
-		int res = service.delete(rno);
+//		Map<String, Object> map = new HashMap<String, Object>();
+//
+//		int res = service.delete(rno);
+//
+//		
+//		
+//		if (res > 0) {
+//
+//			map.put("result", "success");
+//
+//		} else {
+//			map.put("result", "fail");
+//			map.put("message", "댓글 삭제중 예외 발생");
+//		}
+//
+//		return map;
 
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		if (res > 0) {
-
-			map.put("result", "success");
-
-		} else {
-			map.put("result", "fail");
-			map.put("message", "댓글 삭제중 예외 발생");
-		}
-
-		return map;
+		return responseDeleteeMap(service.delete(rno));
 	}
 
-	
 	@PostMapping("/reply/update")
-	public Map<String, Object> update(@RequestBody ReplyVo vo){
-		
-		int res = service.update(vo);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
+	public Map<String, Object> update(@RequestBody ReplyVo vo) {
 
-		if (res > 0) {
+		// Map<String, Object> map = new HashMap<String, Object>();
+		// int res = service.update(vo);
 
-			map.put("result", "success");
+//		if (res > 0) {
+//
+//			map.put("result", "success");
+//
+//		} else {
+//			map.put("result", "fail");
+//			map.put("message", "댓글 수정중 예외 발생");
+//		}
 
-		} else {
-			map.put("result", "fail");
-			map.put("message", "댓글 수정중 예외 발생");
-		}
+		return responseEditMap(service.update(vo));
 
-		return map;
-		
 	}
+
+//	/**
+//	 * 입력, 수정, 삭제의 경우 int 값을 반환
+//	 * 결과를 받아서 Map을 생성 후 반환 합니다.
+//	 * @return
+//	 */
+//	// map을 생성 후 result, msg 세팅
+//	public Map<String, Object> responseMap(int res, String msg){
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		if(res >0) {
+//			
+//			map.put("result","success");
+//			map.put("msg", msg +"되었습니다.");
+//			
+//		}else {
+//
+//			map.put("result", "fail");
+//			map.put("msg", msg +"중 예외 발생.");
+//		}
+//	
+//		return map;
+//		
+//		
+//	}
+
 }
