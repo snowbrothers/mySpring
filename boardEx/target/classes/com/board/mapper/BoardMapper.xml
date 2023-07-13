@@ -14,4 +14,10 @@
 	  
 </select>
 
+<select id="getList" resultType="com.board.vo.BoardVo">
+	
+	select * from board_ex
+
+</select>
+
 </mapper>
