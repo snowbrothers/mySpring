@@ -14,8 +14,8 @@ public class CommonRestController {
 	private final String REST_EDIT ="수정";
 	private final String REST_DELETE ="삭제";
 	private final String REST_SELECT ="아침조회";
-	
-	
+	protected final String REST_SUCCESS ="success";
+	protected final String REST_FAIL ="fail";
 	
 	
 	/**
@@ -30,12 +30,12 @@ public class CommonRestController {
 		
 		if(res >0) {
 			
-			map.put("result","success");
+			map.put("result",REST_SUCCESS);
 			map.put("msg", msg +"되었습니다.");
 			
 		}else {
 
-			map.put("result", "fail");
+			map.put("result", REST_FAIL);
 			map.put("msg", msg +"중 예외 발생.");
 		}
 	
@@ -73,5 +73,20 @@ public class CommonRestController {
 	}
 	
 
+public Map<String, Object> responseMapMsg(String result, String msg){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+			map.put("result",result);
+		
+			map.put("msg", msg);
+		
+	
+		return map;
+		
+		
+	}
+	
+	
 	
 }

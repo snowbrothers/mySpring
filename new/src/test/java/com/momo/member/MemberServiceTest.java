@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-public class MemberTest {
+public class MemberServiceTest {
 
 	@Autowired
 	MemberService memberService;
@@ -33,7 +33,7 @@ public class MemberTest {
 		member.setId("cat");
 		member.setPw("1234");
 		member.setName("나는야");
-		member = memberMapper.login(member);
+		member = memberService.login(member);
 		
 		assertNotNull(member);
 		log.info(member);
@@ -44,10 +44,10 @@ public class MemberTest {
 	public void testInsert() {
 		
 		Member member = new Member();
-		member.setId("Na");
+		member.setId("Sen");
 		member.setPw("1234");
-		member.setName("나는야");
-		int res = memberMapper.insert(member);
+		member.setName("센");
+		int res = memberService.insert(member);
 		
 		assertEquals(1, res);
 		log.info(member);
@@ -59,11 +59,12 @@ public class MemberTest {
 		
 		Member member = new Member();
 		
-		member.setId("caad");
+		member.setId("cat");
 		
-		int res = memberMapper.idCheck(member);
+		int res = memberService.idCheck(member);
 		
 		assertEquals(1, res);
 		
 	}
+	
 }

@@ -34,6 +34,14 @@ public class MemberController extends CommonRestController{
 		return "login";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		// 세션삭제
+		session.invalidate();
+		
+		return "login";
+	}
+	
 	
 	/**
 	 * Map
@@ -58,11 +66,48 @@ public class MemberController extends CommonRestController{
 			session.setAttribute("member", member);
 			session.setAttribute("userId", member.getId());
 			
-			return responseMap(1, "로그인");
+			return responseMapMsg(REST_SUCCESS, "로그인 되었습니다.");
 			
 		} else {
 		
-			return responseMap(0, "로그인");
+			return responseMapMsg(REST_FAIL, "아이디와 비밀번호를 확인해주세요");
+		}
+		
+	}
+	
+	@PostMapping("/idCheck")
+	public @ResponseBody Map<String, Object> idCheck(@RequestBody Member member){
+		
+		int res = service.idCheck(member);
+		
+		if(res == 0) {
+			return responseMapMsg(REST_SUCCESS, "사용가능한 아이디 입니다.");
+		}else {
+			return responseMapMsg(REST_FAIL, "이미 사용중인 아이디 입니다.");
+		}
+		
+		// count = 1 -> 실패
+		// insert, update, delete > 0 => true
+		
+		
+		
+		
+	}
+	
+	@PostMapping("/register")
+	public @ResponseBody Map<String, Object>
+							register(@RequestBody Member member){
+		
+		
+		try {
+
+			int res = service.insert(member);
+			return responseWriteMap(res);
+			
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+			return responseMapMsg(REST_FAIL, "회원가입 중 예외사항 발생..");
 		}
 		
 	}
