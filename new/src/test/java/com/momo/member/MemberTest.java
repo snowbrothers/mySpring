@@ -3,6 +3,8 @@ package com.momo.member;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.momo.mapper.MemberMapper;
 import com.momo.service.MemberService;
 import com.momo.vo.Member;
+
 
 import lombok.extern.log4j.Log4j;
 
@@ -44,9 +47,9 @@ public class MemberTest {
 	public void testInsert() {
 		
 		Member member = new Member();
-		member.setId("Na");
+		member.setId("admin");
 		member.setPw("1234");
-		member.setName("나는야");
+		member.setName("관리자");
 		int res = memberMapper.insert(member);
 		
 		assertEquals(1, res);
@@ -65,5 +68,12 @@ public class MemberTest {
 		
 		assertEquals(1, res);
 		
+	}
+	
+	@Test
+	public void testGetMemberRole() {
+		
+		List<String> list = memberMapper.getMemberRole("admin");
+		System.out.println("관리자 권한 : " + list.contains("ADMIN_ROLE"));
 	}
 }

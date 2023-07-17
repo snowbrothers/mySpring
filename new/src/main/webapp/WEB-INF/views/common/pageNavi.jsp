@@ -9,6 +9,7 @@
 <script type="text/javascript">
 	function go(page){
 		document.searchForm.pageNo.value = page;
+		document.searchForm.action="/board/list";
 		document.searchForm.submit();
 	}
 </script>

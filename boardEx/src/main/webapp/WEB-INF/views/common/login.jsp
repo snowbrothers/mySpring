@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
-<script type="text/javascript" src="../resources/js/reply.js"></script>
+<script type="text/javascript" src="/resources/js/reply.js"></script>
 <script type="text/javascript">
 
 	window.addEventListener('load', function(){
@@ -33,7 +33,7 @@
 		function loginDo(map){
 			
 			if(map.result == 'success'){
-				location.href = 'home/boardRe/list';
+				location.href = 'boardRe/list';
 			}else{
 				msg.innerHTML = result;
 			}

@@ -50,9 +50,10 @@ public class MemberController extends CommonRestController{
 	 * @return
 	 */
 	@PostMapping("/loginAction")
-	public @ResponseBody Map<String, Object> loginAction(@RequestBody Member member
-			, Model model
-			,HttpSession session) {
+	public @ResponseBody Map<String, Object> loginAction
+						(@RequestBody Member member
+									, Model model
+									, HttpSession session) {
 		
 		
 		System.out.println("id : " + member.getId());
@@ -66,11 +67,21 @@ public class MemberController extends CommonRestController{
 			session.setAttribute("member", member);
 			session.setAttribute("userId", member.getId());
 			
-			return responseMapMsg(REST_SUCCESS, "로그인 되었습니다.");
+			Map<String, Object> map = 
+					responseMapMsg(REST_SUCCESS, "로그인 되었습니다.");
 			
-		} else {
+			if(member.getRole() != null 
+					&& member.getRole().contains("ADMIN_ROLE")) {
+				// 관리자 로그인 -> 관리자 페이지로 이동
+				map.put("url", "/admin");
+			} else {
+				map.put("url", "/board/list");
+				
+			}
+				return map;
 		
-			return responseMapMsg(REST_FAIL, "아이디와 비밀번호를 확인해주세요");
+		}else {
+		   return responseMapMsg(REST_FAIL, "아이디와 비밀번호를 확인해주세요");
 		}
 		
 	}

@@ -27,4 +27,8 @@
 
 </select>
 
+<select id="getMemberRole" resultType="String">
+	select role_id from memberrole where id = #{id}
+</select>
+
 </mapper>

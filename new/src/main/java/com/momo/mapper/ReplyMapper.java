@@ -36,4 +36,6 @@ public interface ReplyMapper {
 	// 총건수 조회
 	public int totalCnt(int bno);
 	
+	public ReplyVo getOne(int rno);
+	
 }

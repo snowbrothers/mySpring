@@ -36,7 +36,7 @@
   <div class="bg-light p-5 rounded">
     <h1>게시판</h1>
     <p class="lead">부트스트랩을 이용한 게시판 만들기</p>
-    <a class="btn btn-lg btn-primary" href="/board/write" role="button">글쓰기 &raquo;</a>
+    <a class="btn btn-lg btn-primary" href="/board/write?pageNo=${pageDto.cri.pageNo}" role="button">글쓰기 &raquo;</a>
   </div>
   <p></p>
   <%@include file="../common/searchForm.jsp" %>

@@ -31,6 +31,9 @@ public class MemberServiceImpl implements MemberService {
 			
 			if(res) {
 				
+				// 사용자 권한 조회
+				member.setRole(memberMapper.getMemberRole(member.getId()));
+				
 				return member;
 			}
 		}

@@ -64,6 +64,10 @@
   		where bno=#{bno}
   
   </select>
+  
+  <select id="getOne" resultType="com.momo.vo.ReplyVo">
+  		select * from tbl_reply where rno = #{rno}
+  </select>
 
 
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.board.mapper.BoardMapper;
 import com.board.vo.BoardVo;
@@ -15,8 +16,8 @@ public class BoardServiceImpl implements BoardService {
 	BoardMapper boardMapper;
 	
 	@Override
-	public List<BoardVo> getList() {
-		// TODO Auto-generated method stub
+	public List<BoardVo> getList(Model model) {
+		
 		return boardMapper.getList();
 	}
 

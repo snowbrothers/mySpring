@@ -44,9 +44,9 @@ public class MemberServiceTest {
 	public void testInsert() {
 		
 		Member member = new Member();
-		member.setId("Sen");
+		member.setId("admin");
 		member.setPw("1234");
-		member.setName("센");
+		member.setName("관리자");
 		int res = memberService.insert(member);
 		
 		assertEquals(1, res);
