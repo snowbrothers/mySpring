@@ -10,5 +10,8 @@
 		insert into tbl_log  (classname, methodname, params, errmsg, regdate) 
 		values (#{classname}, #{methodname}, #{params}, #{errmsg}, sysdate)
 	</insert>
+	
+	
+	
 
 </mapper>

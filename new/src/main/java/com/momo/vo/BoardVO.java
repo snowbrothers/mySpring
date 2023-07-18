@@ -1,5 +1,7 @@
 package com.momo.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -11,4 +13,6 @@ public class BoardVO {
 	private String writer;
 	private String regDate;
 	private String updateDate;
+	
+//	private List<FileuploadVo> attachList;
 }

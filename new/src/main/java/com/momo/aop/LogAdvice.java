@@ -67,7 +67,8 @@ public class LogAdvice {
 //	 * Around 타겟의 메소드가 호출되기 이전 시점과 이후 시점에 모두 처리해야 할 필요가 있는 부가기능 정의
 //	 * 
 //	 * 주업무로직을 실행하기 위해 JoinPoint의 하위 클래스인 ProceedingJoinPoint 타입의 파라미터를 필수적으로 선언해야 함.
-//	 * 
+//	 * ProceedingJoinPoint 타입의 파라미터를 필수적으로 선언해야함.
+//  	타겟 메서드의 실행결과를 반환하기 위해서 ..	
 //	 * @return
 //	 */
 //	@Around("execution(* com.momo.service.Board*.*(..))")
