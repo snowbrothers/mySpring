@@ -11,4 +11,8 @@ public interface BoardMapper {
 	public MemberVo login(MemberVo member);
 	
 	public List<BoardVo> getList();
+	
+	public int insert(BoardVo vo);
+	
+	public int delete(int bno);
 }

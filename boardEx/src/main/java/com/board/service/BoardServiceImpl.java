@@ -16,9 +16,15 @@ public class BoardServiceImpl implements BoardService {
 	BoardMapper boardMapper;
 	
 	@Override
-	public List<BoardVo> getList(Model model) {
+	public List<BoardVo> getList() {
 		
 		return boardMapper.getList();
+	}
+
+	@Override
+	public int insert(BoardVo vo) {
+
+		return boardMapper.insert(vo);
 	}
 
 }

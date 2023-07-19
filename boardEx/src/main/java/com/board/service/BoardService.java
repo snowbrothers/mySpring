@@ -11,5 +11,7 @@ import com.board.vo.BoardVo;
 @Service
 public interface BoardService {
 
-	public List<BoardVo> getList(Model model);
+	public List<BoardVo> getList();
+	
+	public int insert(BoardVo vo);
 }

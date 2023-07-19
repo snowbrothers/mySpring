@@ -20,4 +20,9 @@
 
 </select>
 
+<insert id="insert" >
+	insert into board_ex (bno, title, content, writer, regdate, updatedate)
+	 values (seq_bno.nextval, #{title}, #{content}, #{writer},sysdate, sysdate)
+</insert>
+
 </mapper>

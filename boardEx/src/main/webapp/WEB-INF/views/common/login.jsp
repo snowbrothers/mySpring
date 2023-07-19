@@ -33,7 +33,7 @@
 		function loginDo(map){
 			
 			if(map.result == 'success'){
-				location.href = 'boardRe/list';
+				location.href = '/board2/list';
 			}else{
 				msg.innerHTML = result;
 			}
