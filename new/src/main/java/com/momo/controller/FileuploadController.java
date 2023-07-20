@@ -2,6 +2,7 @@ package com.momo.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -10,7 +11,12 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +34,8 @@ import net.coobird.thumbnailator.Thumbnails;
 @Log4j
 public class FileuploadController extends CommonRestController {
 
+	
+	
 	@GetMapping("/file/fileupload")
 	public String fileupload() {
 
@@ -179,6 +187,8 @@ public class FileuploadController extends CommonRestController {
 	@GetMapping("file/list/{bno}")
 	public @ResponseBody Map<String, Object> fileuploadList(@PathVariable("bno") int bno) {
 
+		System.err.println("file/list 실행 =============================");
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", service.getList(bno));
 
@@ -261,6 +271,7 @@ public class FileuploadController extends CommonRestController {
 				// c:/upload/2023/7/18/
 				// 년/월/일
 				File sFile = new File(ATTACHES_DIR + uploadPath + saveFileName);
+				
 				// file(원본파일) sFile(저장 대상 파일)에 저장
 				file.transferTo(sFile);
 
@@ -287,6 +298,8 @@ public class FileuploadController extends CommonRestController {
 
 				}
 
+				log.info("파일경로 ==================================================" + sFile);
+				
 				vo.setBno(bno);
 				vo.setFilename(file.getOriginalFilename());
 
@@ -312,4 +325,94 @@ public class FileuploadController extends CommonRestController {
 
 		return insertRes;
 	}
+	
+	@GetMapping("/file/delete/{uuid}/{bno}/{savePath}/{fileName}")
+	public @ResponseBody Map<String, Object> delete(@PathVariable("uuid") String uuid
+										,@PathVariable("bno") int bno
+										,@PathVariable("savePath") String savePath
+										,@PathVariable("fileName") String fileName){
+		
+		FileuploadVo vo = new FileuploadVo();
+		vo.setUuid(uuid);
+		vo.setBno(bno);
+		
+		int res = service.delete(vo);
+		
+		String msg = "";
+		if(res > 0) {
+			msg = "삭제되었습니다.";
+		}else {
+			msg = "삭제 중 오류 발생";
+		}
+		
+		
+		File file = new File(ATTACHES_DIR + fileName);
+		
+		System.out.println(ATTACHES_DIR + savePath);
+		
+		if(file.exists()) {
+			if(file.delete()) {
+				System.out.println("파일 삭제 성공 ! ! !");
+			}else {
+				System.out.println("파일 삭제 실패 ...............");
+			}
+		}else {
+			System.out.println("파일이 존재하지 않습니다.");
+		}
+		
+		return responseMapMsg(REST_SUCCESS, msg);
+	}
+	
+	/**
+	 * 파일 다운로드
+	 * 		컨텐츠 타입을 다운로드 받을 수 있는 형식으로 지정하여 
+	 * 		브라우저에서 파일을 다운로드 받을 수 있도록 처리한다.
+	 * @param fileName
+	 * @return
+	 */
+	@GetMapping("/file/download")
+	public @ResponseBody ResponseEntity<byte[]> download(String fileName){
+		
+		log.info("download file : " + fileName);
+		
+		HttpHeaders headers = new HttpHeaders();
+		
+		File file = new File(ATTACHES_DIR + fileName);
+		
+		System.out.println("======================== " + ATTACHES_DIR + fileName);
+		
+		if(file.exists()) {
+			// 컨텐츠 타입을 지정
+			// APPLICATION_OCTET_STREAM
+			headers.add("contentType"
+						, MediaType.APPLICATION_OCTET_STREAM.toString());
+			
+			// 한글처리
+			try {
+			      headers.add("Content-Disposition"
+			    		  ,	"attachment; filename=\""
+			      + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			      
+			      return new ResponseEntity<>(
+			    		  	FileCopyUtils.copyToByteArray(file)
+			    		  	, headers
+			    		  	, HttpStatus.OK
+			    		  );
+			    } catch (UnsupportedEncodingException e) {
+			      e.printStackTrace();
+			      	return new ResponseEntity<>(
+			      				HttpStatus.INTERNAL_SERVER_ERROR);			      
+			    } catch (IOException e) {
+			    	e.printStackTrace();
+					// TODO Auto-generated catch block
+			    	return new ResponseEntity<>(
+		      				HttpStatus.INTERNAL_SERVER_ERROR);	
+				}
+
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+			
+	}		
+	
 }

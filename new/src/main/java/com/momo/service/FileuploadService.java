@@ -14,4 +14,5 @@ public interface FileuploadService {
 	
 	public int insert(FileuploadVo fileuploadVo);
 	
+	public int delete(FileuploadVo fileuploadVo);
 }

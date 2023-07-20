@@ -1,5 +1,6 @@
 package com.momo.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -175,5 +176,19 @@ public class ReplyController extends CommonRestController {
 //		
 //		
 //	}
-
+	
+	// 파일 삭제
+	public static void main(String[] args) {
+		File file = new File("C:\\upload\\2023\\07\\19\\3fa53270-c44f-44ca-be97-8eb923510b7c_캡처.PNG");
+		
+		if( file.exists()) {
+			if(file.delete()) {
+				System.out.println("파일삭제 성공");
+			}else {
+				System.out.println("파일삭제 실패");
+			}
+		}else {
+			System.out.println("파일이 존재하지 않습니다.");
+		}
+	}
 }

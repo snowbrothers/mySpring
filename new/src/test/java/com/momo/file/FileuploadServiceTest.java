@@ -66,6 +66,19 @@ public class FileuploadServiceTest {
 			
 		}
 		
+		@Test
+		public void deleteTest() {
+			
+			FileuploadVo vo = new FileuploadVo();
+			
+			vo.setBno(954);
+			vo.setUuid("6ba8b943-a667-42d1-9f74-27117018cee5");
+			
+			int res = fileuploadService.delete(vo);
+			
+			assertEquals(1, res);
+			
+		}
 		
 	
 }

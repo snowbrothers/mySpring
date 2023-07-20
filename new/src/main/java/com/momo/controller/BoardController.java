@@ -1,5 +1,7 @@
 package com.momo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +9,11 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.momo.service.BoardService;
+import com.momo.service.FileuploadService;
 import com.momo.vo.BoardVO;
 import com.momo.vo.Criteria;
 
@@ -18,7 +22,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @RequestMapping("/board/*")
 @Log4j
-public class BoardController {
+public class BoardController extends FileuploadController {
 
 	/**
 	 * /board/msg
@@ -89,6 +93,9 @@ public class BoardController {
 		
 	}
 	
+	@Autowired
+	FileuploadService fileService;
+	
 	/**
 	 * 😀 RedirectAttributes
 	 * 
@@ -101,11 +108,14 @@ public class BoardController {
 	@PostMapping("write")
 	public String writeAction(BoardVO board
 								, RedirectAttributes rttr
-								, Model model) {
+								, Model model
+								, List<MultipartFile> files) {
 		log.info(board);
 		
 		// 시퀀스 조회 후 시퀀스 번호를 bno에 저장
 		int res = boardService.insertSelectKey(board);
+		
+		fileupload(files, board.getBno());
 		
 		String msg = "";
 		

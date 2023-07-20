@@ -36,7 +36,17 @@
 				
 			});
 			
+			
+			btnWrite.addEventListener('click', function(){
+				
+				let formData = new FormData(viewForm);
+				
+				console.log("forData : ", formData)
+				
+			});
+				
 		})
+		
 			
 			
 		
@@ -57,7 +67,7 @@
   <p></p>
   <!-- 글쓰기 -->
   <div class="list-group w-auto">
-    <form method="post" action="/board/write" name="viewForm">
+    <form method="post" action="/board/write" name="viewForm" enctype="multipart/form-data">
     <input type="text" name="pageNo" value="${param.pageNo }">
     
     <input type="text" name="searchField" value="${param.searchField }">
@@ -76,6 +86,13 @@
 	  <label for="writer" class="form-label">작성자</label>
 	  <input type="text" class="form-control" id="writer" name="writer" value="${board.writer}">
 	</div>
+	
+	<div class="mb-3">
+	  <label for="file" class="form-label">첨부파일</label>
+	  <input type="file" class="form-control" id="files" name="files" >
+	</div>
+	
+	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-center">
 		<!-- bno 값이 있으면 수정하기 -->
 		<c:if test="${not empty board.bno}" var="res">
@@ -86,7 +103,7 @@
 		</c:if>
 		<!-- 없으면 등록하기 -->
 		<c:if test="${not res}">
-			<button type="submit" class="btn btn-primary btn-lg">글쓰기</button>
+			<button type="submit" class="btn btn-primary btn-lg" id="btnWrite" >글쓰기</button>
 		</c:if>
 		
 		

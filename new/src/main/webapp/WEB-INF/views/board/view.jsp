@@ -18,6 +18,7 @@
 	<link href="/resources/css/style.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/4863a16a12.js" crossorigin="anonymous"></script>
 	<script src="/resources/js/reply.js"></script>
+	<script src="/resources/js/fileupload.js"></script>
 	<!-- link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
 
@@ -50,12 +51,21 @@ window.addEventListener('load',function(){
 
 	getReplyList(1);
 	
+	
+	btnFileList.addEventListener('click', function () {
+		
+		getFileList();
+		
+	})
+	
 });
 
 function requestAction(url){
 	viewForm.action=url;
 	viewForm.submit();
 }
+
+
 
 
 </script>
@@ -73,11 +83,17 @@ function requestAction(url){
     <form method="get" name="viewForm">
     
     <input type="hidden" name="bno" id="bno" value="${board.bno }">
-    <input type="text" name="page" id="page" value="1">
-    <input type="text" name="pageNo" value="${param.pageNo }">
-    <input type="text" name="searchField" value="${param.searchField }">
-    <input type="text" name="searchWord" value="${param.searchWord }">
+    <input type="hidden" name="page" id="page" value="1">
+    <input type="hidden" name="pageNo" value="${param.pageNo }">
+    <input type="hidden" name="searchField" value="${param.searchField }">
+    <input type="hidden" name="searchWord" value="${param.searchWord }">
 	
+	<button type="button" id="btnFileList" class="btn btn-secondary btn-sm">파일리스트</button>
+	
+	<div id="divFileupload" class="mb-3">
+	  
+	</div>
+		
 	<div class="mb-3">
 	  <label for="title" class="form-label">제목</label>
 	  <input name="title" id="title" 

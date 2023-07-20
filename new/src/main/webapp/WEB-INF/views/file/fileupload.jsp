@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>파일 업로드</title>
-
+<script src="https://kit.fontawesome.com/4863a16a12.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 		
 		window.addEventListener('load', function(){
@@ -84,10 +84,28 @@
 				return false;
 		}
 			return true;
-		}	
+		}
+		
+		function fileDeleteRes(map){
+			if(map.result === 'success'){
+				
+				divFileDeleteRes.innerHTML = map.msg;
+				
+				// 리스트 조회 바로 반영 \^o^/
+				getFileList();
+			}else{
+				alert(map.msg);
+			}
+		}
+		
 		function fileuploadRes(map){
-			if(map.result === 'success')
+			if(map.result === 'success'){
+			console.log(map);
 			divFileuploadRes.innerHTML = map.msg;
+			// 게시글 등록
+			}else{
+			 	alert(map.msg);
+			}
 		}			
 			
 		
@@ -100,13 +118,54 @@
 				.then(map => viewFileList(map));
 		}
 		
+		// 파일 삭제
+		function attachFileDelete(e){
+			(e.dataset.aaa)?'true':'false';
+			console.log(e.dataset.bno
+							,e.dataset.uuid
+							,e.dataset.aaa
+							,encodeURIComponent(e.dataset.savePath));
+			console.log(e);
+			
+			let uuid = e.dataset.uuid;
+			let bno = e.dataset.bno;
+			let savePath = encodeURIComponent(e.dataset.savePath);
+			let fileName = e.dataset.filename;
+			
+			console.log('uuid : ',uuid );
+			console.log('bno : ',bno );
+			console.log('savePath : ',encodeURIComponent(savePath));
+			console.log('fileName : ',fileName );
+			console.log('========================== ');
+			
+			console.log('/file/delete/'+uuid+'/'+bno+'/'+savePath+'/'+fileName);
+			
+			//fetch 요청
+			fetch('/file/delete/'+uuid+'/'+bno+'/'+savePath+'/'+fileName)
+				.then(response => response.json())
+				.then(map => fileDeleteRes(map));
+		}
+		
 		function viewFileList(map){
 			
 			console.log(map);
 			let content = '';
 			if(map.list.length > 0)
 					{ map.list.forEach(function(item, index){
-						content += item.filename + '/' +item.savePath+'<br>';
+						
+						let savePath = item.savePath;
+						console.log('savePath : ', savePath);
+						
+						content += 
+								'<a href="/file/download?fileName='
+								+	encodeURIComponent(savePath)+'">'	
+								+	item.filename + '</a>'
+//								+ '/' +item.savePath +'&nbsp'
+								+ 	'<i onclick="attachFileDelete(this)" ' 
+								+	' data-bno="'+item.bno+'" data-uuid="'+item.uuid +'"' 
+								+   ' data-savePath="'+encodeURIComponent(savePath)+'" data-fileName="'+item.filename+'" '
+								+ 	' class="fa-solid fa-square-xmark" style="color: #a3141b;"></i>'
+								+ '<br>';
 					})
 	
 				}else{
@@ -128,7 +187,7 @@
 	
 	<h2>파일선택</h2>
 	
-	bno : <input type="text" id="bno" name="bno" value="954"><br><br>
+	bno : <input type="text" id="bno" name="bno" value="993"><br><br>
 	<!-- 같은 name 으로 여러개가 넘어가기 때문에 List 로 받는다. -->
 	
 	<!-- multiplt ="multiple" 					다수의 파일 선택 가능 -->
@@ -143,10 +202,11 @@
 	res : ${param.msg}
 	
 	</form>
-	
+	<div id="divFileDeleteRes"></div>
 	<h2>파일 리스트 조회</h2>
 	<button type="button" id="btnList" >리스트 조회</button>
 	<div id="divFileupload"></div>
+	
 
 </body>
 </html>

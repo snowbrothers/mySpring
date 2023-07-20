@@ -14,5 +14,6 @@ public class FileuploadVo {
 	
 	// 저장된 파일 경로
 	private String savePath;
+	private String s_savePath;
 	// uploadpath + uuid + "_" + filename;
 }

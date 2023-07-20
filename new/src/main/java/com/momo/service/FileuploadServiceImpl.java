@@ -28,4 +28,10 @@ public class FileuploadServiceImpl implements FileuploadService {
 		return fileuploadMapper.getList(bno);
 	}
 
+	@Override
+	public int delete(FileuploadVo fileuploadVo) {
+		
+		return fileuploadMapper.delete(fileuploadVo);
+	}
+
 }

@@ -10,5 +10,5 @@ public interface FileuploadMapper {
 
 	public int insert(FileuploadVo fileuploadVo);
 	
-	
+	public int delete(FileuploadVo fileuploadVo);
 }

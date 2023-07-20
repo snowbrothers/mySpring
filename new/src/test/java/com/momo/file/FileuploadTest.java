@@ -67,4 +67,19 @@ public class FileuploadTest {
 		
 		
 	}
+	
+	// 테스트 성공
+	@Test
+	public void deleteTest() {
+		
+		FileuploadVo vo = new FileuploadVo();
+		
+		vo.setBno(954);
+		vo.setUuid("2713e5cf-1119-4e5f-a390-695b53cbd61c");
+		
+		int res = fileuploadMapper.delete(vo);
+		
+		assertEquals(1, res);
+		
+	}
 }
