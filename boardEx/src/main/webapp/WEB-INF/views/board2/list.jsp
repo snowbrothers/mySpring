@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h2>나는 게시판 입니다 </h2>
+<h2>메인게시판</h2>
   
  메세지 출력 : ${msg}
   
@@ -27,7 +27,7 @@
  </c:forEach> 
  
 
-<button onclick="location.href='/board2/write.jsp'">글쓰기</button>
+<button onclick="location.href='/board2/write'">글쓰기</button>
 
  
  
