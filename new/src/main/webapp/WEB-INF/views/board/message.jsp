@@ -21,6 +21,8 @@
 	*/
 	let msg = '${msg}';
 	
+	console.log(msg);
+	
 	window.onload = function(){
 		if(msg != ''){
 			document.querySelector(".modal-body").innerHTML = msg;

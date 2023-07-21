@@ -138,10 +138,10 @@
 			console.log('fileName : ',fileName );
 			console.log('========================== ');
 			
-			console.log('/file/delete/'+uuid+'/'+bno+'/'+savePath+'/'+fileName);
+			console.log('/file/delete/'+uuid+'/'+bno);
 			
 			//fetch 요청
-			fetch('/file/delete/'+uuid+'/'+bno+'/'+savePath+'/'+fileName)
+			fetch('/file/delete/'+uuid+'/'+bno)
 				.then(response => response.json())
 				.then(map => fileDeleteRes(map));
 		}

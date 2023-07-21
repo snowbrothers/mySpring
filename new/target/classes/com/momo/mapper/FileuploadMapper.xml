@@ -28,4 +28,15 @@
 	    	where bno = #{bno}
 	    		and uuid = #{uuid}
 	</delete>
+	
+	<select id="getOne" resultType="com.momo.vo.FileuploadVo">
+		select t.*
+		        , uploadpath||uuid||'_'||filename savePath
+        		, decode(filetype, 'I'
+                			,uploadpath||'s_'||uuid||'_'||filename
+                			,'') s_savePath 
+		  from tbl_attach t
+		 where bno=#{bno} 
+		 	and uuid=#{uuid}
+	</select>
 </mapper>

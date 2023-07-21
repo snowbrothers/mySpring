@@ -72,14 +72,21 @@ public class FileuploadTest {
 	@Test
 	public void deleteTest() {
 		
-		FileuploadVo vo = new FileuploadVo();
-		
-		vo.setBno(954);
-		vo.setUuid("2713e5cf-1119-4e5f-a390-695b53cbd61c");
-		
-		int res = fileuploadMapper.delete(vo);
-		
+		log.info("delete()");
+		int res = fileuploadMapper.delete(994
+						, "d825f5aa-2da6-4b15-afc8-98509963f71e");
 		assertEquals(1, res);
 		
+		
+		
+	}
+	
+	@Test
+	public void getOne() {
+		log.info("getOne()");
+		FileuploadVo vo = fileuploadMapper.getOne(994, "d825f5aa-2da6-4b15-afc8-98509963f71e");
+		
+		assertNotNull(vo);
+			
 	}
 }

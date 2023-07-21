@@ -42,7 +42,7 @@ public class FileuploadController extends CommonRestController {
 		return "/file/fileupload";
 	}
 
-	private static final String ATTACHES_DIR = "C:\\upload\\";
+	public static final String ATTACHES_DIR = "C:\\upload\\";
 
 	/**
 	 * ! 오류가 발생할 수 있는 경우 !
@@ -55,9 +55,10 @@ public class FileuploadController extends CommonRestController {
 	 * 
 	 * @param files
 	 * @return
+	 * @throws Exception 
 	 */
 	@PostMapping("/file/fileuploadAction")
-	public String fileAction(List<MultipartFile> files, int bno, RedirectAttributes rttr) {
+	public String fileAction(List<MultipartFile> files, int bno, RedirectAttributes rttr) throws Exception {
 
 		// 주석주석
 //		int insertRes = 0;
@@ -146,7 +147,7 @@ public class FileuploadController extends CommonRestController {
 ////		});
 //		}
 
-		int insertRes = fileupload(files, bno);
+		int insertRes = service.fileupload(files, bno);
 
 		String msg = insertRes + "건 저장 되었습니다";
 		rttr.addAttribute("msg", msg);
@@ -158,11 +159,11 @@ public class FileuploadController extends CommonRestController {
 	
 	@PostMapping("/file/fileuploadActionFetch")
 	public @ResponseBody Map<String, Object> fileActionFetch(List<MultipartFile> files
-						, int bno) {
+						, int bno) throws Exception {
 
 		log.info("fileActionFetch 실행 =============================================================");
 		
-		int insertRes = fileupload(files, bno);
+		int insertRes = service.fileupload(files, bno);
 		
 		log.info("업로드건수 : " + insertRes);
 		
@@ -195,35 +196,35 @@ public class FileuploadController extends CommonRestController {
 		return map;
 	}
 
-	/**
-	 * 경로 생성 메서드 중복 방지용 업로드 날짜를 폴더 이름으로 사용
-	 * 
-	 * @return
-	 */
-	public String getFolder() {
-
-		LocalDate currentDate = LocalDate.now();
-
-		String uploadPath = currentDate.toString().replace("-", File.separator) + File.separator;
-
-		log.info("CurrentDate : " + currentDate);
-		log.info("경로 : " + uploadPath);
-
-		File saveDir = new File(ATTACHES_DIR + uploadPath);
-
-		if (!saveDir.exists()) {
-			if (saveDir.mkdirs()) {
-
-				log.info("경로생성 ====================");
-			} else {
-				log.info("경로생성실패 ========================");
-			}
-		}
-		;
-
-		return uploadPath;
-
-	}
+//	/**
+//	 * 경로 생성 메서드 중복 방지용 업로드 날짜를 폴더 이름으로 사용
+//	 * 
+//	 * @return
+//	 */
+//	public String getFolder() {
+//
+//		LocalDate currentDate = LocalDate.now();
+//
+//		String uploadPath = currentDate.toString().replace("-", File.separator) + File.separator;
+//
+//		log.info("CurrentDate : " + currentDate);
+//		log.info("경로 : " + uploadPath);
+//
+//		File saveDir = new File(ATTACHES_DIR + uploadPath);
+//
+//		if (!saveDir.exists()) {
+//			if (saveDir.mkdirs()) {
+//
+//				log.info("경로생성 ====================");
+//			} else {
+//				log.info("경로생성실패 ========================");
+//			}
+//		}
+//		;
+//
+//		return uploadPath;
+//
+//	}
 
 	public static void main(String[] args) {
 
@@ -236,131 +237,106 @@ public class FileuploadController extends CommonRestController {
 
 	
 	
-	public int fileupload(List<MultipartFile> files, int bno) {
-
-		int insertRes = 0;
-
-		for (MultipartFile file : files) {
-
-			// file 이 없지 않으면 <<..
-			if (file.isEmpty()) {
-
-				continue;
-			}
-
-			log.info("==========================================");
-			log.info("oFileName : " + file.getOriginalFilename());
-			log.info("name : " + file.getName());
-			log.info("size : " + file.getSize());
-
-			try {
-
-				// UUID
-				/**
-				 * 소프트웨어 구축에 쓰이는 식별자 표준 파일이름이 중복되어 파일이 소실될 위험을 방지한다.
-				 */
-
-				UUID uuid = UUID.randomUUID();
-
-				String saveFileName = uuid + "_" + file.getOriginalFilename();
-
-				// 파일경로 지정
-				// [경로 + 식별자 + 파일이름]
-				String uploadPath = getFolder();
-				// dir
-				// c:/upload/2023/7/18/
-				// 년/월/일
-				File sFile = new File(ATTACHES_DIR + uploadPath + saveFileName);
-				
-				// file(원본파일) sFile(저장 대상 파일)에 저장
-				file.transferTo(sFile);
-
-				FileuploadVo vo = new FileuploadVo();
-
-				// 주인 파일의 Mime유형
-				String contentType = Files.probeContentType(sFile.toPath());
-
-				// Mime 타입을 확인하여 이미지인 경우 썸네일 생성
-				if (contentType != null && contentType.startsWith("image")) {
-					// 썸네일 생성
-					vo.setFiletype("I");
-
-					String thumbnail = ATTACHES_DIR + uploadPath + "s_" + saveFileName;
-
-					// 썸네일 생성
-					// 원본파일, 크기, 저장될 경로
-
-					Thumbnails.of(sFile).size(100, 100).toFile(thumbnail);
-
-				} else {
-
-					vo.setFiletype("F");
-
-				}
-
-				log.info("파일경로 ==================================================" + sFile);
-				
-				vo.setBno(bno);
-				vo.setFilename(file.getOriginalFilename());
-
-				vo.setUploadpath(uploadPath);
-				vo.setUuid(uuid.toString());
-
-				int res = service.insert(vo);
-
-				if (res > 0) {
-
-					insertRes++;
-				}
-
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-
-		return insertRes;
-	}
+//	public int fileupload(List<MultipartFile> files, int bno) {
+//
+//		int insertRes = 0;
+//
+//		for (MultipartFile file : files) {
+//
+//			// file 이 없지 않으면 <<..
+//			if (file.isEmpty()) {
+//
+//				continue;
+//			}
+//
+//			log.info("==========================================");
+//			log.info("oFileName : " + file.getOriginalFilename());
+//			log.info("name : " + file.getName());
+//			log.info("size : " + file.getSize());
+//
+//			try {
+//
+//				// UUID
+//				/**
+//				 * 소프트웨어 구축에 쓰이는 식별자 표준 파일이름이 중복되어 파일이 소실될 위험을 방지한다.
+//				 */
+//
+//				UUID uuid = UUID.randomUUID();
+//
+//				String saveFileName = uuid + "_" + file.getOriginalFilename();
+//
+//				// 파일경로 지정
+//				// [경로 + 식별자 + 파일이름]
+//				String uploadPath = getFolder();
+//				// dir
+//				// c:/upload/2023/7/18/
+//				// 년/월/일
+//				File sFile = new File(ATTACHES_DIR + uploadPath + saveFileName);
+//				
+//				// file(원본파일) sFile(저장 대상 파일)에 저장
+//				file.transferTo(sFile);
+//
+//				FileuploadVo vo = new FileuploadVo();
+//
+//				// 주인 파일의 Mime유형
+//				String contentType = Files.probeContentType(sFile.toPath());
+//
+//				// Mime 타입을 확인하여 이미지인 경우 썸네일 생성
+//				if (contentType != null && contentType.startsWith("image")) {
+//					// 썸네일 생성
+//					vo.setFiletype("I");
+//
+//					String thumbnail = ATTACHES_DIR + uploadPath + "s_" + saveFileName;
+//
+//					// 썸네일 생성
+//					// 원본파일, 크기, 저장될 경로
+//
+//					Thumbnails.of(sFile).size(100, 100).toFile(thumbnail);
+//
+//				} else {
+//
+//					vo.setFiletype("F");
+//
+//				}
+//
+//				log.info("파일경로 ==================================================" + sFile);
+//				
+//				vo.setBno(bno);
+//				vo.setFilename(file.getOriginalFilename());
+//
+//				vo.setUploadpath(uploadPath);
+//				vo.setUuid(uuid.toString());
+//
+//				int res = service.insert(vo);
+//
+//				if (res > 0) {
+//
+//					insertRes++;
+//				}
+//
+//			} catch (IllegalStateException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//		}
+//
+//		return insertRes;
+//	}
 	
-	@GetMapping("/file/delete/{uuid}/{bno}/{savePath}/{fileName}")
+	@GetMapping("/file/delete/{uuid}/{bno}")
 	public @ResponseBody Map<String, Object> delete(@PathVariable("uuid") String uuid
 										,@PathVariable("bno") int bno
-										,@PathVariable("savePath") String savePath
-										,@PathVariable("fileName") String fileName){
-		
-		FileuploadVo vo = new FileuploadVo();
-		vo.setUuid(uuid);
-		vo.setBno(bno);
-		
-		int res = service.delete(vo);
-		
-		String msg = "";
-		if(res > 0) {
-			msg = "삭제되었습니다.";
-		}else {
-			msg = "삭제 중 오류 발생";
+										){
+		int res = service.delete(bno, uuid);
+		if(res>0) {
+			return responseDeleteeMap(res);
+		} else {
+			return responseDeleteeMap(res);
 		}
-		
-		
-		File file = new File(ATTACHES_DIR + fileName);
-		
-		System.out.println(ATTACHES_DIR + savePath);
-		
-		if(file.exists()) {
-			if(file.delete()) {
-				System.out.println("파일 삭제 성공 ! ! !");
-			}else {
-				System.out.println("파일 삭제 실패 ...............");
-			}
-		}else {
-			System.out.println("파일이 존재하지 않습니다.");
-		}
-		
-		return responseMapMsg(REST_SUCCESS, msg);
 	}
 	
 	/**

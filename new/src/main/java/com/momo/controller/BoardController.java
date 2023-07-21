@@ -113,31 +113,44 @@ public class BoardController extends FileuploadController {
 		log.info(board);
 		
 		// 시퀀스 조회 후 시퀀스 번호를 bno에 저장
-		int res = boardService.insertSelectKey(board);
+		// 게시물 등록 및 파일 첨부
+		int res;
 		
-		fileupload(files, board.getBno());
-		
-		String msg = "";
-		
-		if(res > 0) {
+		try {
+			res = boardService.insertSelectKey(board, files);
+			String msg = "";
 			
-			msg = board.getBno() + "번 등록되었습니다";
-			// url?msg=등록 (쿼리스트링으로 전달 -> param.msg)
-			//rttr.addAttribute("msg", msg);
+			if(res > 0) {
+				
+				msg = board.getBno() + "번 등록되었습니다";
+				// url?msg=등록 (쿼리스트링으로 전달 -> param.msg)
+				//rttr.addAttribute("msg", msg);
+				
+				// 세션영역에 저장 -> msg
+				// 새로고침시 유지되지 않음
+				rttr.addFlashAttribute("msg", msg);
+				
+				return "redirect:/board/list";
+				
+			} else {
+				msg = "등록중 예외사항이 발생 하였습니다.";
+				model.addAttribute("msg", msg);
+				return "/board/message";
+			}
+				
+		} catch (Exception e) {
 			
-			// 세션영역에 저장 -> msg
-			// 새로고침시 유지되지 않음
-			rttr.addFlashAttribute("msg", msg);
+			log.info(e.getMessage());
+			if(e.getMessage().indexOf("첨부파일")>-1) {
+				model.addAttribute("msg", e.getMessage());
+			}else {
+				model.addAttribute("msg", "등록중 예외사항이 발생 하였습니다.");
+			}
 			
-			return "redirect:/board/list";
-			
-		} else {
-			msg = "등록중 예외사항이 발생 하였습니다.";
-			model.addAttribute("msg", msg);
 			return "/board/message";
 		}
 		
-		
+		// fileService.fileupload(files, board.getBno())		
 	}
 	
 	@GetMapping("edit")
@@ -150,6 +163,7 @@ public class BoardController extends FileuploadController {
 	
 	@PostMapping("editAction")
 	public String editAction(BoardVO board
+								, List<MultipartFile> files
 								, Criteria cri
 								, RedirectAttributes rttr
 								, Model model
@@ -157,25 +171,39 @@ public class BoardController extends FileuploadController {
 
 		System.err.println("pageNo :" + pageNo);
 		// 수정
-		int res = boardService.update(board);
+		int res;
+		try {
+			res = boardService.update(board, files);
 		
-		rttr.addAttribute("pageNo", cri.getPageNo());
-		rttr.addAttribute("searchField", cri.getSearchField());
-		rttr.addAttribute("searchWord", cri.getSearchWord());
-		
-		if(res > 0) {
-			// redirect시 request 영역이 공유 되지 않으므로 
-			// RedirectAttributes를 이용 합니다. 
-			//model.addAttribute("msg", "수정 되었습니다.");
-			rttr.addFlashAttribute("msg", "수정되었습니다.");
-			rttr.addAttribute("pageNo", pageNo);
-			rttr.addAttribute("bno", board.getBno());
-			// 상세페이지로 이동
-			return "redirect:/board/view";			
-		} else {
-			model.addAttribute("msg", "수정중 예외사항이 발생 하였습니다.");
-			return "/board/message";
+			rttr.addAttribute("pageNo", cri.getPageNo());
+			rttr.addAttribute("searchField", cri.getSearchField());
+			rttr.addAttribute("searchWord", cri.getSearchWord());
+			
+			if(res > 0) {
+				// redirect시 request 영역이 공유 되지 않으므로 
+				// RedirectAttributes를 이용 합니다. 
+				//model.addAttribute("msg", "수정 되었습니다.");
+				rttr.addFlashAttribute("msg", "수정되었습니다.");
+				rttr.addAttribute("pageNo", pageNo);
+				rttr.addAttribute("bno", board.getBno());
+				// 상세페이지로 이동
+				return "redirect:/board/view";			
+			} else {
+				model.addAttribute("msg", "수정중 예외사항이 발생 하였습니다.");
+				return "/board/message";
+			}
+			
+			
+		} catch (Exception e) {
+			
+			if(e.getMessage().indexOf("첨부파일") > -1) {
+				model.addAttribute("msg", e.getMessage());
+			} else {
+				model.addAttribute("msg", "수정중 예외사항이 발생 하였습니다.");
+			}
+			return "/board/message";	
 		}
+		
 		
 	}
 	

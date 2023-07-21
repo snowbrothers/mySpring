@@ -98,10 +98,16 @@ function replyView(map){
 		replyDivStr += 
 		'    <tr id="tr'+reply.rno+'">                                    '
 		+ '      <th scope="row">'+reply.rno+'</th>                '
-		+ '      <td class="text-start">'+ reply.reply 
-		+ ` <i class="fa-solid fa-pen-nib" style="cursor : pointer" onclick="replyEdit('${reply.rno}','${reply.replyer}')"></i>`
-		+ '<i class="fa-solid fa-trash" style="cursor : pointer" onclick="replyDelete('+reply.rno+')"></i>'
-		+ '</td>                         '
+		+ '      <td class="text-start">'+ reply.reply ;
+		
+		if(replyer.value == reply.replyer){
+			replyDivStr +=
+				` <i class="fa-solid fa-pen-nib" style="cursor : pointer" onclick="replyEdit('${reply.rno}','${reply.replyer}')"></i>`
+				+ '<i class="fa-solid fa-trash" style="cursor : pointer" onclick="replyDelete('+reply.rno+')"></i>'
+		}
+
+		replyDivStr +=
+		 '</td>                         '
 		+ '      <td>'+ reply.replyer +'</td>                         '
 		+ '      <td>'+reply.replyDate + '</td>                         '
 		+ '    </tr>';   

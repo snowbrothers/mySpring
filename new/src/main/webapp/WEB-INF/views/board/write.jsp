@@ -26,13 +26,15 @@
 			viewForm.submit();
 		}
 		
-		window.addEventListener('load', function(){
+		window.addEventListener('DOMContentLoaded', function(){
 			
 			btnList.addEventListener('click', function(){
 		
 				viewForm.action = "/board/list";
 				viewForm.method = "get";
 				viewForm.submit();
+				
+				
 				
 			});
 			
@@ -45,7 +47,57 @@
 				
 			});
 				
+			getFileList();
+			
 		})
+		
+		function getFileList(){
+		
+		//file/list/{bno}
+		let bno = '${board.bno}';
+		
+		if(bno){
+			
+		fetch('/file/list/' + bno)
+			.then(response => response.json())
+			.then(map => viewFileList(map));
+		}
+	}
+	
+	function viewFileList(map){
+		
+		console.log(map);
+		let content = '';
+		if(map.list.length > 0){
+			content +=
+			
+			 '<div class="mb-3">'
+			+ '	  <label for="attachFile" class="form-label">'
+			+ '   첨부파일목록</label> '
+			+ '	  <div class="form-control" id="attachFile"> '
+			
+			
+			map.list.forEach(function(item, index){
+					
+					let savePath =encodeURIComponent( item.savePath);
+					console.log('savePath : ', savePath);
+					
+					content += 
+							'<a href="/file/download?fileName='
+							+	savePath+'">'	
+							+	item.filename + '</a>'
+							+ '<br>';
+				})
+
+				
+			content	+= '	  </div> '
+					+ '</div> ';
+				
+			}else{
+				content = '등록된 파일이 없습니다.';
+			}
+			divFileupload.innerHTML = content;
+	}
 		
 			
 			
@@ -68,7 +120,7 @@
   <!-- 글쓰기 -->
   <div class="list-group w-auto">
     <form method="post" action="/board/write" name="viewForm" enctype="multipart/form-data">
-    <input type="text" name="pageNo" value="${param.pageNo }">
+    <input type="text" name="pageNo" value="${param.pageNo ==''?'1':param.pageNo}">
     
     <input type="text" name="searchField" value="${param.searchField }">
     <input type="text" name="searchWord" value="${param.searchWord }">
@@ -82,15 +134,32 @@
 	  <label for="content" class="form-label">내용</label>
 	  <textarea class="form-control" id="content" name="content" rows="3">${board.content}</textarea>
 	</div>
+	
+	
+	
 	<div class="mb-3">
+	
+	<c:if test="${empty board.writer }">
+	
 	  <label for="writer" class="form-label">작성자</label>
-	  <input type="text" class="form-control" id="writer" name="writer" value="${board.writer}">
+	  <input type="text" class="form-control" id="writer" name="writer" value="${userId}" readonly="readonly">
+	</c:if>
+	
+	<c:if test="${not empty board.writer }">
+	
+	  <label for="writer" class="form-label">작성자</label>
+	  <input type="text" class="form-control" id="writer" name="writer" value="${board.writer}" readonly="readonly">
+	</c:if>
+	
 	</div>
 	
 	<div class="mb-3">
 	  <label for="file" class="form-label">첨부파일</label>
-	  <input type="file" class="form-control" id="files" name="files" >
+	  <input type="file" class="form-control" id="files" name="files" multiple="multiple" >
 	</div>
+	
+	<!--   첨부파일-->
+	<div id="divFileupload" class="mb-3"></div>
 	
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-center">
