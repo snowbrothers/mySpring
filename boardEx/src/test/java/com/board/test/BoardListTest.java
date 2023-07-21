@@ -61,4 +61,12 @@ public class BoardListTest {
 		
 	}
 	
+	public void getOne() {
+		
+		BoardVo vo = new BoardVo();
+		
+		vo = boardMapper.getOne();
+		
+	}
+	
 }

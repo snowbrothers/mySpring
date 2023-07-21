@@ -25,4 +25,10 @@
 	 values (seq_bno.nextval, #{title}, #{content}, #{writer},sysdate, sysdate)
 </insert>
 
+<select id="getOne" resultType="com.board.vo.BoardVo">
+	select * from board_ex where bno = #{bno}
+</select>
+
+
+
 </mapper>
