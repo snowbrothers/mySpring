@@ -22,13 +22,17 @@
 
 <insert id="insert" >
 	insert into board_ex (bno, title, content, writer, regdate, updatedate)
-	 values (seq_bno.nextval, #{title}, #{content}, #{writer},sysdate, sysdate)
+	 values (seq_bno.nextval, #{title}, #{content}, #{writer}, sysdate, sysdate)
 </insert>
 
 <select id="getOne" resultType="com.board.vo.BoardVo">
 	select * from board_ex where bno = #{bno}
 </select>
 
+<delete id="delete">
+	delete board_ex
+		where bno = #{bno}
+</delete>
 
 
 </mapper>

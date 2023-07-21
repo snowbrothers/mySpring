@@ -14,4 +14,8 @@ public interface BoardService {
 	public List<BoardVo> getList();
 	
 	public int insert(BoardVo vo);
+	
+	public BoardVo getOne(int bno);
+	
+	public int delete(int bno);
 }

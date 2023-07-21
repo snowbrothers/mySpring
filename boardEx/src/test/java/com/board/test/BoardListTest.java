@@ -61,12 +61,23 @@ public class BoardListTest {
 		
 	}
 	
+	@Test
 	public void getOne() {
 		
 		BoardVo vo = new BoardVo();
 		
-		vo = boardMapper.getOne();
+		vo = boardMapper.getOne(8);
 		
+		assertNotNull(vo);
 	}
 	
+	
+	@Test
+	public void delete() {
+		
+		int res = boardMapper.delete(9);
+		
+		assertEquals(1, res);
+		
+	}
 }

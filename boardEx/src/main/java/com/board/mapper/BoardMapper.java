@@ -16,5 +16,9 @@ public interface BoardMapper {
 	
 	public int delete(int bno);
 	
-	public BoardVo getOne();
+	public BoardVo getOne(int bno);
+	
+
+
+	
 }

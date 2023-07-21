@@ -27,4 +27,17 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.insert(vo);
 	}
 
+	@Override
+	public BoardVo getOne(int bno) {
+		
+		
+		return boardMapper.getOne(bno);
+	}
+
+	@Override
+	public int delete(int bno) {
+		
+		return boardMapper.delete(bno);
+	}
+
 }
