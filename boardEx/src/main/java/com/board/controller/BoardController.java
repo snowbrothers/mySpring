@@ -147,4 +147,18 @@ public class BoardController {
 		
 	}
 	
+	
+	@GetMapping("edit")
+	public String edit(BoardVo board
+						,Model model ) {
+		
+		BoardVo vo = boardService.getOne(board.getBno());
+		
+		model.addAttribute("vo",vo);
+		
+		
+		return "/board2/write";
+	}
+	
+	
 }

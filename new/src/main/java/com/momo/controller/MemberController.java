@@ -2,6 +2,7 @@ package com.momo.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,24 @@ public class MemberController extends CommonRestController{
 	
 	@Autowired
 	MemberService service;
+	
+	
+	@GetMapping("/login/naver")
+	public void naverLogin() {
+		
+	}
+	
+	@GetMapping("/login/naver_callback")
+	public String naverLogin_callback(HttpServletRequest request
+									, Model model) {
+		
+		service.naverLogin(request, model);
+		
+		return "/login/naver";
+		// access 토큰 얻어오는 작업
+		// 
+	}
+	
 	
 	/**
 	 * 로그인 페이지로 이동

@@ -202,5 +202,11 @@ public class FileuploadServiceImpl implements FileuploadService {
 			return uploadPath;
 			
 		}
+
+		@Override
+		public FileuploadVo getOne(int bno, String uuid) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	
 }
