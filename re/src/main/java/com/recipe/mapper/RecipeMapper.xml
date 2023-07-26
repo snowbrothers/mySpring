@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper의 namespace속성은 연결할 mapper의 interface 풀 경로로 작성  -->
+<mapper namespace="com.recipe.mapper.RecipeMapper">
+
+	
+	
+	<select id="getTotalCnt" resultType="int">
+		select count(*) 
+		  from book
+		 where 1=1
+		 <include refid="criteria"></include>
+	</select>
+	
+	
+	<sql id="criteria">
+		<choose>
+			<when test="searchField == 'title'">
+				and title like '%'||#{searchWord}||'%'
+			</when>
+			
+			<when test="searchField == 'author'">
+				and author like '%'||#{searchWord}||'%'
+			</when>
+		</choose>
+	</sql>
+	
+	<!-- 게시글 한건 조회 -->
+	<select id="getOne" resultType="com.recipe.vo.RecipeBoardVo">
+		select * 
+		  from rec_board
+		 where b_no = #{b_no} 
+	</select>
+	
+	<!-- 레시피의 필요 재료들을 조회하기 위해 -->
+	<select id="getMaterial" resultType="com.recipe.vo.MaterialVo">
+		select * 
+		  from REC_MATERIAL
+		 where b_no = #{b_no} 
+	</select>
+	
+	<select id="getMaterial" resultType="com.recipe.vo.IngredientsVo">
+		select * 
+		  from INGREDIENTS
+		 where i_no in (#{i_no}, #{i_no}) 
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
