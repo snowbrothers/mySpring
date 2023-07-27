@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recipe.mapper.RecipeMapper;
+import com.recipe.vo.IngredientsVo;
 import com.recipe.vo.MaterialVo;
 import com.recipe.vo.RecipeBoardVo;
 import com.recipe.vo.RecipeReplyVo;
@@ -40,6 +41,18 @@ public class RecipeServiceImpl implements RecipeService{
 	public List<RecipeReplyVo> getRecipeReply(int b_no) {
 		// TODO Auto-generated method stub
 		return mapper.getRecipeReply(b_no);
+	}
+
+	@Override
+	public int replyTotalCnt(int b_no) {
+		// TODO Auto-generated method stub
+		return mapper.replyTotalCnt(b_no);
+	}
+
+	@Override
+	public IngredientsVo getIngredients(int i_no) {
+		// TODO Auto-generated method stub
+		return mapper.getIngredients(i_no);
 	}
 
 	

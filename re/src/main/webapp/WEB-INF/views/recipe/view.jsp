@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
     <title>Bulletin Board Detail Page</title>
+    
    <link href="/resources/css/view.css" rel="stylesheet">
    <style>
 
@@ -13,6 +15,42 @@
     /* Alternatively, you can use margin to create a gap between the text and <span> */
     /* margin-right: 10px; */
 }
+
+/* 모달창 스타일 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
     </style>
    <script type="text/javascript">
    
@@ -75,6 +113,30 @@
    			}
    			
    			headImgDiv.innerHTML = content;
+   			
+   			
+   			let photoReply = '';
+   			
+   			if(map.photoReview.length > 0) {
+   					
+   				map.photoReview.forEach(function(item, index){
+   				
+   					let savePath = encodeURIComponent( item.savePath);
+   					console.log('savePath : ', savePath);
+   					
+   					photoReply +=
+   						
+   						'<a onclick="photoModal('+item.r_no+','+map.photoReview+')"><img src="/display?fileName=' + savePath +'"></a>';
+   					
+   					
+   				})
+   				
+   				photoReviewDiv.innerHTML = photoReply;
+   				
+   			}
+   			
+   			
+  
    		}
    		
    		
@@ -116,7 +178,8 @@
    						+'<div>'
     					
     					+'<ul>'
-        				+'<li class="">' +i_name +'<span class="material-span">'+materialCnt+'개</span></li>'
+        				+'<li class="">' + i_name +'&nbsp;<i class="fa-solid fa-circle-info" style="color: #374967;" onclick="goModal(' + i_no + ')"></i>'
+        				+'</i><span class="material-span">'+materialCnt+'개</span></li>'
         				+'</ul>'
 						+'</div>'
    				})
@@ -129,6 +192,59 @@
    			
    			materialContentDiv.innerHTML = content;
    		}
+   		
+   		
+   		
+   		// 버튼을 클릭하면 모달창 출력
+   		function goModal(i_no){
+   			
+   			console.log('goMoal 출력 : ', i_no);
+   			
+   			
+   			
+   		// fetch 사용
+   	   		// 정보를 가져와서 함수에 파라메터로 넣는다. 
+   	   		fetch('/recipe/modal/ingredientModal/' + i_no)
+   	   			.then(response => response.json())
+   	   			.then(map => viewIngredientsModal(map));
+   	   			
+   	   		}
+   			
+   		
+   		
+   		
+   		
+   		function viewIngredientsModal(map){
+   			
+   			console.log('모달창 재료 정보 map 출력 : ', map)
+   			
+   		 	const modal = document.getElementById("ingredientModal");
+   		  	const ingredientInfoDiv = document.getElementById("ingredientInfoDiv");
+
+   		  	let content = '';
+   		  	if (map.ingredient) {
+   		    content +=
+   		      '<p><b>재료명: </b>' + map.ingredient.i_name + '</p>' 
+   		      	+ '<p><b>효능: </b>' + map.ingredient.i_power + '</p>'
+   		   		+ '<p><b>잘맞는 음식: </b>' + map.ingredient.i_friendfood + '</p>' 
+   				+ '<p><b>손질법: </b>' + map.ingredient.i_repair + '</p>'
+   				+ '<p><b>관련요리: </b>' + map.ingredient.i_cook + '</p>';
+   		  } else {
+   		    content = '재료 정보를 가져오지 못했습니다.';
+   		  }
+
+   		  ingredientInfoDiv.innerHTML = content;
+   		  modal.style.display = "block";
+   		}
+
+   		
+   		function closeModal() {
+   		  const modal = document.getElementById("ingredientModal");
+   		  modal.style.display = "none";
+   		}
+   			
+   			
+   		
    		
    		
    		//--------------------------------------------------------------------------------------
@@ -147,7 +263,59 @@
    	   		}
    		
    		
-   		function viewRecipeStep(map){
+   		
+   		function viewRecipeStep(map) {
+   		    console.log('조리순서 map 출력 : ', map);
+   		    let content = '';
+
+   		    if (map.recipeStep.length > 0) {
+   		        map.recipeStep.forEach(function (item, index) {
+   		            let step_content = item.step_content;
+   		            var s_no = item.s_no;
+
+   		            // Verifica si 'map.fileStepList' está definido y es una matriz
+   		            if (Array.isArray(map.fileStepList)) {
+   		                // Utiliza el método 'find' solo si 'map.fileStepList' es una matriz
+   		                console.log("fileStepList =======================================")
+   		                
+   		                let matchedImage = map.fileStepList.find(function (imageItem) {
+   		                    return imageItem.s_no === s_no;
+   		                });
+
+   		                content +=
+   		                    '<input type="text" value="' + s_no + '">'
+   		                    + '<div>'
+   		                    + '<ul>'
+   		                    + '<li class="">' + step_content + '</li>';
+
+   		                if (matchedImage) {
+   		                    let savePath = encodeURIComponent(matchedImage.savePath);
+   		                    content +=
+   		                        '<li id="stepImg"><a><img src="/display?fileName=' + savePath + '"></a></li>';
+   		                }
+
+   		                content += '</ul>'
+   		                    + '</div>';
+   		            } else {
+   		                // Maneja el caso cuando 'map.fileStepList' no es una matriz
+   		                content +=
+   		                    '<input type="text" value="' + s_no + '">'
+   		                    + '<div>'
+   		                    + '<ul>'
+   		                    + '<li class="">' + step_content + '</li>'
+   		                    + '</ul>'
+   		                    + '</div>';
+   		            }
+   		        });
+   		    } else {
+   		        content = '재료 정보를 불러오지 못했습니다.';
+   		    }
+
+   		    recipeStepDiv.innerHTML = content;
+   		}
+   		
+   		
+   		/*function viewRecipeStep(map){
    			
    			console.log('조리순서 map 출력 : ', map);
    			let content = '';
@@ -168,6 +336,7 @@
    						+'<div>'
     					+'<ul>'
         				+'<li class="">' +step_content+ '</li>'
+        				+'<li id="stepImg"></li>'
         				+'</ul>'
 						+'</div>'
    				})
@@ -181,8 +350,9 @@
    			recipeStepDiv.innerHTML = content;
    					
    			
-   		}
+   		}*/
    		
+
    		
    		
    		// 댓글 정보 출력 =================================================================
@@ -246,7 +416,8 @@
    </script>  		
 
 <body>
-
+	
+	<script src="https://kit.fontawesome.com/4863a16a12.js" crossorigin="anonymous"></script>
 
 	<input type="text" value="${board.b_no}">
 	
@@ -268,12 +439,30 @@
     
     <div class="material">
     <h2>재료</h2>
+    
+    
     <div  id="materialContentDiv">
     	
    	
 	
     </div>
     </div>
+    
+    
+    
+    <!-- 모달창 -->
+<div id="ingredientModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>재료 정보</h2>
+    <div id="ingredientInfoDiv">
+      <!-- 재료 정보가 여기에 출력될 것입니다. -->
+    </div>
+  </div>
+</div>
+    
+    
+    
 
     <!-- 조리 순서 -->
     <div class="cooking-order" >
@@ -285,18 +474,27 @@
        	
        
     </div>
+    
+    <!-- 작성자 정보 -->
+    
+    <div>
+    <h2>레시피 작성자</h2>
+    <div id="MemberInfoDiv">
+    	${board.nickname}
+    </div>
+    </div>
 
     <!-- 요리후기  -->
     <div class="cooking-review">
-    	<h2>요리후기</h2>
+    	<h2>요리후기 ${replyCnt}건</h2>
         <!-- 포토리뷰 -->
-        <div class="photo-review">
+        <div class="photo-review" >
         <h3>포토리뷰</h3>
         
-            <!-- Display only images here -->
-            <img src="path/to/image1.jpg" alt="Review Image 1">
-            <img src="path/to/image2.jpg" alt="Review Image 2">
-            <!-- Add more images if needed -->
+        <div id="photoReviewDiv">
+        
+        </div>
+       
         </div>
 
         <!-- 일반 요리 후기 -->
@@ -308,7 +506,11 @@
 
         <!-- 댓글 작성 부분, 사진 첨부 추가 -->
         <div class="comment-writing">
-            <!-- Add comment writing form here -->
+        <form id="replyWriteForm" method="post">
+            <textarea id="cmt_tx_content1" onclick="EZ.ATLogin(); return false;" 
+            	name="frm[cmt_tx_content]" class="form-control" placeholder="다양한 요리 후기를 작성해주세요!" 
+            	style="height:100px; width:100%; resize:none;"></textarea>
+       	</form>
         </div>
     </div>
 

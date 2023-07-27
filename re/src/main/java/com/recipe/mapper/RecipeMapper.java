@@ -17,9 +17,13 @@ public interface RecipeMapper {
 	public List<MaterialVo> getMaterial(int b_no);
 	
 	// 순수 재료 정보 
-	public IngredientsVo getIngredients(List<IngredientsVo> i_no);
+	public IngredientsVo getIngredients(int i_no);
 	
 	public List<RecipeStepVo> getRecipeStep(int b_no);
 	
 	public List<RecipeReplyVo> getRecipeReply(int b_no);
+	
+	public int replyTotalCnt(int b_no);
+	
+	
 }

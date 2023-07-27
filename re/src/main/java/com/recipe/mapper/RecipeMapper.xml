@@ -8,11 +8,10 @@
 
 	
 	
-	<select id="getTotalCnt" resultType="int">
+	<select id="replyTotalCnt" resultType="int">
 		select count(*) 
-		  from book
-		 where 1=1
-		 <include refid="criteria"></include>
+  		from rec_reply
+  		where bno=#{bno}
 	</select>
 	
 	
@@ -61,6 +60,14 @@
 			from rec_reply
 			where bno = #{bno}
 		
+	</select>
+	
+	<select id="getIngredients" resultType="com.recipe.vo.IngredientsVo">
+	
+		select *
+		from rec_ingredients
+		where i_no = #{i_no}
+	
 	</select>
 	
 	

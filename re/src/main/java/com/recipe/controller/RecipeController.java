@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.recipe.service.FileuploadService;
 import com.recipe.service.RecipeService;
+import com.recipe.vo.FileuploadVo;
+import com.recipe.vo.IngredientsVo;
 import com.recipe.vo.MaterialVo;
 import com.recipe.vo.RecipeBoardVo;
 import com.recipe.vo.RecipeReplyVo;
@@ -60,13 +63,19 @@ public class RecipeController {
 		
 		
 		
+		int replyCnt =service.replyTotalCnt(5);
 		
 		// key, value 로 이루어진 model 객체를 사용해 /recipe/view 페이지에 데이터 전달.
+		model.addAttribute("replyCnt", replyCnt);
 		model.addAttribute("board", vo);
 		
 		
 	}
 	
+	@Autowired
+	FileuploadService fileService;
+	
+
 	
 	@GetMapping("material/{bno}")
 	public @ResponseBody Map<String, Object> getMaterial(@PathVariable("bno") int bno){
@@ -91,8 +100,10 @@ public class RecipeController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<RecipeStepVo> step = service.getRecipeStep(5);
+		List<FileuploadVo> stepFile = fileService.getRecipeStep(5);
 		
 		map.put("recipeStep", step);
+		map.put("fileStepList", stepFile);
 		
 		return map;
 	}
@@ -113,6 +124,19 @@ public class RecipeController {
 		return map;
 	}
 	
+	
+	@GetMapping("/modal/ingredientModal/{i_no}")
+	public @ResponseBody Map<String, Object> getIngredient(@PathVariable("i_no") int i_no){
+		
+		System.out.println("getIngredient 호출 ==========================================");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		IngredientsVo ingredient = service.getIngredients(i_no);
+		
+		map.put("ingredient", ingredient);
+		
+		return map;
+	}
 	
 	
 	
