@@ -1,13 +1,22 @@
 package com.recipe.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.recipe.service.RecipeService;
+import com.recipe.vo.MaterialVo;
 import com.recipe.vo.RecipeBoardVo;
+import com.recipe.vo.RecipeReplyVo;
+import com.recipe.vo.RecipeStepVo;
 
 import lombok.extern.log4j.Log4j;
 
@@ -41,14 +50,69 @@ public class RecipeController {
 		log.info("============== bno " + b_no); 
 		
 		// b_no 를 활용해 데이터 베이스에서 게시글 정보 조회 // 우선 5으로 설정 해둠 수정해야함
-		RecipeBoardVo vo =  service.getOne(5);  
+		RecipeBoardVo vo =  service.getOne(5);
+		
 		// 객체 정보가 넘어온다..
-		service.getMaterial(5);
+		//service.getMaterial(5);
+		
+		
+		// 재료 정보 조회
+		
+		
+		
 		
 		// key, value 로 이루어진 model 객체를 사용해 /recipe/view 페이지에 데이터 전달.
-		model.addAttribute("board", vo); 
+		model.addAttribute("board", vo);
+		
 		
 	}
+	
+	
+	@GetMapping("material/{bno}")
+	public @ResponseBody Map<String, Object> getMaterial(@PathVariable("bno") int bno){
+		
+		System.out.println(" getMaterial 호출 ========================================== ");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<MaterialVo> material = service.getMaterial(5);
+		
+		map.put("materialList", material);
+		
+		return map;
+		
+	}
+	
+	@GetMapping("recipeStep/{bno}")
+	public @ResponseBody Map<String,Object> getRecipeStep(@PathVariable("bno") int bno){
+		
+		
+		System.out.println(" getRecipeStep 호출 ========================================== ");
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<RecipeStepVo> step = service.getRecipeStep(5);
+		
+		map.put("recipeStep", step);
+		
+		return map;
+	}
+	
+	
+	@GetMapping("replyList/{bno}")
+	public @ResponseBody Map<String,Object> getRecipeList(@PathVariable("bno") int bno){
+		
+		
+		System.out.println(" getRecipeList 호출 ========================================== ");
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<RecipeReplyVo> replyList = service.getRecipeReply(5);
+		
+		map.put("replyList", replyList);
+		
+		return map;
+	}
+	
 	
 	
 	

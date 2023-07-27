@@ -1,5 +1,7 @@
 package com.recipe.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -22,4 +24,8 @@ public class RecipeBoardVo {
 	private int star;
 	private String tier;
 	private int mno;
+	
+	// 파일 vo list
+	// private Filelist file;
+	// private List<ListStep> step;
 }

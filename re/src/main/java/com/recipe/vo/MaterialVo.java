@@ -9,4 +9,6 @@ public class MaterialVo {
 	private int i_no;
 	private int materialcnt;
 	private int m_no;
+	
+	private String i_name;
 }

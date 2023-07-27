@@ -2,6 +2,8 @@ package com.recipe.test;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import com.recipe.mapper.RecipeMapper;
 import com.recipe.test.RecipeBoardTest;
 import com.recipe.vo.MaterialVo;
 import com.recipe.vo.RecipeBoardVo;
+import com.recipe.vo.RecipeReplyVo;
+import com.recipe.vo.RecipeStepVo;
 
 import lombok.extern.log4j.Log4j;
 
@@ -43,10 +47,31 @@ public class RecipeBoardTest {
 	public void getMaterial() {
 		
 		assertNotNull(mapper);
-		MaterialVo material = mapper.getMaterial(5);
+		List<MaterialVo> material = mapper.getMaterial(5);
 		
 		log.info("==================================");
 		log.info(material);
+	}
+	
+	@Test
+	public void getRecipeStep() {
+		
+		assertNotNull(mapper);
+		
+		List<RecipeStepVo> step = mapper.getRecipeStep(5);
+		
+		log.info(step);
+		
+	}
+	
+	@Test
+	public void getReplyList() {
+		
+		assertNotNull(mapper);
+		
+		List<RecipeReplyVo> replyList = mapper.getRecipeReply(5);
+		
+		log.info(replyList);
 	}
 
 }

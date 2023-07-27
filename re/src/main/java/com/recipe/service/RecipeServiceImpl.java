@@ -1,11 +1,15 @@
 package com.recipe.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recipe.mapper.RecipeMapper;
 import com.recipe.vo.MaterialVo;
 import com.recipe.vo.RecipeBoardVo;
+import com.recipe.vo.RecipeReplyVo;
+import com.recipe.vo.RecipeStepVo;
 
 @Service
 public class RecipeServiceImpl implements RecipeService{
@@ -21,10 +25,25 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public MaterialVo getMaterial(int b_no) {
+	public List<MaterialVo> getMaterial(int b_no) {
 		// TODO Auto-generated method stub
 		return mapper.getMaterial(b_no);
 	}
+
+	@Override
+	public List<RecipeStepVo> getRecipeStep(int b_no) {
+		// TODO Auto-generated method stub
+		return mapper.getRecipeStep(b_no);
+	}
+
+	@Override
+	public List<RecipeReplyVo> getRecipeReply(int b_no) {
+		// TODO Auto-generated method stub
+		return mapper.getRecipeReply(b_no);
+	}
+
+	
+
 	
 	
 	

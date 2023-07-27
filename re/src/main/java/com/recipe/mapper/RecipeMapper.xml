@@ -35,18 +35,34 @@
 		 where b_no = #{b_no} 
 	</select>
 	
-	<!-- 레시피의 필요 재료들을 조회하기 위해 -->
 	<select id="getMaterial" resultType="com.recipe.vo.MaterialVo">
-		select * 
-		  from REC_MATERIAL
-		 where b_no = #{b_no} 
+		
+		 SELECT *
+  FROM (
+    SELECT M.I_NAME, MATERIALCNT, M.B_NO, I_NO, M_no
+    FROM REC_BOARD B, REC_MATERIAL M
+    WHERE M.B_NO = B.B_NO
+  ) 
+  WHERE B_NO = #{b_no}
+		
 	</select>
 	
-	<select id="getMaterial" resultType="com.recipe.vo.IngredientsVo">
-		select * 
-		  from INGREDIENTS
-		 where i_no in (#{i_no}, #{i_no}) 
+	<select id="getRecipeStep" resultType="com.recipe.vo.RecipeStepVo">
+			
+			select * 
+			from rec_step
+			where b_no = #{b_no}
+		
 	</select>
+	
+	<select id="getRecipeReply" resultType="com.recipe.vo.RecipeReplyVo">
+			
+			select *
+			from rec_reply
+			where bno = #{bno}
+		
+	</select>
+	
 	
 </mapper>
 
