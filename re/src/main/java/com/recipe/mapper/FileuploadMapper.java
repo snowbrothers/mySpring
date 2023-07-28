@@ -12,4 +12,6 @@ public interface FileuploadMapper {
 	
 	public List<FileuploadVo> getPhotoReview(int bno);
 	
+	public FileuploadVo getIngredients(int i_no);
+	
 }

@@ -61,8 +61,7 @@ public class RecipeController {
 		
 		// 재료 정보 조회
 		
-		
-		
+	
 		int replyCnt =service.replyTotalCnt(5);
 		
 		// key, value 로 이루어진 model 객체를 사용해 /recipe/view 페이지에 데이터 전달.
@@ -120,6 +119,7 @@ public class RecipeController {
 		List<RecipeReplyVo> replyList = service.getRecipeReply(5);
 		
 		map.put("replyList", replyList);
+		map.put("photoReview", fileService.getPhotoReview(5));
 		
 		return map;
 	}
@@ -132,12 +132,17 @@ public class RecipeController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		IngredientsVo ingredient = service.getIngredients(i_no);
+		FileuploadVo ingredientImg = fileService.getIngredients(i_no);
 		
 		map.put("ingredient", ingredient);
+		map.put("ingredientImg", ingredientImg);
 		
 		return map;
 	}
 	
-	
+	@GetMapping("/modal/star")
+	public void star() {
+		
+	}
 	
 }
