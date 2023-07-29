@@ -63,7 +63,9 @@
 	}*/
 </style>
 <script type="text/javascript">
-   window.addEventListener('load', function(){
+  
+
+	window.addEventListener('load', function(){
   		
 	  
 			
@@ -126,6 +128,7 @@
 				fetch('/file/photoReview'
 						, {
 							method : 'post'
+							, headers : {'Content-Type' : 'application/json'}
 							, body : formData
 				})
 					.then(response => response.json())
