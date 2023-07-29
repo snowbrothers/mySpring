@@ -36,13 +36,13 @@
 	
 	<select id="getMaterial" resultType="com.recipe.vo.MaterialVo">
 		
-		 SELECT *
-  FROM (
-    SELECT M.I_NAME, MATERIALCNT, M.B_NO, I_NO, M_no
-    FROM REC_BOARD B, REC_MATERIAL M
-    WHERE M.B_NO = B.B_NO
-  ) 
-  WHERE B_NO = #{b_no}
+		 		SELECT *
+ 				 FROM (
+  				  		SELECT M.I_NAME, MATERIALCNT, M.B_NO, I_NO, M_no
+   					 	FROM REC_BOARD B, REC_MATERIAL M
+    					WHERE M.B_NO = B.B_NO
+ 			 ) 
+  				WHERE B_NO = #{b_no}
 		
 	</select>
 	
@@ -69,6 +69,13 @@
 		where i_no = #{i_no}
 	
 	</select>
+	
+	<!-- 레시피저장 -->
+	<insert id="like_Recipe">
+		
+		insert into like_recipe (l_no, m_no, b_no) values (seq_l_no.nextval, #{m_no}, #{b_no})
+		
+	</insert>
 	
 	
 </mapper>

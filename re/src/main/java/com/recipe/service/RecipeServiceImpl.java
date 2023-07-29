@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.recipe.mapper.RecipeMapper;
 import com.recipe.vo.IngredientsVo;
+import com.recipe.vo.LikeVo;
 import com.recipe.vo.MaterialVo;
 import com.recipe.vo.RecipeBoardVo;
 import com.recipe.vo.RecipeReplyVo;
@@ -53,6 +54,12 @@ public class RecipeServiceImpl implements RecipeService{
 	public IngredientsVo getIngredients(int i_no) {
 		// TODO Auto-generated method stub
 		return mapper.getIngredients(i_no);
+	}
+
+	@Override
+	public int like_Recipe(LikeVo likevo) {
+		// TODO Auto-generated method stub
+		return mapper.like_Recipe(likevo);
 	}
 
 	

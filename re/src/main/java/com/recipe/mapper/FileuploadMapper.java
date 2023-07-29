@@ -14,4 +14,7 @@ public interface FileuploadMapper {
 	
 	public FileuploadVo getIngredients(int i_no);
 	
+	// 파일 업로드
+	public int insertFile(FileuploadVo vo);
+	
 }

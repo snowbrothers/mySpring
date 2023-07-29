@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.recipe.vo.IngredientsVo;
+import com.recipe.vo.LikeVo;
 import com.recipe.vo.MaterialVo;
 import com.recipe.vo.RecipeBoardVo;
 import com.recipe.vo.RecipeReplyVo;
@@ -24,5 +25,7 @@ public interface RecipeService {
 	public int replyTotalCnt(int b_no);
 
 	public IngredientsVo getIngredients(int i_no);
+	
+	public int like_Recipe(LikeVo likevo);
 
 }

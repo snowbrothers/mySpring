@@ -65,6 +65,7 @@
 <script type="text/javascript">
    window.addEventListener('load', function(){
   		
+	  
 			
 			// 상단 사진 이미지 출력
 			getFileList();
@@ -83,8 +84,155 @@
 			initializeStarRatings();
 			
 		 
+			// 좋아요 버튼 클릭 시 실행되는 함수
+			likeBtn.addEventListener('click', function(){
+				
+				
+				LikeRecipe();
+
+			});
 			
+			// 댓글 작성 클릭시 실행되는 함수
+			replyWriteBtn.addEventListener('click',function(){
+				
+				// 댓글 작성 함수
+				replyWrite();
+				
+			});
+			
+			//파일업로드
+			replyPhotoupload.addEventListener('click', function(){
+				
+				event.preventDefault();
+				
+				let formData = new FormData(replyPhotoForm);
+				formData.append('name','photo');
+				
+				console.log("formData : ", formData);
+				
+				for(var pair of formData.entries()){
+					
+					if(typeof(pair[1]) == 'object') {
+						let fileName = pair[1].name;
+						let fileSize = pair[1].fileSize;
+						
+						console.log('fileName', fileName);
+						console.log('fileSize', fileSize);
+						
+					}
+					
+				}
+				
+				fetch('/file/photoReview'
+						, {
+							method : 'post'
+							, body : formData
+				})
+					.then(response => response.json())
+					.then(map => fileuploadRes(map));
+				
+			});
 		})
+		
+		
+	
+		function fileuploadRes(map){
+	   
+	   			console.log(map.result);
+	   			
+	   
+   		}
+		
+		
+		function fetchPost(url, obj, callback){
+			
+		try {
+			
+			fetch(url
+					,{method : 'post'
+					, headers : {'Content-Type' : 'application/json'}
+					, body : JSON.stringify(obj)
+			})
+			// 요청결과 json 문자열을 javascript 객체로 반환
+			.then(response => response.json())
+			// 콜백함수 실행
+			.then(map => callback(map));
+			
+		} catch (e) {
+			console.log(e);
+		}	
+	}
+   
+   
+	   // 댓글 작성 함수
+	   function replyWrite(){
+		
+		   event.preventDefault(); // Prevent the default form submission behavior (page refresh)
+		   
+			let bno = document.querySelector('#b_no').value;
+			let reply = document.querySelector('#replyContent').value;
+			let writer = document.querySelector('#replyer').value;
+			
+			let obj = {bno : bno
+					, reply : reply
+					, writer : writer}
+			
+			console.log("bno", bno);
+			console.log("reply", reply);
+			console.log("writer", writer);
+			
+			// url : /reply/insert : 요청경로
+			// obj : json 형식으로 전달할 데이터
+			// callback : 응답을 받아 실행할 함수 / 콜백함수
+			fetchPost('/reply/write', obj, replyRes);
+		}
+  	
+	   
+	   function replyRes(map){
+		      // 성공 : 리스트 조회 및 출력
+		      // 실패 : 메세지 출력
+		      console.log('map', map);
+		      
+		      if (map.result == "success"){
+		    	 
+		    	  getRecipeReply();
+		         
+		         // 댓글 등록, 수정 후 화면 조회 시 입력창 초기화
+		         document.querySelector('#reply').value = "";
+		         document.querySelector('#replyer').value = "";
+		      } else {
+		         alert("다른내용");
+		      }
+		   }
+   
+	
+   
+   
+   // 레시피 저장 함수
+   function LikeRecipe(){
+	   
+	   	let m_no = document.querySelector('#m_no').value; // 세션 정보에서 m_no 를 받아온다면 저장
+		let b_no = document.querySelector('#b_no').value; // 화면에서 게시글의  b_no 를 읽어와서 저장
+	   
+		let obj = {m_no : m_no
+				, b_no : b_no }
+		
+		console.log("m_no :" , m_no); // 확인 완료
+		console.log("b_no :" , b_no);
+		
+		
+		fetchPost('/recipe/likeRecipe', obj, LikeRecipeRes);
+   }
+   
+	// 레시피 저장을 알려주는 함수
+	   function LikeRecipeRes(map){
+	   	
+			alert(map.message);
+	   	
+	   }
+			
+		
+		
 		
 		 
 	  
@@ -94,7 +242,8 @@
 	<script src="https://kit.fontawesome.com/4863a16a12.js"
 		crossorigin="anonymous"></script>
 
-	<input id="b_no" type="text" value="${board.b_no}">
+	<input id="m_no" type="text" value="2">
+	
 
 	<!-- 상단 -->
 	<div class="header">
@@ -102,7 +251,7 @@
 		<div id="headImgDiv"></div>
 
 		<h1>${board.title }</h1>
-
+		<button id="likeBtn">레시피 저장</button>
 		<p>${board.intro }</p>
 	</div>
 
@@ -189,11 +338,26 @@
 
 		<!-- 댓글 작성 부분, 사진 첨부 추가 -->
 		<div class="comment-writing">
-			<form id="replyWriteForm" method="post">
-				<textarea id="cmt_tx_content1" onclick="EZ.ATLogin(); return false;"
-					name="frm[cmt_tx_content]" class="form-control"
+
+		<form id="replyPhotoForm" enctype="multipart/form-data" name="replyPhotoForm" >
+			<input id="b_no" name ="b_no" type="text" value="${board.b_no}">
+			<input type="file" name="files">
+			<button type="button" id="replyPhotoupload">Fetch파일업로드</button>
+			
+			<div id="photouploadRes"></div>
+			
+		</form>
+
+
+			<form id="replyWriteForm" enctype="multipart/form-data" onsubmit="replyWrite(); return false;" >
+				<!--  작성자 나중엔 세션에서 받아와야함 .... -->
+				<input type="text" id="replyer">
+				
+				<textarea id="replyContent" name="replyContent" class="form-control"
 					placeholder="다양한 요리 후기를 작성해주세요!"
 					style="height: 100px; width: 100%; resize: none;"></textarea>
+
+				<button id="replyWriteBtn">댓글 작성</button>
 			</form>
 		</div>
 	</div>

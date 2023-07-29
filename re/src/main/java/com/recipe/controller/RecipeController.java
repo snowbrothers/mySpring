@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,6 +18,7 @@ import com.recipe.service.FileuploadService;
 import com.recipe.service.RecipeService;
 import com.recipe.vo.FileuploadVo;
 import com.recipe.vo.IngredientsVo;
+import com.recipe.vo.LikeVo;
 import com.recipe.vo.MaterialVo;
 import com.recipe.vo.RecipeBoardVo;
 import com.recipe.vo.RecipeReplyVo;
@@ -140,9 +143,36 @@ public class RecipeController {
 		return map;
 	}
 	
-	@GetMapping("/modal/star")
-	public void star() {
+	
+	@PostMapping("likeRecipe")
+	public @ResponseBody Map<String, Object> likeRecipe(@RequestBody LikeVo vo){
 		
+		System.out.println("likeRecipe 성공 ======================");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+	
+			int res = service.like_Recipe(vo);
+			
+			
+				
+				map.put("message", "레시피 저장 성공  ! ");
+			
+			
+			
+			log.info(res);
+		
+		} catch (Exception e) {
+			map.put("message","이미 저장 되어 있는 레시피 입니다 . ^^");
+		}
+	
+		
+		
+		
+		
+		return map;
 	}
+	
 	
 }

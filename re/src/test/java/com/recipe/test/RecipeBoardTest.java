@@ -1,5 +1,6 @@
 package com.recipe.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.recipe.mapper.RecipeMapper;
 import com.recipe.test.RecipeBoardTest;
 import com.recipe.vo.IngredientsVo;
+import com.recipe.vo.LikeVo;
 import com.recipe.vo.MaterialVo;
 import com.recipe.vo.RecipeBoardVo;
 import com.recipe.vo.RecipeReplyVo;
@@ -91,6 +93,22 @@ public class RecipeBoardTest {
 		
 		IngredientsVo vo = mapper.getIngredients(1);
 		
+		
+	}
+	
+	@Test
+	public void like_Recipe() {
+		
+		
+		
+		LikeVo like = new LikeVo();
+		
+		like.setM_no(1);
+		like.setB_no(5);
+		
+		int res = mapper.like_Recipe(like);
+		
+		assertEquals(1, res);
 		
 	}
 

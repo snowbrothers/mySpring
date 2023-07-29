@@ -3,6 +3,7 @@ package com.recipe.mapper;
 import java.util.List;
 
 import com.recipe.vo.IngredientsVo;
+import com.recipe.vo.LikeVo;
 import com.recipe.vo.MaterialVo;
 import com.recipe.vo.RecipeBoardVo;
 import com.recipe.vo.RecipeReplyVo;
@@ -24,6 +25,8 @@ public interface RecipeMapper {
 	public List<RecipeReplyVo> getRecipeReply(int b_no);
 	
 	public int replyTotalCnt(int b_no);
+	
+	public int like_Recipe(LikeVo likevo);
 	
 	
 }
