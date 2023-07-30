@@ -25,6 +25,11 @@ import com.board.vo.BoardVo;
 public class BoardController {
 
 	
+	@GetMapping("recView")
+	public void viewPage() {
+		
+	}
+	
 	@GetMapping("msg")
 	public void msg() {
 		

@@ -102,7 +102,8 @@ window.addEventListener('load',function(){
 							'<a href="/file/download?fileName='
 							+	savePath+'">'	
 							+	item.filename + '</a>'
-							+ '<br>';
+							+ '<br>'
+							+ '<a><img src="/display?fileName=' + savePath +'"></a>';
 				})
 
 				
@@ -201,6 +202,9 @@ function requestAction(url){
   <div id="replyDiv">
   
   </div>
+  
+  
+  		
   
 </main>
 

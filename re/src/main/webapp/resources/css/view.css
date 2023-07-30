@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+ <style>
+        /* Add your CSS styles here */
+
+        /* Example styles for demonstration purposes */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            /* Styles for the upper part */
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .material {
+            /* Styles for the material part */
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        .cooking-order {
+            /* Styles for the cooking order part */
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .cooking-review {
+            /* Styles for the cooking review part */
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        .recently-viewed {
+            /* Styles for the recently viewed section */
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        /* Example styles for photo review section */
+        .photo-review {
+            /* Styles for the photo review part */
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .photo-review img {
+            /* Styles for displaying images in photo review */
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+
+        /* Example styles for general comment section */
+        .general-comment {
+            /* Styles for the general comment part */
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        /* Example styles for comment writing section */
+        .comment-writing {
+            /* Styles for the comment writing part */
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+    </style>
