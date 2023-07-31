@@ -28,4 +28,11 @@ public class ReplyServiceImpl implements ReplyService{
 		return replyMapper.replyWrite(vo);
 	}
 
+
+	@Override
+	public RecipeReplyVo selectPhotoReview(int r_no) {
+		// TODO Auto-generated method stub
+		return replyMapper.selectPhotoReview(r_no);
+	}
+
 }

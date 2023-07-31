@@ -214,10 +214,8 @@
 				event.preventDefault();
 				
 				let b_no = document.querySelector('#b_no').value;
-				let writer = document.querySelector('#writer').value;
-				let reply = document.querySelector('#reply').value;
-				let star = document.querySelector('#star').value;
 				
+	
 				
 				let formData = new FormData(replyPhotoForm_Test);
 				
@@ -229,7 +227,7 @@
 				
 				console.log("reply : ", reply);
 				
-				console.log("star : ", star);
+				
 				
 				for(var pair of formData.entries()){
 					
@@ -255,7 +253,7 @@
 			}); // 
 			
 			
-			// 별점 전송
+			/*// 별점 전송
 			 $(".starDiv").score({
 		           starColor: "gold",
 		           editable:true,
@@ -278,7 +276,7 @@
 			      // Update the hidden input field with the selected rating value
 			      $("#star").val(starRating);
 			    });
-			//
+			//*/
 	        });
 			
 	
@@ -499,7 +497,7 @@
 			
 			
 				
-			  <div class="starDiv" id="star" data-max="5"></div>
+			  
 				<textarea id="reply" name="reply" class="form-control"
 					placeholder="다양한 요리 후기를 작성해주세요!"
 					style="height: 100px; width: 60%; resize: none;"></textarea><span ><button style="width:85px; height: 86px;" id="replyPhotoupload_Test">작성</button></span>

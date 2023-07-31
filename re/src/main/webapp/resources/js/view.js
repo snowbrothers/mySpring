@@ -26,19 +26,20 @@ console.log('연결 확인 ===================================================')
 		let bno = document.querySelector('#b_no').value;
 		
 		// fetch 사용
-		// 정보를 가져와서 함수에 파라메터로 넣는다. 
+		// 정보를 가져와서 함수에 파라메터로 넣는다.
 		fetch('/file/list/' + bno)
 			.then(response => response.json())
 			.then(map => viewFileList(map));
 			
 		}
 		
-		// 상단 img ======================================================================
+		// 상단 img
+		// ======================================================================
 		
 		function viewFileList(map){
 			
 			// 잘 들어왔는지 확인
-			//console.log('map 출력 :', map);
+			// console.log('map 출력 :', map);
 			let content = '';
 			
 			if(map.list.length > 0) {
@@ -46,7 +47,7 @@ console.log('연결 확인 ===================================================')
 				map.list.forEach(function(item, index){
 					
 					let savePath = encodeURIComponent( item.savePath);
-					//console.log('savePath : ', savePath);
+					// console.log('savePath : ', savePath);
 					
 					content +=
 						
@@ -68,14 +69,15 @@ console.log('연결 확인 ===================================================')
 		
 		
 		
-		// 재료정보출력 ======================================================================== 
+		// 재료정보출력
+		// ========================================================================
 		
 		function getMaterial(){
 			
 			let bno = document.querySelector('#b_no').value;
 	   		
 	   		// fetch 사용
-	   		// 정보를 가져와서 함수에 파라메터로 넣는다. 
+	   		// 정보를 가져와서 함수에 파라메터로 넣는다.
 	   		fetch('/recipe/material/' + bno)
 	   			.then(response => response.json())
 	   			.then(map => viewMaterialList(map));
@@ -85,7 +87,7 @@ console.log('연결 확인 ===================================================')
 		
 		function viewMaterialList(map){
 				
-			//console.log('재료정보 map 출력 : ', map);
+			// console.log('재료정보 map 출력 : ', map);
 			let content = '<b>[재료]</b>';
 			// Controller 에서 map 에 put 할때 지정한 값이 있다면..
 			
@@ -127,12 +129,12 @@ console.log('연결 확인 ===================================================')
 		// 버튼을 클릭하면 모달창 출력
 		function goModal(i_no, i_name){
 			
-//			console.log('goMoal 출력 : ', i_no);
-//			console.log('goMoal 출력 : ', i_name);
+// console.log('goMoal 출력 : ', i_no);
+// console.log('goMoal 출력 : ', i_name);
 			
 			
 		// fetch 사용
-	   		// 정보를 가져와서 함수에 파라메터로 넣는다. 
+	   		// 정보를 가져와서 함수에 파라메터로 넣는다.
 	   		fetch('/recipe/modal/ingredientModal/' + i_no +'/'+ i_name)
 	   			.then(response => response.json())
 	   			.then(map => viewIngredientsModal(map));
@@ -145,7 +147,7 @@ console.log('연결 확인 ===================================================')
 		
 		function viewIngredientsModal(map){
 			
-			//console.log('모달창 재료 정보 map 출력 : ', map)
+			// console.log('모달창 재료 정보 map 출력 : ', map)
 			
 		 	const modal = document.getElementById("ingredientModal");
 		  	const ingredientInfoDiv = document.getElementById("ingredientInfoDiv");
@@ -154,7 +156,7 @@ console.log('연결 확인 ===================================================')
 		  	if(map.ingredientImg){
 		  		
 		  		let savePath = encodeURIComponent( map.ingredientImg.savePath);
-			//console.log('savePath : ', savePath);
+			// console.log('savePath : ', savePath);
 		  		
 		  		contentImg = 
 		  			
@@ -189,7 +191,7 @@ console.log('연결 확인 ===================================================')
 		
 		
 		
-		//--------------------------------------------------------------------------------------
+		// --------------------------------------------------------------------------------------
 			
 		// 요리 순서 출력
 		function getRecipeStep(){
@@ -197,12 +199,19 @@ console.log('연결 확인 ===================================================')
 			let bno = document.querySelector('#b_no').value;
 	   		
 	   		// fetch 사용
-	   		// 정보를 가져와서 함수에 파라메터로 넣는다. 
+	   		// 정보를 가져와서 함수에 파라메터로 넣는다.
 	   		fetch('/recipe/recipeStep/' + bno)
 	   			.then(response => response.json())
 	   			.then(map => viewRecipeStep(map));
 	   			
 	   		}
+		
+		
+		
+		
+		
+
+		//---------------------------------------------------------------------------------------
 			
 		function viewRecipeStep(map) {
 		   // console.log('조리순서 map 출력 : ', map);
@@ -213,10 +222,13 @@ console.log('연결 확인 ===================================================')
 		            let step_content = item.step_content;
 		            var s_no = item.s_no;
 
-		            // Verifica si 'map.fileStepList' está definido y es una matriz
+		            // Verifica si 'map.fileStepList' está definido y es una
+					// matriz
 		            if (Array.isArray(map.fileStepList)) {
-		                // Utiliza el método 'find' solo si 'map.fileStepList' es una matriz
-		               // console.log("fileStepList =======================================")
+		                // Utiliza el método 'find' solo si 'map.fileStepList'
+						// es una matriz
+		               // console.log("fileStepList
+						// =======================================")
 		                
 		                let matchedImage = map.fileStepList.find(function (imageItem) {
 		                    return imageItem.s_no === s_no;
@@ -236,7 +248,8 @@ console.log('연결 확인 ===================================================')
 		                content += 
 		                    		 '</div>';
 		            } else {
-		                // Maneja el caso cuando 'map.fileStepList' no es una matriz
+		                // Maneja el caso cuando 'map.fileStepList' no es una
+						// matriz
 		                content +=
 		                    '<input type="text" value="' + s_no + '">'
 		                    + '<div>'
@@ -254,54 +267,45 @@ console.log('연결 확인 ===================================================')
 		}
 		
 		
-		/*function viewRecipeStep(map){
-			
-			console.log('조리순서 map 출력 : ', map);
-			let content = '';
-			// Controller 에서 map 에 put 할때 지정한 값이 있다면..
-			
-			if(map.recipeStep.length > 0){
-				
-				map.recipeStep.forEach(function(item, index){
-					
-					let step_content = item.step_content;
-					
-					// input hidden 으로 가지고 간다음 클릭하면 넘어갈때 가져갈 수 있도록 해보자.
-					var s_no = item.s_no;
-			
-				content +=   						
-						
-					'<input type="text" value="'+s_no+'">'
-						+'<div>'
-					+'<ul>'
-   				+'<li class="">' +step_content+ '</li>'
-   				+'<li id="stepImg"></li>'
-   				+'</ul>'
-					+'</div>'
-				})
-				
-				
-			}else{
-				content='재료 정보를 불러오지 못했습니다.';
-			}
-			
-			
-			recipeStepDiv.innerHTML = content;
-					
-			
-		}*/
+		/*
+		 * function viewRecipeStep(map){
+		 * 
+		 * console.log('조리순서 map 출력 : ', map); let content = ''; // Controller
+		 * 에서 map 에 put 할때 지정한 값이 있다면..
+		 * 
+		 * if(map.recipeStep.length > 0){
+		 * 
+		 * map.recipeStep.forEach(function(item, index){
+		 * 
+		 * let step_content = item.step_content;
+		 *  // input hidden 으로 가지고 간다음 클릭하면 넘어갈때 가져갈 수 있도록 해보자. var s_no =
+		 * item.s_no;
+		 * 
+		 * content +=
+		 *  '<input type="text" value="'+s_no+'">' +'<div>' +'<ul>' +'<li class="">'
+		 * +step_content+ '</li>' +'<li id="stepImg"></li>' +'</ul>' +'</div>' })
+		 * 
+		 * 
+		 * }else{ content='재료 정보를 불러오지 못했습니다.'; }
+		 * 
+		 * 
+		 * recipeStepDiv.innerHTML = content;
+		 * 
+		 *  }
+		 */
 		
 
 		
 		
-		// 댓글 정보 출력 =================================================================
+		// 댓글 정보 출력
+		// =================================================================
 		
 		function getRecipeReply(){
 			
 				let bno = document.querySelector('#b_no').value;
 	   		
 		   		// fetch 사용
-		   		// 정보를 가져와서 함수에 파라메터로 넣는다. 
+		   		// 정보를 가져와서 함수에 파라메터로 넣는다.
 		   		fetch('/replyList/' + bno)
 		   			.then(response => response.json())
 		   			.then(map => viewReplyList_Test(map));
@@ -311,129 +315,105 @@ console.log('연결 확인 ===================================================')
 		
 		
 		
-		/*function viewReplyList(map){
-			
-			console.log('댓글리스트 map 출력 : ', map);
-			
-			
-			let content = '';
-			// Controller 에서 map 에 put 할때 지정한 값이 있다면..
-			
-			if(map.replyList.length > 0){
-				
-				map.replyList.forEach(function(item, index){
-					
-					let r_no = item.r_no; // 댓글번호
-					let replydate = item.replydate; // 작성일
-					let reply = item.reply; // 내용
-					let writer = item.writer; // 작성자
-					let star = item.star;
-					
-					// input hidden 으로 가지고 간다음 클릭하면 넘어갈때 가져갈 수 있도록 해보자.
-					// 나중에 댓글과 연결된 사진 가져와야함.
-					
-					// 댓글 5개 보여주기
-					// 더보기 버튼을 누르면 전체 댓글 표시 될 수 있도록
-					
-					
-					
-					content +=   						
-					
-					'<div class="media-body">'
-				    +'<h4 class="media-heading">'
-				    +'<b class="info_name_f">'+writer+'</b>'+replydate+'<div class="test-score1" data-max="5" data-rate="'+star+'"></div>'
-				    +'</h4>'
-				    +'<p class="reply_list_cont">'+reply+'</p></div>';
-				    
-				})
-				
-				
-			}else{
-				content='재료 정보를 불러오지 못했습니다.';
-			}
-			
-			
-			generalCommentDiv.innerHTML = content;
-			
-			
-			
-			let photoReply = '';
-
-			console.log(map.photoReview);
-			console.log(map.replyList);
-		  if (map.photoReview.length > 0) {
-		    
-			  map.photoReview.forEach(function(item, index) {
-				  
-    		      let savePath = encodeURIComponent(item.savePath);
-    		      let r_no = item.r_no;
-    		      console.log('savePath : ', savePath);
-
-    		      // Use encodeURIComponent for the entire JSON string to handle quotes correctly
-    		      let photoReviewJson = encodeURIComponent(JSON.stringify(map.photoReview));
-    		      let replyListJson = encodeURIComponent(JSON.stringify(map.replyList));
-    		     
-    		      
-		   			console.log('================================');
-    		      	console.log(map.replyList[index]);
-    		      	console.log(map.replyList);
-
-    		   		let reply = map.replyList[index];
-    		  	 	let replyJson = JSON.stringify(reply);
-    		  	 	console.log(replyJson);
-    		      
-    		  	 photoReply +=
-    		  	  '<div><a onclick="photoModal_test(\'' + savePath + '\', \'' + encodeURIComponent(replyJson) + '\')">'
-    		  	  + '<img src="/display?fileName=' + savePath + '"></a></div>';
-		    });
-			  
-			  
-			  
-		    photoReviewDiv.innerHTML = photoReply;
-		  }
-		}
-		
-		
-		
-		function photoModal_test(savePath, replyJson) {
-		 
-			
-			let reply = JSON.parse(decodeURIComponent(replyJson));
-			console.log("reply 출력 : ",  reply);
-			
- 			const modal = document.getElementById("photoReviewModal");
-		  	const photoReviewImgDiv = document.getElementById("photoReviewImgDiv");
-		  	const photoReviewReplyDiv = document.getElementById("photoReviewReplyDiv");
-		   	
-	
-		
-		  	// 사진 div
-		  	photoReviewImgDiv.innerHTML = '<img src="/display?fileName=' + savePath + '"></a>';
-			
-		  	let content = 
-		  	
-				'<div id="modalContent">'	
-					+'<div id="modalHead">'
-					+ '<span>'+reply.writer+'</span>&nbsp;<div class="test-score1" data-max="5" data-rate="'+reply.star+'"></div>'
-					+ '&nbsp;<span>'+reply.replydate+'</span>' 
-					+'</div>'
-					+'<div id="modalContent">'+reply.reply+'</div>'
-		  			+'</div>'
-	  	
-		  	// 댓글 div
-		  	photoReviewReplyDiv.innerHTML = content;
-		  			
-		  		 		  			
-		 	 modal.style.display = "block";
-		 	 
-		 	
-		}*/
+		/*
+		 * function viewReplyList(map){
+		 * 
+		 * console.log('댓글리스트 map 출력 : ', map);
+		 * 
+		 * 
+		 * let content = ''; // Controller 에서 map 에 put 할때 지정한 값이 있다면..
+		 * 
+		 * if(map.replyList.length > 0){
+		 * 
+		 * map.replyList.forEach(function(item, index){
+		 * 
+		 * let r_no = item.r_no; // 댓글번호 let replydate = item.replydate; // 작성일
+		 * let reply = item.reply; // 내용 let writer = item.writer; // 작성자 let
+		 * star = item.star;
+		 *  // input hidden 으로 가지고 간다음 클릭하면 넘어갈때 가져갈 수 있도록 해보자. // 나중에 댓글과 연결된
+		 * 사진 가져와야함.
+		 *  // 댓글 5개 보여주기 // 더보기 버튼을 누르면 전체 댓글 표시 될 수 있도록
+		 * 
+		 * 
+		 * 
+		 * content +=
+		 *  '<div class="media-body">' +'<h4 class="media-heading">' +'<b
+		 * class="info_name_f">'+writer+'</b>'+replydate+'<div
+		 * class="test-score1" data-max="5" data-rate="'+star+'"></div>' +'</h4>' +'<p class="reply_list_cont">'+reply+'</p></div>';
+		 *  })
+		 * 
+		 * 
+		 * }else{ content='재료 정보를 불러오지 못했습니다.'; }
+		 * 
+		 * 
+		 * generalCommentDiv.innerHTML = content;
+		 * 
+		 * 
+		 * 
+		 * let photoReply = '';
+		 * 
+		 * console.log(map.photoReview); console.log(map.replyList); if
+		 * (map.photoReview.length > 0) {
+		 * 
+		 * map.photoReview.forEach(function(item, index) {
+		 * 
+		 * let savePath = encodeURIComponent(item.savePath); let r_no =
+		 * item.r_no; console.log('savePath : ', savePath);
+		 *  // Use encodeURIComponent for the entire JSON string to handle
+		 * quotes correctly let photoReviewJson =
+		 * encodeURIComponent(JSON.stringify(map.photoReview)); let
+		 * replyListJson = encodeURIComponent(JSON.stringify(map.replyList));
+		 * 
+		 * 
+		 * console.log('================================');
+		 * console.log(map.replyList[index]); console.log(map.replyList);
+		 * 
+		 * let reply = map.replyList[index]; let replyJson =
+		 * JSON.stringify(reply); console.log(replyJson);
+		 * 
+		 * photoReply += '<div><a onclick="photoModal_test(\'' + savePath +
+		 * '\', \'' + encodeURIComponent(replyJson) + '\')">' + '<img
+		 * src="/display?fileName=' + savePath + '"></a></div>'; });
+		 * 
+		 * 
+		 * 
+		 * photoReviewDiv.innerHTML = photoReply; } }
+		 * 
+		 * 
+		 * 
+		 * function photoModal_test(savePath, replyJson) {
+		 * 
+		 * 
+		 * let reply = JSON.parse(decodeURIComponent(replyJson));
+		 * console.log("reply 출력 : ", reply);
+		 * 
+		 * const modal = document.getElementById("photoReviewModal"); const
+		 * photoReviewImgDiv = document.getElementById("photoReviewImgDiv");
+		 * const photoReviewReplyDiv =
+		 * document.getElementById("photoReviewReplyDiv");
+		 * 
+		 * 
+		 *  // 사진 div photoReviewImgDiv.innerHTML = '<img
+		 * src="/display?fileName=' + savePath + '"></a>';
+		 * 
+		 * let content =
+		 *  '<div id="modalContent">' +'<div id="modalHead">' + '<span>'+reply.writer+'</span>&nbsp;<div
+		 * class="test-score1" data-max="5" data-rate="'+reply.star+'"></div>' +
+		 * '&nbsp;<span>'+reply.replydate+'</span>' +'</div>' +'<div
+		 * id="modalContent">'+reply.reply+'</div>' +'</div>'
+		 *  // 댓글 div photoReviewReplyDiv.innerHTML = content;
+		 * 
+		 * 
+		 * modal.style.display = "block";
+		 * 
+		 *  }
+		 */
 		
 		// =================================================================================================
 			
 			
 		function viewReplyList_Test(map) {
-			  //console.log('comments list map output: ', map);
+			  // console.log('comments list map output: ', map);
 
 			  let content = '';
 			  let showAll = false;
@@ -446,7 +426,8 @@ console.log('연결 확인 ===================================================')
 			    let writer = item.writer; // Writer
 			    let star = item.star;
 
-			    // Let's take it to the input hidden and make it available when clicking on it.
+			    // Let's take it to the input hidden and make it available when
+				// clicking on it.
 			    // We need to get the picture associated with the comment later.
 			    return (
 			    		
@@ -471,7 +452,8 @@ console.log('연결 확인 ===================================================')
 			    $(".test-score1").score();
 			  }
 
-			  // If there is a value specified when putting it to the map in the controller...
+			  // If there is a value specified when putting it to the map in
+				// the controller...
 			  if (map.replyList.length > 0) {
 			    // Show the first five items initially
 			    for (let index = 0; index < Math.min(5, map.replyList.length); index++) {
@@ -491,7 +473,7 @@ console.log('연결 확인 ===================================================')
 
 			  let photoReply = '';
 
-			//  console.log(map.photoReview);
+			// console.log(map.photoReview);
 			 // console.log(map.replyList);
 
 			  if (map.photoReview.length > 0) {
@@ -500,17 +482,18 @@ console.log('연결 확인 ===================================================')
 			      let r_no = item.r_no;
 			     // console.log('savePath : ', savePath);
 
-			      // Use encodeURIComponent for the entire JSON string to handle quotes correctly
+			      // Use encodeURIComponent for the entire JSON string to
+					// handle quotes correctly
 			      let photoReviewJson = encodeURIComponent(JSON.stringify(map.photoReview));
 			      let replyListJson = encodeURIComponent(JSON.stringify(map.replyList));
 
-			    //  console.log('================================');
-			    //  console.log(map.replyList[index]);
-			    //  console.log(map.replyList);
+			    // console.log('================================');
+			    // console.log(map.replyList[index]);
+			    // console.log(map.replyList);
 
 			      let reply = map.replyList[index];
 			      let replyJson = JSON.stringify(reply);
-			   //   console.log(replyJson);
+			   // console.log(replyJson);
 
 			      if (!showAll && index >= 5) {
 			        photoReply +=
@@ -527,18 +510,40 @@ console.log('연결 확인 ===================================================')
 			  }
 			}
 		
+		//===========================================================================================
+		
+			function photoModal_ex(r_no){
+				
+				let r_no = r_no;
+				
+				fetch('/file/photoReviewGo'
+						,{method : 'post'
+						, r_no : r_no
+				})
+				// 요청결과 json 문자열을 javascript 객체로 반환
+				.then(response => response.json())
+				// 콜백함수 실행
+				.then(map => callback(map));
+				
+			}
+		
 		
 		
 			function photoModal_re(savePath, replyJson, replyListJson, photoReviewJson) {
 				  
-					const modal = document.getElementById("photoReviewModal");
+				  const modal = document.getElementById("photoReviewModal");
 				  const photoReviewImgDiv = document.getElementById("photoReviewImgDiv");
 				  const photoReviewReplyDiv = document.getElementById("photoReviewReplyDiv");
-				  const photoReviewModalList = document.getElementById("photoReviewModalList"); // Element to display all images
+				  const photoReviewModalList = document.getElementById("photoReviewModalList"); // Element
+																								// to
+																								// display
+																								// all
+																								// images
 
 				  photoReviewImgDiv.innerHTML = '<img src="/display?fileName=' + savePath + '">';
 
-				  // Parse the stringified JSON objects back into arrays/objects
+				  // Parse the stringified JSON objects back into
+					// arrays/objects
 				  var photoReview = JSON.parse(decodeURIComponent(photoReviewJson));
 				  var replyList = JSON.parse(decodeURIComponent(replyListJson));
 				  var reply = JSON.parse(decodeURIComponent(replyJson));
@@ -568,113 +573,140 @@ console.log('연결 확인 ===================================================')
 				}
 		
 		
+			/*=============================================================================================================*/
+			
+			function photoModal_rere(savePath, replyJson, replyListJson, photoReviewJson) {
+				  
+				  const modal = document.getElementById("photoReviewModal");
+				  const photoReviewImgDiv = document.getElementById("photoReviewImgDiv");
+				  const photoReviewReplyDiv = document.getElementById("photoReviewReplyDiv");
+				  const photoReviewModalList = document.getElementById("photoReviewModalList"); // Element
+																								
+				  
+
+				  // Parse the stringified JSON objects back into
+					// arrays/objects
+				  var photoReview = JSON.parse(decodeURIComponent(photoReviewJson));
+				  var replyList = JSON.parse(decodeURIComponent(replyListJson));
+				  var reply = JSON.parse(decodeURIComponent(replyJson));
+				 
+				  
+				  
+				  photoReviewImgDiv.innerHTML = '<img src="/display?fileName=' + savePath + '">';
+
+				  
+				  
+				  // Display all images in the photoReview array
+				  let photoList = '';
+				  photoReview.forEach(function (item, index) {
+				    let saveP = encodeURIComponent(item.savePath);
+				    photoList += '<img src="/display?fileName=' + saveP + '">';
+				  });
+
+				  photoReviewModalList.innerHTML = photoList;
+
+				  // Display reply information in the photoReviewReplyDiv
+				  let content =
+				    '<div id="modalContent">' +
+				    '<div id="modalHead">' +
+				    '<span>' + reply.writer + '</span> <div class="test-score2" data-max="5" data-rate="' + reply.star + '"></div>' +
+				    '<span>' + reply.replydate + '</span>' +
+				    '</div>' +
+				    '<div id="modalContent">' + reply.reply + '</div>' +
+				    '</div>';
+
+				  photoReviewReplyDiv.innerHTML = content;
+				  $(".test-score2").score();
+				  modal.style.display = "block";
+				}
+			
+			
+		
+			
+			
+			
 			
 		/*
-		function photoModal(savePath, replyJson, replyListJson, photoReviewJson) {
-	   		
-		   	
- 		 // Decode the URI encoded JSON string and parse it back into an object:
- 		  
- 		 // 문자열을 JSON 형식으로 parse
- 		
- 		 // 포토 리스트 전체
- 		var photoReview = JSON.parse(decodeURIComponent(photoReviewJson));
- 		console.log(photoReview);
- 		
- 		// 전체 댓글 리스트  객체
- 		var replyList= JSON.parse(decodeURIComponent(replyListJson));
- 		console.log(replyList);
- 		
- 		// index 를 담은 객체 하나
- 		var reply = JSON.parse(decodeURIComponent(replyJson));
- 		console.log(photoReview);
- 		 
- 			const modal = document.getElementById("photoReviewModal");
-		  	const photoReviewImgDiv = document.getElementById("photoReviewImgDiv");
-		  	const photoReviewReplyDiv = document.getElementById("photoReviewReplyDiv");
-			 
-			photoReviewImgDiv.innerHTML = '<img src="/display?fileName=' + savePath + '"></a>';
-			
-		  	let content = 
-		  	
-				'<div id="modalContent">'	
-					+'<div id="modalHead">'
-					+ '<span>'+reply.writer+'</span>&nbsp;<div class="test-score1" data-max="5" data-rate="'+reply.star+'"></div>'
-					+ '&nbsp;<span>'+reply.replydate+'</span>' 
-					+'</div>'
-					+'<div id="modalContent">'+reply.reply+'</div>'
-		  			+'</div>'
-	  	
-		  	// 댓글 div
-		  	photoReviewReplyDiv.innerHTML = content;
-		  	let photoList = '';	
-		  	photoReview.forEach(function(item, index){
-		  		
-		  	
-		  		
-		  		let saveP = encodeURIComponent(item.savePath);
-		  		
-		  		photoList = '<table border="1px" solid>'
-							+ '<tr>'
-	            			+ 	'<td>'
-	            			+  		'<img src="/display?fileName=' + saveP + '"></a>'  
-	            			+  	'</td>'
-	            			+  '</tr>'	
-	            			+'</table>';
-	         	
-		  		
-		  	})
-		  			
-		  			photoReviewModalList.innerHTML += photoList;
-		  	  	
-		  /*	
-		  	let photoImg = '';
-		  	let content = '';
-		  	if (photoReview && photoReview.length >0) {
-		    	
-		  		
-			photoReview.forEach(function(item, index){
-
-  			let savePath = encodeURIComponent(item.savePath);
-  			var r_no = item.r_no;
-
-  			let matchedReply = replyList.find(function (imageItem) {
-  					
-  				return imageItem.r_no === r_no;	
-  			});
-  			
-  			console.log('matchedImage : ', matchedReply );
-  			
-  			console.log('item.savePath : ', item.savePath);
-  			
-  			photoImg =
-  			      
-  		    	'<img src="/display?fileName=' + savePath + '"></a>'
-  				
-  		    			
-  		    if(matchedReply){
-  		    	
-  		    	content = 
-  		    		'<div id="writer">'+matchedReply.writer+'</div>'
-  		    		+'<div id="reply">'+matchedReply.reply+'</div>'
-  		    }
-  		     			
-
-  			});		  		
-		  	
-		    			
-		  } else {
-		    content = '사진 정보가 없습니다.';
-		  }
-		
-		  
-		 	
-		  	
-		  	
-		 	 modal.style.display = "block";
-		 	 
-		 	
-		}	*/
+		 * function photoModal(savePath, replyJson, replyListJson,
+		 * photoReviewJson) {
+		 * 
+		 *  // Decode the URI encoded JSON string and parse it back into an
+		 * object:
+		 *  // 문자열을 JSON 형식으로 parse
+		 *  // 포토 리스트 전체 var photoReview =
+		 * JSON.parse(decodeURIComponent(photoReviewJson));
+		 * console.log(photoReview);
+		 *  // 전체 댓글 리스트 객체 var replyList=
+		 * JSON.parse(decodeURIComponent(replyListJson));
+		 * console.log(replyList);
+		 *  // index 를 담은 객체 하나 var reply =
+		 * JSON.parse(decodeURIComponent(replyJson)); console.log(photoReview);
+		 * 
+		 * const modal = document.getElementById("photoReviewModal"); const
+		 * photoReviewImgDiv = document.getElementById("photoReviewImgDiv");
+		 * const photoReviewReplyDiv =
+		 * document.getElementById("photoReviewReplyDiv");
+		 * 
+		 * photoReviewImgDiv.innerHTML = '<img src="/display?fileName=' +
+		 * savePath + '"></a>';
+		 * 
+		 * let content =
+		 *  '<div id="modalContent">' +'<div id="modalHead">' + '<span>'+reply.writer+'</span>&nbsp;<div
+		 * class="test-score1" data-max="5" data-rate="'+reply.star+'"></div>' +
+		 * '&nbsp;<span>'+reply.replydate+'</span>' +'</div>' +'<div
+		 * id="modalContent">'+reply.reply+'</div>' +'</div>'
+		 *  // 댓글 div photoReviewReplyDiv.innerHTML = content; let photoList =
+		 * ''; photoReview.forEach(function(item, index){
+		 * 
+		 * 
+		 * 
+		 * let saveP = encodeURIComponent(item.savePath);
+		 * 
+		 * photoList = '<table border="1px" solid>' + '<tr>' + '<td>' + '<img
+		 * src="/display?fileName=' + saveP + '"></a>' + '</td>' + '</tr>' +'</table>';
+		 * 
+		 *  })
+		 * 
+		 * photoReviewModalList.innerHTML += photoList;
+		 *  /* let photoImg = ''; let content = ''; if (photoReview &&
+		 * photoReview.length >0) {
+		 * 
+		 * 
+		 * photoReview.forEach(function(item, index){
+		 * 
+		 * let savePath = encodeURIComponent(item.savePath); var r_no =
+		 * item.r_no;
+		 * 
+		 * let matchedReply = replyList.find(function (imageItem) {
+		 * 
+		 * return imageItem.r_no === r_no; });
+		 * 
+		 * console.log('matchedImage : ', matchedReply );
+		 * 
+		 * console.log('item.savePath : ', item.savePath);
+		 * 
+		 * photoImg =
+		 *  '<img src="/display?fileName=' + savePath + '"></a>'
+		 * 
+		 * 
+		 * if(matchedReply){
+		 * 
+		 * content = '<div id="writer">'+matchedReply.writer+'</div>' +'<div
+		 * id="reply">'+matchedReply.reply+'</div>' }
+		 * 
+		 * 
+		 * });
+		 * 
+		 *  } else { content = '사진 정보가 없습니다.'; }
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * modal.style.display = "block";
+		 * 
+		 *  }
+		 */
 		
 		
 		

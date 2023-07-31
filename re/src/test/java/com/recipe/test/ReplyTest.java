@@ -45,4 +45,15 @@ public class ReplyTest {
 		assertEquals(1, res);
 		
 	}
+	
+	@Test
+	public void selectPhoto() {
+		
+		RecipeReplyVo vo = new RecipeReplyVo();
+		assertNotNull(replyMapper);
+		
+		replyMapper.selectPhotoReview(58);
+		
+		
+	}
 }

@@ -93,9 +93,12 @@ public class FileuploadController {
 //		
 //	}
 	
+	
+	
+	
 	@PostMapping("/file/photoReview_Test")
 	public @ResponseBody Map<String, Object> uploadTest(List<MultipartFile> files
-											,int b_no
+											, int b_no
 											, RecipeReplyVo vo){
 		
 		System.out.println("uploadTest 출력 =================================");
@@ -131,43 +134,7 @@ public class FileuploadController {
 		return map;
 	}
 	
-	@PostMapping("/file/photoReview_Test2")
-	public @ResponseBody Map<String, Object> uploadTest2(@RequestParam List<MultipartFile> files
-											,@RequestParam int b_no
-											,@ModelAttribute RecipeReplyVo vo){
-		
-		System.out.println("uploadTest 출력 =================================");
-		
-		System.out.println(b_no);
-		System.out.println(vo.getB_no());
-		System.out.println(vo.getReply());
-		System.out.println(vo.getWriter());
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		try {
-			int res = replyService.replyWrite(vo);
-
-			System.out.println("vo ===================== " + vo);
-			
-			 RecipeReplyVo replyVo = new RecipeReplyVo();
-			 
-			 if(res > 0) {
-			 
-				 service.fileupload(files, b_no, vo.getR_no());
-
-				 map.put("result", "success");
-				 return map;
-			 } else {
-				 map.put("result", "fail");
-			 }
-		
-		}catch (Exception e) {
-			 map.put("result", "댓글 추가 및 사진추가 오류발생 오류발생 ==========");
-		}
-		
-		return map;
-	}
+	
 	
 	
 	

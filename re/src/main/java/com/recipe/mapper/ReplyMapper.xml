@@ -26,5 +26,14 @@
     	values (#{r_no}, sysdate,  #{reply}, #{b_no}, #{writer}, #{star})
  
   </insert>
+  
+  
+  <select id="selectPhotoReview" resultType="com.recipe.vo.RecipeReplyVo">
+  		
+  		select * 
+  		from rec_reply
+  		where r_no = #{r_no}
+  	
+  </select>
 
 </mapper>

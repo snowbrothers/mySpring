@@ -29,6 +29,28 @@ public class ReplyController {
 	@Autowired
 	FileuploadService fileService;
 	
+	@PostMapping("/reply/photoReply")
+	public Map<String, Object> selectPhotoReview(int r_no){
+		
+		System.out.println("selectPhotoReview 실행 ==================================");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		RecipeReplyVo vo = service.selectPhotoReview(r_no);
+		
+		
+		if(vo != null) {
+			
+			map.put("photoReply", vo);
+			map.put("result", "success");
+		}else {
+			map.put("result", "fails");
+		}
+		
+		return map;
+	}
+	
+	
 	@GetMapping("/replyList/{bno}")
 	public Map<String,Object> getRecipeList(@PathVariable("bno") int bno){
 		
