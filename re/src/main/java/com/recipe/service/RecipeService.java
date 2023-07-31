@@ -24,7 +24,7 @@ public interface RecipeService {
 	
 	public int replyTotalCnt(int b_no);
 
-	public IngredientsVo getIngredients(int i_no);
+	public IngredientsVo getIngredients(String i_name);
 	
 	public int like_Recipe(LikeVo likevo);
 

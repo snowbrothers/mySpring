@@ -51,9 +51,9 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public IngredientsVo getIngredients(int i_no) {
+	public IngredientsVo getIngredients(String i_name) {
 		// TODO Auto-generated method stub
-		return mapper.getIngredients(i_no);
+		return mapper.getIngredients(i_name);
 	}
 
 	@Override

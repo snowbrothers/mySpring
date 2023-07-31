@@ -11,15 +11,19 @@
 			
 			select *
 			from rec_reply
-			where bno = #{bno}
-			order by r_no
+			where b_no = #{b_no}
+			order by r_no desc
 		
 	</select>
 
 <insert id="replyWrite">
  
-    insert into rec_reply (r_no, REPLYDATE, reply, BNO, WRITER, STAR)
-    	values (SEQ_REPLY.nextval, sysdate,  #{reply}, #{bno}, #{writer}, 3)
+ 	<selectKey keyProperty="r_no" order="BEFORE" resultType="int">
+		select SEQ_REPLY.nextval from dual
+		</selectKey>
+ 
+    insert into rec_reply (r_no, REPLYDATE, reply, b_no, WRITER, STAR)
+    	values (#{r_no}, sysdate,  #{reply}, #{b_no}, #{writer}, #{star})
  
   </insert>
 

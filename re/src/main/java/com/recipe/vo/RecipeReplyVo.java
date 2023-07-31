@@ -10,7 +10,7 @@ public class RecipeReplyVo {
 	private String replydate;
 	private String reply;
 	// bno 주의
-	private int bno;
+	private int b_no;
 	private String writer;
 	private int star;
 	

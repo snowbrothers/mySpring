@@ -8,16 +8,51 @@
 <script
 	src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
 <title>Bulletin Board Detail Page</title>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="/resources/css/view.css" rel="stylesheet">
 <script src="/resources/js/view.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <style>
+
+#viewContainer {
+	margin : 0 auto;
+}
+	
 .material-span {
 	/* Add some padding on the right side of the text "Eggs" */
-	padding-left: 150px;
+	padding-left: 0px;
+	float: right;
 	/* Alternatively, you can use margin to create a gap between the text and <span> */
 	/* margin-right: 10px; */
 }
+
+#roketBtn {
+	float: right;
+}
+
+
+#headIntroDiv {
+	
+	width : 100%;
+}
+
+#headTitle {
+  display: flex;
+  align-items: center; /* Align items vertically at the center */
+  justify-content: center;
+}
+
+#h1-title {
+  margin: 0; /* Remove default margin for <h1> */
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+#likeBtn {
+  margin-left: 10px; /* Add some space between the h1 and the button */
+}
+
 
 /* 모달창 스타일 */
 .modal {
@@ -61,12 +96,44 @@
 		display: flex;
 		
 	}*/
+	
+	<!-- 요리순서 css -->
+	
+	#recipeStepDiv {
+            background-color: antiquewhite;
+            display: flex;
+        }
+
+        /* Set the container to flex and set the direction to row */
+        #recipeContainer {
+            display: flex;
+            flex-direction: row;
+            align-items: center; /* Optional: Align items vertically in the center */
+        }
+
+        /* Add some margin between the text and the image */
+        #recipeContainer > div:first-child {
+            margin-right: 10px;
+        }
+
+        /* Optional: Add some styles to the image */
+        #recipeContainer img {
+            margin-left: 300px;
+            width: 300px;
+            height: 200px;
+        }
+        
+        #replyWriteForm {
+        	display: flex;
+        }
+        
+        
 </style>
 <script type="text/javascript">
   
 
 	window.addEventListener('load', function(){
-  		
+  			
 	  
 			
 			// 상단 사진 이미지 출력
@@ -95,17 +162,21 @@
 			});
 			
 			// 댓글 작성 클릭시 실행되는 함수
-			replyWriteBtn.addEventListener('click',function(){
+			/*replyWriteBtn.addEventListener('click',function(){
 				
 				// 댓글 작성 함수
 				replyWrite();
 				
-			});
+			});*/
 			
+						
 			//파일업로드
-			replyPhotoupload.addEventListener('click', function(){
+			/*replyPhotoupload.addEventListener('click', function(){
 				
 				event.preventDefault();
+				
+				let b_no = document.querySelector('#b_no').value;
+				
 				
 				let formData = new FormData(replyPhotoForm);
 				formData.append('name','photo');
@@ -128,14 +199,131 @@
 				fetch('/file/photoReview'
 						, {
 							method : 'post'
-							, headers : {'Content-Type' : 'application/json'}
 							, body : formData
 				})
 					.then(response => response.json())
 					.then(map => fileuploadRes(map));
 				
-			});
-		})
+			});*/
+			
+			
+			
+			//파일업로드
+			replyPhotoupload_Test.addEventListener('click', function(){
+				
+				event.preventDefault();
+				
+				let b_no = document.querySelector('#b_no').value;
+				let writer = document.querySelector('#writer').value;
+				let reply = document.querySelector('#reply').value;
+				let star = document.querySelector('#star').value;
+				
+				
+				let formData = new FormData(replyPhotoForm_Test);
+				
+				console.log("b_no : ", b_no);
+				
+				console.log("formData : ", formData);
+				
+				console.log("writer : ", writer);
+				
+				console.log("reply : ", reply);
+				
+				console.log("star : ", star);
+				
+				for(var pair of formData.entries()){
+					
+					if(typeof(pair[1]) == 'object') {
+						let fileName = pair[1].name;
+						let fileSize = pair[1].fileSize;
+						
+						console.log('fileName', fileName);
+						console.log('fileSize', fileSize);
+						
+					}
+					
+				}
+				
+				fetch('/file/photoReview_Test'
+						, {
+							method : 'post'
+							, body : formData
+				})
+					.then(response => response.json())
+					.then(map => fileuploadRes_Test(map));
+				
+			}); // 
+			
+			
+			// 별점 전송
+			 $(".starDiv").score({
+		           starColor: "gold",
+		           editable:true,
+		           integerOnly:true,
+
+		           send:{
+		               sendable:true,
+		               name:"star",
+		           },
+		           display:{
+		               showNumber:true
+		           }
+		       });
+			
+			//
+			 $(".starDiv").on("click", function() {
+			      // Get the selected star rating value
+			      const starRating = $(this).data("score");
+
+			      // Update the hidden input field with the selected rating value
+			      $("#star").val(starRating);
+			    });
+			//
+	        });
+			
+	
+		
+		
+		
+		function fileuploadRes_Test(map){
+		
+		console.log(map.result);
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		// 댓글 작성 함수
+	   function replyWrite(){
+		
+		   event.preventDefault(); // Prevent the default form submission behavior (page refresh)
+		   
+			let bno = document.querySelector('#b_no').value;
+			let reply = document.querySelector('#replyContent').value;
+			let writer = document.querySelector('#replyer').value;
+			
+			let obj = {bno : bno
+					, reply : reply
+					, writer : writer}
+			
+			console.log("bno", bno);
+			console.log("reply", reply);
+			console.log("writer", writer);
+			
+			// url : /reply/insert : 요청경로
+			// obj : json 형식으로 전달할 데이터
+			// callback : 응답을 받아 실행할 함수 / 콜백함수
+			fetchPost('/reply/write', obj, replyRes);
+			
+			
+			// =========================================================== 파일 업로드 합치기
+			
+		}
+		
 		
 		
 	
@@ -167,28 +355,7 @@
 	}
    
    
-	   // 댓글 작성 함수
-	   function replyWrite(){
-		
-		   event.preventDefault(); // Prevent the default form submission behavior (page refresh)
-		   
-			let bno = document.querySelector('#b_no').value;
-			let reply = document.querySelector('#replyContent').value;
-			let writer = document.querySelector('#replyer').value;
-			
-			let obj = {bno : bno
-					, reply : reply
-					, writer : writer}
-			
-			console.log("bno", bno);
-			console.log("reply", reply);
-			console.log("writer", writer);
-			
-			// url : /reply/insert : 요청경로
-			// obj : json 형식으로 전달할 데이터
-			// callback : 응답을 받아 실행할 함수 / 콜백함수
-			fetchPost('/reply/write', obj, replyRes);
-		}
+	   
   	
 	   
 	   function replyRes(map){
@@ -245,6 +412,8 @@
 	<script src="https://kit.fontawesome.com/4863a16a12.js"
 		crossorigin="anonymous"></script>
 
+	<div class="viewContainer">
+
 	<input id="m_no" type="text" value="2">
 	
 
@@ -253,9 +422,11 @@
 		<!-- Insert representative photo here -->
 		<div id="headImgDiv"></div>
 
-		<h1>${board.title }</h1>
-		<button id="likeBtn">레시피 저장</button>
+		<div id="headTitle"><h1 id="h1-title" style="margin-top: 30px;">${board.title}</h1><span><button id="likeBtn">레시피 저장</button></span></div>
+		
+		<div id="headIntroDiv">
 		<p>${board.intro }</p>
+		</div>
 	</div>
 
 
@@ -272,43 +443,13 @@
 	</div>
 
 
-
-	<!-- 모달창 -->
-	<div id="ingredientModal" class="modal">
-		<div class="modal-content">
-			<span class="close" onclick="closeModal()">&times;</span>
-			<h2>재료 정보</h2>
-			<div id="ingredientImgDiv">
-				<!-- 재료 사진 출력  -->
-			</div>
-
-			<div id="ingredientInfoDiv">
-				<!-- 재료 정보가 여기에 출력될 것입니다. -->
-			</div>
-		</div>
-	</div>
-
-	<div id="photoReviewModal" class="modal">
-		<div class="modal-content">
-			<span class="close" onclick="closeModal()">&times;</span>
-			<h2>포토리뷰</h2>
-			<div id="photoReviewImgDiv"></div>
-			<div id="photoReviewReplyDiv"></div>
-
-		</div>
-
-		<div id="photoReviewModalList"></div>
-
-	</div>
-
-
-
-
 	<!-- 조리 순서 -->
 	<div class="cooking-order">
 		<h2>조리순서</h2>
 
-		<div id="recipeStepDiv"></div>
+		<div id="recipeStepDiv">
+		
+		</div>
 
 		<div id="regdate">
 			<span>작성일 : ${board.regdate }</span>&nbsp;|<span>수정일 :
@@ -337,12 +478,37 @@
 		</div>
 
 		<!-- 일반 요리 후기 -->
-		<div class="general-comment" id="generalCommentDiv"></div>
-
+			
+		<div class="general-comment" id="generalCommentDiv">
+		
+		
+		</div>
+		<div class="d-grid gap-2 col-6 mx-auto"><button id="moreButton" type="button" class="btn btn-success">댓글 더보기</button></div></div>
 		<!-- 댓글 작성 부분, 사진 첨부 추가 -->
+		
+		<!-- <button id="moreButton">더보기</button> -->
 		<div class="comment-writing">
 
-		<form id="replyPhotoForm" enctype="multipart/form-data" name="replyPhotoForm" >
+
+			
+		<form id="replyPhotoForm_Test" enctype="multipart/form-data" name="replyPhotoForm_Test">
+		
+				<input id="b_no" name ="b_no" type="text" value="${board.b_no}">
+			<input type="file" name="files">			
+			<input type="text" id="writer" name="writer"> 
+			
+			
+				
+			  <div class="starDiv" id="star" data-max="5"></div>
+				<textarea id="reply" name="reply" class="form-control"
+					placeholder="다양한 요리 후기를 작성해주세요!"
+					style="height: 100px; width: 60%; resize: none;"></textarea><span ><button style="width:85px; height: 86px;" id="replyPhotoupload_Test">작성</button></span>
+		
+		</form>	
+
+<!-- 
+
+		  <form id="replyPhotoForm" method="post"enctype="multipart/form-data" name="replyPhotoForm" >
 			<input id="b_no" name ="b_no" type="text" value="${board.b_no}">
 			<input type="file" name="files">
 			<button type="button" id="replyPhotoupload">Fetch파일업로드</button>
@@ -351,19 +517,53 @@
 			
 		</form>
 
-
-			<form id="replyWriteForm" enctype="multipart/form-data" onsubmit="replyWrite(); return false;" >
-				<!--  작성자 나중엔 세션에서 받아와야함 .... -->
+		
+			<form id="replyWriteForm"  onsubmit="replyWrite(); return false;" enctype="multipart/form-data" >
+				  작성자 나중엔 세션에서 받아와야함 .... 
 				<input type="text" id="replyer">
-				
 				<textarea id="replyContent" name="replyContent" class="form-control"
 					placeholder="다양한 요리 후기를 작성해주세요!"
-					style="height: 100px; width: 100%; resize: none;"></textarea>
+					style="height: 100px; width: 60%; resize: none;"></textarea><span ><button style="width:85px; height: 86px;" id="replyWriteBtn">작성</button></span>
 
-				<button id="replyWriteBtn">댓글 작성</button>
+				<input id="b_no" name ="b_no" type="text" value="${board.b_no}">
+				
+				
 			</form>
 		</div>
+	 -->
+	
+	
+	<!-- 모달창 -->
+	<div id="ingredientModal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal()">&times;</span>
+			<h2>재료 정보</h2>
+			<div id="ingredientImgDiv">
+				<!-- 재료 사진 출력  -->
+			</div>
+
+			<div id="ingredientInfoDiv">
+				<!-- 재료 정보가 여기에 출력될 것입니다. -->
+			</div>
+		</div>
 	</div>
+
+
+	<div id="photoReviewModal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal()">&times;</span>
+			<h2>포토리뷰</h2>
+			<div id="photoReviewImgDiv"></div>
+			<div id="photoReviewReplyDiv"></div>
+			
+			<div id="photoReviewModalList"></div>
+			
+		</div>
+
+		
+
+	</div>
+	
 
 	<!-- 최근 방문한 레시피 -->
 	<div class="recently-viewed">
@@ -373,5 +573,9 @@
 			src="path/to/recipe2.jpg" alt="Recipe 2"></a>
 		<!-- Add more recently viewed recipes if needed -->
 	</div>
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+	
 </body>
 </html>

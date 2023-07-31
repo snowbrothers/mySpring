@@ -19,7 +19,7 @@ public interface FileuploadService {
 	public FileuploadVo getIngredients(int i_no);
 
 	// 파일 업로드
-	public int fileupload(List<MultipartFile> files, int bno);
+	public int fileupload(List<MultipartFile> files, int bno, int r_no);
 	
 	int insertFile(FileuploadVo vo);
 }

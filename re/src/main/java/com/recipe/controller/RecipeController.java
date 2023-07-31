@@ -128,13 +128,14 @@ public class RecipeController {
 	}
 	
 	
-	@GetMapping("/modal/ingredientModal/{i_no}")
-	public @ResponseBody Map<String, Object> getIngredient(@PathVariable("i_no") int i_no){
+	@GetMapping("/modal/ingredientModal/{i_no}/{i_name}")
+	public @ResponseBody Map<String, Object> getIngredient(@PathVariable("i_name") String i_name
+															, @PathVariable("i_no") int i_no){
 		
 		System.out.println("getIngredient 호출 ==========================================");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		IngredientsVo ingredient = service.getIngredients(i_no);
+		IngredientsVo ingredient = service.getIngredients(i_name);
 		FileuploadVo ingredientImg = fileService.getIngredients(i_no);
 		
 		map.put("ingredient", ingredient);

@@ -14,12 +14,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.recipe.service.FileuploadService;
+import com.recipe.service.ReplyService;
+import com.recipe.vo.RecipeReplyVo;
 
 import lombok.extern.log4j.Log4j;
 
@@ -31,6 +35,9 @@ public class FileuploadController {
 	
 	@Autowired
 	FileuploadService service;
+	
+	@Autowired
+	ReplyService replyService;
 	
 	@GetMapping("file/list/{bno}")
 	public @ResponseBody Map<String, Object> fileuploadList(@PathVariable("bno") int bno){
@@ -46,36 +53,120 @@ public class FileuploadController {
 	}
 	
 	
+//	
+//	@PostMapping("/file/photoReview")
+//	public @ResponseBody Map<String, Object> photoReviewUpload(List<MultipartFile> files
+//											, int b_no
+//											){
+////		int b_no = 5;
+//		System.out.println("/file/photoReview 실행 =====================================");
+//		System.out.println(b_no + "======================================================");
+//		
+//		// 형변환
+//		
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		
+//		try {
+//
+//			int fileInsertRes = service.fileupload(files, b_no, );
+//			System.out.println("업로드 결과 출력 ================================================ " +fileInsertRes);
+//			
+//			
+//			if(fileInsertRes > 0) {
+//				
+//				map.put("result", "success");
+//			
+//			} else {
+//			
+//				map.put("result", "파일 업로드에 실패하였습니다 ....");
+//				
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		return map; 
+//		
+//	}
 	
-	@PostMapping("/file/photoReview")
-	public Map<String, Object> photoReviewUpload(List<MultipartFile> files
-											, int b_no){
+	@PostMapping("/file/photoReview_Test")
+	public @ResponseBody Map<String, Object> uploadTest(List<MultipartFile> files
+											,int b_no
+											, RecipeReplyVo vo){
+		
+		System.out.println("uploadTest 출력 =================================");
+		
+		System.out.println(b_no);
+		System.out.println(vo.getB_no());
+		System.out.println(vo.getReply());
+		System.out.println(vo.getWriter());
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
+			int res = replyService.replyWrite(vo);
 
-			int fileInsertRes = service.fileupload(files, b_no);
-			System.out.println("업로드 결과 출력 ================================================ " +fileInsertRes);
+			System.out.println("vo ===================== " + vo);
 			
-			
-			if(fileInsertRes > 0) {
-				
-				map.put("result", "success");
-			
-			} else {
-			
-				map.put("result", "파일 업로드에 실패하였습니다 ....");
-				
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+			 RecipeReplyVo replyVo = new RecipeReplyVo();
+			 
+			 if(res > 0) {
+			 
+				 service.fileupload(files, b_no, vo.getR_no());
+
+				 map.put("result", "success");
+				 return map;
+			 } else {
+				 map.put("result", "fail");
+			 }
+		
+		}catch (Exception e) {
+			 map.put("result", "댓글 추가 및 사진추가 오류발생 오류발생 ==========");
 		}
 		
+		return map;
+	}
+	
+	@PostMapping("/file/photoReview_Test2")
+	public @ResponseBody Map<String, Object> uploadTest2(@RequestParam List<MultipartFile> files
+											,@RequestParam int b_no
+											,@ModelAttribute RecipeReplyVo vo){
 		
-		return map; 
+		System.out.println("uploadTest 출력 =================================");
 		
+		System.out.println(b_no);
+		System.out.println(vo.getB_no());
+		System.out.println(vo.getReply());
+		System.out.println(vo.getWriter());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			int res = replyService.replyWrite(vo);
+
+			System.out.println("vo ===================== " + vo);
+			
+			 RecipeReplyVo replyVo = new RecipeReplyVo();
+			 
+			 if(res > 0) {
+			 
+				 service.fileupload(files, b_no, vo.getR_no());
+
+				 map.put("result", "success");
+				 return map;
+			 } else {
+				 map.put("result", "fail");
+			 }
+		
+		}catch (Exception e) {
+			 map.put("result", "댓글 추가 및 사진추가 오류발생 오류발생 ==========");
+		}
+		
+		return map;
 	}
 	
 	

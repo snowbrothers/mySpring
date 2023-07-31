@@ -91,7 +91,7 @@ public class RecipeBoardTest {
 		
 		assertNotNull(mapper);
 		
-		IngredientsVo vo = mapper.getIngredients(1);
+		IngredientsVo vo = mapper.getIngredients("계란");
 		
 		
 	}

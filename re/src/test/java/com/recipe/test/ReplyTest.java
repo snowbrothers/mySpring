@@ -35,7 +35,7 @@ public class ReplyTest {
 		
 		RecipeReplyVo vo = new RecipeReplyVo();
 		
-		vo.setBno(5);
+		vo.setB_no(5);
 		vo.setReply("댓글 작성 테스트");
 		vo.setWriter("testWriter");
 		

@@ -53,7 +53,7 @@ public class FileuploadServiceImpl implements FileuploadService{
 	 * 첨부파일 저장 및 데이터 베이스 등록
 	 */
 	@Override
-	public int fileupload(List<MultipartFile> files, int bno) {
+	public int fileupload(List<MultipartFile> files, int bno, int r_no) {
 		
 		int insertRes = 0;
 		// 반복
@@ -98,7 +98,8 @@ public class FileuploadServiceImpl implements FileuploadService{
 							.of(sFile)
 							.size(100, 100)
 							.toFile(thmbnail);	
-			
+				
+				vo.setR_no(r_no);
 				vo.setB_no(bno);
 				vo.setFilename(file.getOriginalFilename());
 				vo.setUploadpath(uploadpath);

@@ -11,7 +11,7 @@
 	<select id="replyTotalCnt" resultType="int">
 		select count(*) 
   		from rec_reply
-  		where bno=#{bno}
+  		where b_no=#{b_no}
 	</select>
 	
 	
@@ -66,7 +66,7 @@
 	
 		select *
 		from rec_ingredients
-		where i_no = #{i_no}
+		where i_name = #{i_name}
 	
 	</select>
 	

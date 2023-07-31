@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
  <style>
+ 
+ 		
         /* Add your CSS styles here */
 
         /* Example styles for demonstration purposes */
@@ -10,10 +12,51 @@
             padding: 0;
         }
 
+
+
+
+
+		.viewContainer {
+			
+			/* padding-left: 300px;
+			padding-right: 300px;
+			 */
+			padding: 0 20%;
+		}
+
+		<!-- 재료 -->
+		ul {
+			list-style-type: none;
+			width: 40%;
+		}
+		
+		li {
+			list-style: none;
+			width: 40%;
+			
+		}
+		
+		
+		
+		<!-- 조리순서 -->
+		#recipeContainer {
+			
+			width: 100%;
+			
+		}
+		
+		#stepContent {
+			width: 70%;
+		}
+
+	
+
+
         .header {
             /* Styles for the upper part */
             background-color: #f1f1f1;
             padding: 20px;
+            
             text-align: center;
         }
 
@@ -21,6 +64,8 @@
             /* Styles for the material part */
             background-color: #fff;
             padding: 20px;
+            height: 300px
+            
         }
 
         .cooking-order {
