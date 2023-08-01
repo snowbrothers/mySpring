@@ -12,6 +12,6 @@ public class RecipeReplyVo {
 	// bno 주의
 	private int b_no;
 	private String writer;
-	private int star;
+	private double star;
 	
 }

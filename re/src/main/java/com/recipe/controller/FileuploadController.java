@@ -98,12 +98,13 @@ public class FileuploadController {
 	
 	@PostMapping("/file/photoReview_Test")
 	public @ResponseBody Map<String, Object> uploadTest(List<MultipartFile> files
-											, int b_no
-											, RecipeReplyVo vo){
+											,RecipeReplyVo vo
+											){
 		
 		System.out.println("uploadTest 출력 =================================");
 		
-		System.out.println(b_no);
+		
+		System.out.println(vo.getStar());
 		System.out.println(vo.getB_no());
 		System.out.println(vo.getReply());
 		System.out.println(vo.getWriter());
@@ -119,7 +120,7 @@ public class FileuploadController {
 			 
 			 if(res > 0) {
 			 
-				 service.fileupload(files, b_no, vo.getR_no());
+				 service.fileupload(files, vo.getB_no(), vo.getR_no());
 
 				 map.put("result", "success");
 				 return map;

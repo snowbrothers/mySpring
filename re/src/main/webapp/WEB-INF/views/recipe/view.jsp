@@ -16,99 +16,179 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <style>
 
-#viewContainer {
-	margin : 0 auto;
-}
+<!-- 모달창 포토리스트 -->
+
 	
-.material-span {
-	/* Add some padding on the right side of the text "Eggs" */
-	padding-left: 0px;
-	float: right;
-	/* Alternatively, you can use margin to create a gap between the text and <span> */
-	/* margin-right: 10px; */
-}
 
-#roketBtn {
-	float: right;
-}
+	.photoList img{
+            border: 1px solid;
+            width: 100px;
+            height: 80px;
+        }
 
-
-#headIntroDiv {
-	
-	width : 100%;
-}
-
-#headTitle {
-  display: flex;
-  align-items: center; /* Align items vertically at the center */
-  justify-content: center;
-}
-
-#h1-title {
-  margin: 0; /* Remove default margin for <h1> */
-  font-family: 'IBM Plex Sans KR', sans-serif;
-}
-
-#likeBtn {
-  margin-left: 10px; /* Add some space between the h1 and the button */
-}
-
-
-/* 모달창 스타일 */
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 80%;
-}
-
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-#photoReviewDiv {
-	display: flex;
-}
-
-/*#recipeStepDiv {
-		display: flex;
+		.w100{
 		
-	}*/
+			width : 100px;
+			height : 100px;
+		
+		}
+		
+		.w136{
+			width: 136px;
+			height : 136px;
+		}
+		
+		.w20p{
+			width: 20%;
+			height: 100%
+		}
+		
+		.MB40T20{
+			margin-top: 10px;
+			margin-bottom: 40px;
+		}
+		
+		/*안의 요소 들여쓰는 마진*/
+		.elementsMargin{
+			margin: 30px
+		}
+		
+<!-- 이미지 미리보기 -->
+
+	.bodySection{
+	margin-top: 20px;
+	}
+
+	#image_container{
+    /* Set the container size to match the image size */
+    width: auto;
+    height: auto;
+    max-width: 30%;
+    max-height: 30%;
+	}
+
+/* Set the image to be responsive inside the container */
+	#image_container img {
+	    width: 30%;
+	    height: 30%;
+	    object-fit: contain;
+	}
+
+<!-- ----------------->
+
+
+		#generalReplyContainer{
+			margin-top: 20px;
+		}
+		
+		#viewContainer {
+			margin : 0 auto;
+		}
+			
+		.material-span {
+			/* Add some padding on the right side of the text "Eggs" */
+			padding-left: 0px;
+			float: right;
+			/* Alternatively, you can use margin to create a gap between the text and <span> */
+			/* margin-right: 10px; */
+		}
+		
+		#roketBtn {
+			float: right;
+		}
+		
+		
+		#headIntroDiv {
+			
+			width : 100%;
+		}
+		
+		#headTitle {
+		  display: flex;
+		  align-items: center; /* Align items vertically at the center */
+		  justify-content: center;
+		}
+		
+		#h1-title {
+		  margin: 0; /* Remove default margin for <h1> */
+		  font-family: 'IBM Plex Sans KR', sans-serif;
+		}
+		
+		#likeBtn {
+		  margin-left: 10px; /* Add some space between the h1 and the button */
+		}
+		
+		
+		/* 모달창 스타일 */
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.4);
+		}
+		
+		.modal-content {
+			display:flex;
+			background-color: #fefefe;
+			margin: 15% auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+			height: 100%;
+		}
+		
+		#container {
+			width: 70%;
+	  		height: 100%;
+		}
+		
+		#photoReviewModalList {
+			width: 30%;
+			height: 100%;
+		}
+		
+		.close {
+			color: #aaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+		
+		.close:hover, .close:focus {
+			color: black;
+			text-decoration: none;
+			cursor: pointer;
+		}
+		
+		#photoReviewDiv {
+			width: 100%;
+			display: flex;
+		}
+		
+		/*#recipeStepDiv {
+				display: flex;
+				
+			}*/
 	
 	<!-- 요리순서 css -->
 	
-	#recipeStepDiv {
+		#recipeStepDiv {
             background-color: antiquewhite;
             display: flex;
         }
 
         /* Set the container to flex and set the direction to row */
         #recipeContainer {
+        	font-size: 22px;
+            margin-bottom: 60px;
             display: flex;
             flex-direction: row;
-            align-items: center; /* Optional: Align items vertically in the center */
+            /*align-items: center; 텍스트 중앙정렬 */
         }
 
         /* Add some margin between the text and the image */
@@ -118,7 +198,8 @@
 
         /* Optional: Add some styles to the image */
         #recipeContainer img {
-            margin-left: 300px;
+           	border-radius: 30px;
+            
             width: 300px;
             height: 200px;
         }
@@ -146,11 +227,13 @@
 			getRecipeStep();
 			
 			// 댓글 출력 
-			
 			getRecipeReply();
 			
-		
+			// 별점
 			initializeStarRatings();
+			
+			// 일반 댓글 출력
+			getGeneralReply();
 			
 		 
 			// 좋아요 버튼 클릭 시 실행되는 함수
@@ -161,6 +244,9 @@
 
 			});
 			
+			
+			
+			
 			// 댓글 작성 클릭시 실행되는 함수
 			/*replyWriteBtn.addEventListener('click',function(){
 				
@@ -169,44 +255,7 @@
 				
 			});*/
 			
-						
-			//파일업로드
-			/*replyPhotoupload.addEventListener('click', function(){
-				
-				event.preventDefault();
-				
-				let b_no = document.querySelector('#b_no').value;
-				
-				
-				let formData = new FormData(replyPhotoForm);
-				formData.append('name','photo');
-				
-				console.log("formData : ", formData);
-				
-				for(var pair of formData.entries()){
-					
-					if(typeof(pair[1]) == 'object') {
-						let fileName = pair[1].name;
-						let fileSize = pair[1].fileSize;
-						
-						console.log('fileName', fileName);
-						console.log('fileSize', fileSize);
-						
-					}
-					
-				}
-				
-				fetch('/file/photoReview'
-						, {
-							method : 'post'
-							, body : formData
-				})
-					.then(response => response.json())
-					.then(map => fileuploadRes(map));
-				
-			});*/
-			
-			
+		
 			
 			//파일업로드
 			replyPhotoupload_Test.addEventListener('click', function(){
@@ -215,7 +264,13 @@
 				
 				let b_no = document.querySelector('#b_no').value;
 				
-	
+				
+				
+				
+				document.querySelector('#star').value = document.querySelector('.starDiv').dataset.max;
+				
+				
+				
 				
 				let formData = new FormData(replyPhotoForm_Test);
 				
@@ -226,6 +281,10 @@
 				console.log("writer : ", writer);
 				
 				console.log("reply : ", reply);
+				
+				
+				
+				
 				
 				
 				
@@ -253,42 +312,78 @@
 			}); // 
 			
 			
-			/*// 별점 전송
-			 $(".starDiv").score({
-		           starColor: "gold",
-		           editable:true,
-		           integerOnly:true,
+			// 별점 전송
+			  $(".starDiv").score({
+			    starColor: "gold",
+			    editable: true,
+			    integerOnly: true,
+			    send: {
+			      sendable: true,
+			      name: "star",
+			    },
+			    display: {
+			      showNumber: true,
+			    },
+			  });
 
-		           send:{
-		               sendable:true,
-		               name:"star",
-		           },
-		           display:{
-		               showNumber:true
-		           }
-		       });
-			
-			//
-			 $(".starDiv").on("click", function() {
-			      // Get the selected star rating value
-			      const starRating = $(this).data("score");
+			  // .starDiv 클릭 이벤트 리스너
+			 /* $(".starDiv").on("click", function () {
+			    // Get the selected star rating value
+			    const starRating = $(this).data("score");
 
-			      // Update the hidden input field with the selected rating value
-			      $("#star").val(starRating);
-			    });
+			    // Update the hidden input field with the selected rating value
+			    $("#star").val(starRating);
+			  }); */
 			//*/
+			
+			
+  
+			
+			
 	        });
 			
 	
 		
+		// 일반 댓글 작성 함수
+		
+		function grWrite(){
+			
+			event.preventDefault();
+			
+			let b_no = document.querySelector('#b_no').value;
+			let content = document.querySelector('#content').value;
+			let replyer = document.querySelector('#replyer').value;
+			
+			let obj = {b_no : b_no
+					, content : content
+					, replyer : replyer}
+			
+			fetchPost('/reply/grWrite', obj, grRes);
+			
+		}
+	
+		function grRes(map){
+			
+			getGeneralReply();
+			
+			if(map.result == 'success'){
+				alert("댓글 입력 성공");
+			
+			}else{
+				alert("댓글 입력 중 오류 발생");
+			} 
+			
+		}
+	
+	
+	
 		
 		
 		function fileuploadRes_Test(map){
-		
+			// 댓글 출력 
+			getRecipeReply();
 		console.log(map.result);
 	}
-		
-		
 		
 		
 		
@@ -403,23 +498,86 @@
 		
 		
 		 
-	  
+	function getGeneralReply(){
+		
+		let b_no = document.querySelector('#b_no').value;
+   		
+		
+   		// fetch 사용
+   		// 정보를 가져와서 함수에 파라메터로 넣는다.
+   		fetch('/reply/generalReply/' + b_no)
+   			.then(response => response.json())
+   			.then(map => viewGeneralReply(map));
+		
+	}
+	
+	
+	function viewGeneralReply(map){
+		
+		console.log('map.generalReply', map.generalReply)
+	
+		let content = '';
+		
+		map.generalReply.forEach(function(item, index){
+							
+				 content +=
+					
+				'<div class="generalHead margin-B30">' 
+	            + '<h4>'+item.replyer+' | '+item.regdate+'</h4>'
+	            
+	            + '<div class="generalContent">'+item.content+'</div>'
+	          	+'</div>'
+		
+	
+	          	
+	         
+	});
+		
+		 generalReplyDiv.innerHTML = content;
+		}
+	
+	
+	
+	//-----------------------------------------------------------------------------------------------
+	
+	// 이미지 보여주기 
+	
+	function setThumbnail(event) {
+        var reader = new FileReader();
+
+        reader.onload = function(event) {
+          var img = document.createElement("img");
+          img.setAttribute("src", event.target.result);
+
+          // Remove any previously added images
+          var container = document.querySelector("div#image_container");
+          while (container.firstChild) {
+            container.removeChild(container.firstChild);
+          }
+
+          container.appendChild(img);
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+      }
+	
+
    </script>
 <body>
 
 	<script src="https://kit.fontawesome.com/4863a16a12.js"
 		crossorigin="anonymous"></script>
 
-	<div class="viewContainer">
+	<div class="viewContainer bor">
 
 	<input id="m_no" type="text" value="2">
 	
 
 	<!-- 상단 -->
-	<div class="header">
+	<div class="header" >
 		<!-- Insert representative photo here -->
 		<div id="headImgDiv"></div>
-
+		
 		<div id="headTitle"><h1 id="h1-title" style="margin-top: 30px;">${board.title}</h1><span><button id="likeBtn">레시피 저장</button></span></div>
 		
 		<div id="headIntroDiv">
@@ -428,44 +586,45 @@
 	</div>
 
 
-
-
 	<!-- 재료 -->
 
 
-	<div class="material">
-		<h2>재료</h2>
+	<div class="material margin-T12">
+		<div class="sectionTitle MB40T20"><h3>재료</h3></div>
+		
 
 
-		<div id="materialContentDiv"></div>
+		<div class="materialContent elementsMargin" id="materialContentDiv"></div>
+		
+    	
 	</div>
 
 
 	<!-- 조리 순서 -->
-	<div class="cooking-order">
-		<h2>조리순서</h2>
+	<div class="cooking-order margin-T12">
+		<div class="sectionTitle MB40T20"><h3>조리순서</h3></div>
 
-		<div id="recipeStepDiv">
+		<div class="recipeStep elementsMargin" id="recipeStepDiv">
 		
 		</div>
 
-		<div id="regdate">
-			<span>작성일 : ${board.regdate }</span>&nbsp;|<span>수정일 :
-				${board.updatedate }</span>
+		<div class="regdateDiv regDottd" id="regdate">
+			<span style="float:left; margin-top: 10px; margin-left: 10px"><b>작성일</b> : ${board.regdate }&nbsp;<b>|</b>&nbsp;<b>수정일</b> : ${board.updatedate }</span>
 		</div>
 
 	</div>
 
 	<!-- 작성자 정보 -->
 
-	<div>
-		<h2>레시피 작성자</h2>
-		<div id="MemberInfoDiv">${board.nickname}</div>
+	<div class="writerInfoDiv margin-T12">
+		<div class="sectionTitle MB40T20"><h3>레시피 작성자</h3></div>
+		<div id="MemberInfoDiv ">${board.nickname}</div>
+	
 	</div>
 
 	<!-- 요리후기  -->
-	<div class="cooking-review">
-		<h2>요리후기 ${replyCnt}건</h2>
+	<div class="cooking-review margin-T12">
+		<div class="sectionTitle MB40T20"><h3>요리후기 ${replyCnt}건</h3></div>
 		<!-- 포토리뷰 -->
 		<div class="photo-review">
 
@@ -477,32 +636,68 @@
 
 		<!-- 일반 요리 후기 -->
 			
-		<div class="general-comment" id="generalCommentDiv">
+		<div class="general-comment margin-T12" id="generalCommentDiv">
 		
 		
 		</div>
-		<div class="d-grid gap-2 col-6 mx-auto"><button id="moreButton" type="button" class="btn btn-success">댓글 더보기</button></div></div>
+		<div class="d-grid gap-2 col-6 mx-auto "><button id="moreButton" type="button" class="btn btn-success">댓글 더보기</button></div></div>
 		<!-- 댓글 작성 부분, 사진 첨부 추가 -->
 		
 		<!-- <button id="moreButton">더보기</button> -->
-		<div class="comment-writing">
+		<div class="comment-writing margin-T12">
 
 
 			
-		<form id="replyPhotoForm_Test" enctype="multipart/form-data" name="replyPhotoForm_Test">
+			<form id="replyPhotoForm_Test" enctype="multipart/form-data" name="replyPhotoForm_Test">
+					
+						
+				<div class="starDiv" data-max="5"></div>
+					<input id="b_no" name ="b_no" type="hidden" value="${board.b_no}">
+					<input type="hidden" id="star">
+				
+					<input type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);">
+				<div id="image_container"></div>			
+					<input type="text" id="writer" name="writer" value="나는작성자"> 
+				
+				
+					<textarea id="reply" name="reply" class="form-control"
+						placeholder="다양한 요리 후기를 작성해주세요!"
+						style="height: 100px; width: 60%; resize: none;"></textarea><span ><button style="width:85px; height: 100%;" id="replyPhotoupload_Test" value="나는 후기">작성</button></span>
+			
+			</form>	
+		</div>
 		
-				<input id="b_no" name ="b_no" type="text" value="${board.b_no}">
-			<input type="file" name="files">			
-			<input type="text" id="writer" name="writer"> 
+		
+		<!-- 일반댓글 표시 -->
+		
+		<div  class="generalReply margin-T12" id="generalReplyContainer">
 			
+			<div class="sectionTitle MB40T20"><h3>댓글</h3></div>
+			
+			<div id="generalReplyDiv">
+			
+			</div>
+		
+		
+			<div class="generalReplyWrite bodySection ">
 			
 				
-			  
-				<textarea id="reply" name="reply" class="form-control"
-					placeholder="다양한 요리 후기를 작성해주세요!"
-					style="height: 100px; width: 60%; resize: none;"></textarea><span ><button style="width:85px; height: 86px;" id="replyPhotoupload_Test">작성</button></span>
+				<form id="grForm">
+					
+					<input type="text" id="replyer" name="replyer" value="작성자입력">
+					<textarea id="content" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!" >
+						댓글작성테스트댓글
+					</textarea>
+				
+					<button id="grBtn" onclick="grWrite()">댓글작성</button>
+			
+				</form>
+			
+			</div>
+			
+			
 		
-		</form>	
+		</div>
 
 <!-- 
 
@@ -551,18 +746,24 @@
 		<div class="modal-content">
 			<span class="close" onclick="closeModal()">&times;</span>
 			<h2>포토리뷰</h2>
+			<div id="container">
 			<div id="photoReviewImgDiv"></div>
 			<div id="photoReviewReplyDiv"></div>
+			</div>
+		
+		
+			<!-- 전체 포토리뷰가 표시되는 부분 -->
+			<div id="photoReviewModalList">
 			
-			<div id="photoReviewModalList"></div>
-			
-		</div>
-
+			</div>
+			</div>
 		
 
 	</div>
 	
-
+	</div>
+	
+	
 	<!-- 최근 방문한 레시피 -->
 	<div class="recently-viewed">
 		<!-- Display recently viewed recipes as clickable images -->
@@ -571,7 +772,7 @@
 			src="path/to/recipe2.jpg" alt="Recipe 2"></a>
 		<!-- Add more recently viewed recipes if needed -->
 	</div>
-	</div>
+	
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 	

@@ -28,5 +28,12 @@ public class ReplyServiceTest {
 		
 	}
 	
+	@Test
+	public void getList() {
+		assertNotNull(service);
+		service.getGeneralReply(5);
+		
+	}
+	
 	
 }

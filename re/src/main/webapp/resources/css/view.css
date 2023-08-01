@@ -1,7 +1,33 @@
 @charset "UTF-8";
 
  <style>
- 
+ 		
+ 		.stepFont {
+ 			font-size: 22px;
+ 		}
+ 		
+ 		.sectionTitle {
+ 			
+ 			margin-bottom: 40px;
+ 			
+ 		}
+ 		
+ 		
+ 		/* 일반 댓글 간격 */
+ 		
+ 		.generalHead {
+ 		
+ 			margin-bottom: 30px;
+ 		}
+ 		/* 요리순서 앞 아이콘 */
+ 		
+ 		.circle-test {
+		      width: 50px;
+		      height: 50px;
+		      border-radius: 50%;
+		      background-color: rgb(233, 129, 118);
+    	}
+ 		
  		
         /* Add your CSS styles here */
 
@@ -22,12 +48,15 @@
 			padding-right: 300px;
 			 */
 			padding: 0 20%;
+			background-color: #f5e1dc;
 		}
 
-		<!-- 재료 -->
+		
 		ul {
-			list-style-type: none;
-			width: 40%;
+		    margin-top: 10px;
+		    list-style-type: none;
+		    /* width: 40%; */
+		    padding: 0px;
 		}
 		
 		li {
@@ -37,66 +66,98 @@
 		}
 		
 		
+		#replyPhotoForm_Test{
+			display: flex;
+		}
 		
-		<!-- 조리순서 -->
+		/**/
 		#recipeContainer {
 			
 			width: 100%;
 			
 		}
 		
-		#stepContent {
-			width: 70%;
+		.stepContent {
+			width: 50%;
 		}
 
-	
-
+		.margin-T12{
+			
+			margin-top: 12px;
+			
+		}
+		
+		.margin-B30{
+			margin-bottom: 30px
+		}
 
         .header {
             /* Styles for the upper part */
-            background-color: #f1f1f1;
+            background-color: #fff;
             padding: 20px;
-            
             text-align: center;
+            border: 1px solid;
         }
 
         .material {
             /* Styles for the material part */
             background-color: #fff;
             padding: 20px;
-            height: 300px
+            height: 100%;
+            border: 1px solid;
             
         }
 
         .cooking-order {
             /* Styles for the cooking order part */
-            background-color: #f9f9f9;
+            background-color: #fff;
             padding: 20px;
+             border: 1px solid;
         }
+        
+        
+        .regDottd {
+		   
+		    border: 2px dashed;
+		    height: 40px;
+		    font-size: 14px;
+		    color: #978e8e;
+		    /* float: left; */
+		    text-align: center;
+		}
 
         .cooking-review {
             /* Styles for the cooking review part */
-            background-color: #f1f1f1;
+            background-color: #fff;
             padding: 20px;
+             border: 1px solid;
         }
 
         .recently-viewed {
             /* Styles for the recently viewed section */
             background-color: #fff;
             padding: 20px;
+             border: 1px solid;
         }
 
         /* Example styles for photo review section */
         .photo-review {
             /* Styles for the photo review part */
-            background-color: #f9f9f9;
+            background-color: #fff;
             padding: 20px;
+             border: 1px solid;
+        }
+        
+        .generalReply {
+        	background-color: #fff;
+            padding: 20px;
+             border: 1px solid;
         }
 
         .photo-review img {
             /* Styles for displaying images in photo review */
-            max-width: 100%;
-            height: auto;
+            /*max-width: 100%;
+            height: auto;*/
             display: block;
             margin: 10px auto;
         }
@@ -106,12 +167,23 @@
             /* Styles for the general comment part */
             background-color: #fff;
             padding: 20px;
+             border: 1px solid;
         }
 
         /* Example styles for comment writing section */
         .comment-writing {
             /* Styles for the comment writing part */
-            background-color: #f9f9f9;
+            background-color: #fff;
             padding: 20px;
+             border: 1px solid;
+             
+        }
+        
+        
+        .writerInfoDiv {
+        
+       		 background-color: #fff;
+            padding: 20px;
+             border: 1px solid;
         }
     </style>
