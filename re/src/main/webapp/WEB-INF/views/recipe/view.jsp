@@ -119,56 +119,62 @@
 		}
 		
 		
-		/* 모달창 스타일 */
-		.modal {
-			display: none;
-			position: fixed;
-			z-index: 1;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			overflow: auto;
-			background-color: rgba(0, 0, 0, 0.4);
-		}
-		
-		.modal-content {
-			display:flex;
-			background-color: #fefefe;
-			margin: 15% auto;
-			padding: 20px;
-			border: 1px solid #888;
-			width: 80%;
-			height: 100%;
-		}
-		
-		#container {
-			width: 70%;
-	  		height: 100%;
-		}
-		
-		#photoReviewModalList {
-			width: 30%;
-			height: 100%;
-		}
-		
-		.close {
-			color: #aaa;
-			float: right;
-			font-size: 28px;
-			font-weight: bold;
-		}
-		
-		.close:hover, .close:focus {
-			color: black;
-			text-decoration: none;
-			cursor: pointer;
-		}
-		
-		#photoReviewDiv {
-			width: 100%;
-			display: flex;
-		}
+		/* 모달 스타일 */
+			.modal {
+			    display: none;
+			    position: fixed;
+			    z-index: 1;
+			    left: 0;
+			    top: 0;
+			    width: 100%;
+			    height: 100%;
+			    overflow: auto;
+			    background-color: rgba(0, 0, 0, 0.4);
+			}
+			
+			.modal-content {
+			    display: flex;
+			    flex-wrap: wrap; /* 공간 부족 시 항목을 다음 줄로 랩핑 */
+			    justify-content: space-between; /* 항목을 수평으로 정렬하고 사이에 공간을 추가 */
+			    background-color: #fefefe;
+			    margin: 15% auto;
+			    padding: 20px;
+			    border: 1px solid #888;
+			    width: 80%;
+			    max-height: 80%; /* 모달 내용의 최대 높이 제한 */
+			    overflow-y: auto; /* 내용이 넘칠 경우 수직 스크롤바 추가 */
+			}
+			
+			#container {
+			    flex-basis: 70%; /* 가능한 가로 공간의 70%를 차지 */
+			    max-width: 70%;
+			    height: 100%;
+			}
+			
+			#photoReviewModalList {
+			    flex-basis: 30%; /* 가능한 가로 공간의 30%를 차지 */
+			    max-width: 30%;
+			    height: 100%;
+			    overflow-y: auto; /* 내용이 넘칠 경우 수직 스크롤바 추가 */
+			}
+			
+			.close {
+			    color: #aaa;
+			    font-size: 28px;
+			    font-weight: bold;
+			    align-self: flex-start; /* 닫기 버튼을 상단에 정렬 */
+			}
+			
+			.close:hover, .close:focus {
+			    color: black;
+			    text-decoration: none;
+			    cursor: pointer;
+			}
+			
+			#photoReviewDiv {
+			    width: 100%;
+			    display: flex;
+			}
 		
 		/*#recipeStepDiv {
 				display: flex;
