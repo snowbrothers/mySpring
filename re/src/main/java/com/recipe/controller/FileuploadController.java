@@ -45,8 +45,8 @@ public class FileuploadController {
 		System.err.println("file/list 실행 =============================");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", service.getFileList(5));
-		map.put("fileStepList", service.getRecipeStep(5));
+		map.put("list", service.getFileList(7));
+		map.put("fileStepList", service.getRecipeStep(7));
 		
 		
 		return map;

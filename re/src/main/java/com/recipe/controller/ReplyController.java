@@ -54,10 +54,10 @@ public class ReplyController {
 		System.out.println(" getRecipeList 호출 ========================================== ");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<RecipeReplyVo> replyList = service.getRecipeReply(5);
+		List<RecipeReplyVo> replyList = service.getRecipeReply(7);
 
 		map.put("replyList", replyList);
-		map.put("photoReview", fileService.getPhotoReview(5));
+		map.put("photoReview", fileService.getPhotoReview(7));
 
 		return map;
 	}

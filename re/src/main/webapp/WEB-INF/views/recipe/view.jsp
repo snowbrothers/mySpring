@@ -19,6 +19,12 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <style>
 
+	.ingredientImgDiv{
+		width: 100%;
+		height: 100%;
+		margin-top: 30px;
+	}
+
 	.materialName{
  			
  		font-weight: 900;
@@ -40,6 +46,7 @@
     	height: 100%;
     	color: white;
     	font-weight: 800;
+    	border: 1px;
 	}
 
 	.media-body {
@@ -122,6 +129,47 @@
 		.elementsMargin{
 			margin: 30px
 		}
+		
+		.ingreModal_wrap{
+			
+			width: 100%;
+			
+		}
+		
+		.ingreModal_img{
+			border-radius: 50%;
+			width: 100px;
+			height: 100px;
+			margin-left: 20px;
+			
+		}
+		
+		.ingreModalName{
+			font-size: 40px;
+			vertical-align: middle;
+		}
+		
+		.ingredientInfoDiv th{
+			   
+		    background: #f7863b8a;
+		    font-weight: 500;
+		    padding: 12px 0 12px 40px;
+		    font-size: 15px;
+		    border-top: 1px solid;
+		    border-color: #995c307d;
+		}
+		
+		.ingredientInfoDiv td {
+		    font-weight: normal;
+		    padding: 12px 20px;
+		    font-size: 15px;
+		}
+		
+		.ingredientInfoDiv{
+			margin-top: 20px;
+   		 	border-top: 1px solid;
+		}
+		
 		
 <!-- 이미지 미리보기 -->
 
@@ -210,6 +258,7 @@
 			    height: 100%;
 			    overflow: auto;
 			    background-color: rgba(0, 0, 0, 0.4);
+			    font-family: 'Noto Sans KR';
 			}
 			
 			.modal-content {
@@ -220,7 +269,7 @@
 			    margin: 15% auto;
 			    padding: 20px;
 			    border: 1px solid #888;
-			    width: 80%;
+			    width: 500px;
 			    max-height: 80%; /* 모달 내용의 최대 높이 제한 */
 			    overflow-y: auto; /* 내용이 넘칠 경우 수직 스크롤바 추가 */
 			}
@@ -243,6 +292,7 @@
 			    font-size: 28px;
 			    font-weight: bold;
 			    align-self: flex-start; /* 닫기 버튼을 상단에 정렬 */
+			    margin-left: 420px;
 			}
 			
 			.close:hover, .close:focus {
@@ -755,7 +805,7 @@
 				
 					<textarea id="reply" name="reply" class="form-control"
 						placeholder="다양한 요리 후기를 작성해주세요!"
-						style="height: 100px; width: 60%; resize: none;"></textarea><span ><button class="writeBtn" style="width:85px; height: 100%;" id="replyPhotoupload_Test" value="나는 후기">작성</button></span>
+						style="height: 100px; width: 60%; resize: none; border-radius: 0px;"></textarea><span ><button class="writeBtn" style="width:85px; height: 100%; " id="replyPhotoupload_Test" value="나는 후기">작성</button></span>
 			
 			</form>	
 		</div>
@@ -823,13 +873,14 @@
 	<div id="ingredientModal" class="modal">
 		<div class="modal-content">
 			<span class="close" onclick="closeModal()">&times;</span>
-			<h2>재료 정보</h2>
-			<div id="ingredientImgDiv">
+			<div class="ingreModal_wrap">
+			<div class="ingredientImgDiv" id="ingredientTop">
 				<!-- 재료 사진 출력  -->
 			</div>
 
-			<div id="ingredientInfoDiv">
+			<div class="ingredientInfoDiv" id="ingredientInfoDiv">
 				<!-- 재료 정보가 여기에 출력될 것입니다. -->
+			</div>
 			</div>
 		</div>
 	</div>

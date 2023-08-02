@@ -234,28 +234,52 @@ console.log('연결 확인 ===================================================')
 		  	if(map.ingredientImg){
 		  		
 		  		let savePath = encodeURIComponent( map.ingredientImg.savePath);
-			// console.log('savePath : ', savePath);
+			
+		  	// console.log('savePath : ', savePath);
 		  		
 		  		contentImg = 
 		  			
-		  		'<a><img src="/display?fileName=' + savePath +'"></a>';
+		  		'<a><img class="ingreModal_img" src="/display?fileName=' + savePath +'"><span><b class="ingreModalName">'+map.ingredient.i_name+'</b></span></a>';
 		  	}
 		  	
 		  	
 		  	let content = '';
 		  	if (map.ingredient) {
 		    content +=
-		      '<p><b>재료명: </b>' + map.ingredient.i_name + '</p>' 
+		    	
+		    	'<table border="0" cellpadding="0" cellspacing="0">'
+		+			            '<tbody><tr>'
+		+			'<th width="200">효능</th>'
+		+				'<td>' + map.ingredient.i_power + '</td>'
+		+			'</tr>'
+		+			       '     <tr>'
+		+			'<th width="200">잘맞는 음식</th>'
+		+				'<td>' + map.ingredient.i_friendfood + '</td>'
+		+			'</tr>'
+		+			       '     <tr>'
+		+			'<th width="200">손질법</th>'
+		+				'<td>' + map.ingredient.i_repair + '</td>'
+		+			'</tr>'
+		+			       '     <tr>'
+		+			'<th width="200">관련요리</th>'
+		+				'<td>' + map.ingredient.i_cook + '</td>'
+		+			'</tr>'
+		+			       '     <tr>'
+		+		'</tbody></table>';
+		    	
+		    	
+		    	
+		      /*'<p><b>재료명: </b>' + map.ingredient.i_name + '</p>' 
 		      	+ '<p><b>효능: </b>' + map.ingredient.i_power + '</p>'
 		   		+ '<p><b>잘맞는 음식: </b>' + map.ingredient.i_friendfood + '</p>' 
 				+ '<p><b>손질법: </b>' + map.ingredient.i_repair + '</p>'
-				+ '<p><b>관련요리: </b>' + map.ingredient.i_cook + '</p>';
+				+ '<p><b>관련요리: </b>' + map.ingredient.i_cook + '</p>';*/
 		  } else {
 		    content = '재료 정보를 가져오지 못했습니다.';
 		  }
 
 		  ingredientInfoDiv.innerHTML = content;
-		  ingredientImgDiv.innerHTML = contentImg;
+		  ingredientTop.innerHTML = contentImg;
 		  modal.style.display = "block";
 		}
 

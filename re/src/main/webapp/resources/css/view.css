@@ -135,7 +135,7 @@
         .header {
             /* Styles for the upper part */
             background-color: #fff;
-            padding: 20px;
+            padding: 20px 40px;
             text-align: center;
             border: 1px solid;
              font-family: 'IBM Plex Sans KR';
@@ -144,7 +144,7 @@
         .material {
             /* Styles for the material part */
             background-color: #fff;
-            padding: 20px;
+            padding: 20px 40px;
             height: 100%;
             border-top: 3px solid;
             border-bottom: 3px solid;
@@ -155,7 +155,7 @@
         .cooking-order {
             /* Styles for the cooking order part */
             background-color: #fff;
-            padding: 20px;
+            padding: 20px 40px;
             border-top: 3px solid;
             border-bottom: 3px solid;
         }
@@ -174,7 +174,7 @@
         .cooking-review {
             /* Styles for the cooking review part */
             background-color: #fff;
-            padding: 20px;
+            padding: 20px 40px;
              border-top: 3px solid;
             border-bottom: 3px solid;
         }
@@ -198,7 +198,7 @@
         
         .generalReply {
         	background-color: #fff;
-            padding: 20px;
+            padding: 20px 40px;
            border-top: 3px solid;
             border-bottom: 3px solid;
             font-family: 'IBM Plex Sans KR';
@@ -237,7 +237,7 @@
         .writerInfoDiv {
         
        		 background-color: #fff;
-            padding: 20px;
+            padding: 20px 40px;
             border-top: 3px solid;
             border-bottom: 3px solid;
         }
