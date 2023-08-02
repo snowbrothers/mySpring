@@ -13,13 +13,83 @@
 <script src="/resources/js/view.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;500&family=Nanum+Gothic&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <style>
+
+	.materialName{
+ 			
+ 		font-weight: 900;
+ 		font-family: 'IBM Plex Sans KR';
+ 		
+ 	}
+ 		
+
+	.italicTitle{
+		
+		font-size: 20px;
+    	font-style: italic;
+    	color: #f7863b61;
+	}
+
+	.writeBtn{
+		width: 100px;
+    	background-color: #F7863B;
+    	height: 100%;
+    	color: white;
+    	font-weight: 800;
+	}
+
+	.media-body {
+		margin-bottom: 30px;
+		border-bottom: 1px solid;
+		border-color: #00000045;
+	}
+
+	.media-heading{
+		font-size: 15px;
+		
+	}
+	
+	.reply-regdate{
+		margin-left: 10px;
+		opacity: 50%
+	}
+	
+	.reply-regdate-star{
+		margin-left: 10px;
+		
+	}
+	
+	.reply-star{
+		font-size: 18px;
+	}
+
+	.info_name_f{
+ 			font-size: 18px;
+ 			color: #F7863B;
+ 		}
+ 		
+ 	.reply_list_cont{
+ 		font-size:13px;
+ 	}	
+
+	
 
 <!-- 모달창 포토리스트 -->
 
 	
-
+	.roket {
+		margin-left: 10px;
+	}
+	
+	.stepFont-Family {
+		font-family: 'IBM Plex Sans KR';
+		
+	}
+	
 	.photoList img{
             border: 1px solid;
             width: 100px;
@@ -89,6 +159,7 @@
 			/* Add some padding on the right side of the text "Eggs" */
 			padding-left: 0px;
 			float: right;
+			margin-right: 10px;
 			/* Alternatively, you can use margin to create a gap between the text and <span> */
 			/* margin-right: 10px; */
 		}
@@ -99,7 +170,7 @@
 		
 		
 		#headIntroDiv {
-			
+			margin-top : 30px;
 			width : 100%;
 		}
 		
@@ -115,9 +186,18 @@
 		}
 		
 		#likeBtn {
-		  margin-left: 10px; /* Add some space between the h1 and the button */
+		  margin-top : 7px;
+		  border: 1px solid;
+		  border-color: #d79587;
+		  font-weight: 600;
+		  color: #F7863B;
+		  font-size: 13px;
 		}
 		
+		.h3FW800 {
+ 			font-weight: 800;
+ 			font-family: 'IBM Plex Sans KR', sans-serif;
+ 		}
 		
 		/* 모달 스타일 */
 			.modal {
@@ -194,6 +274,8 @@
             margin-bottom: 60px;
             display: flex;
             flex-direction: row;
+            padding: 40px;
+           font-family: 'Noto Sans KR', sans-serif;
             /*align-items: center; 텍스트 중앙정렬 */
         }
 
@@ -528,10 +610,10 @@
 							
 				 content +=
 					
-				'<div class="generalHead margin-B30">' 
-	            + '<h4>'+item.replyer+' | '+item.regdate+'</h4>'
+				'<div class="generalHead margin-B30" style="border-bottom: 1px solid; border-color: #a52a2a52">' 
+	            + '<b style="font-size:17px">'+item.replyer+'</b> | <span style="font-size:14px; color: #0000007a;">'+item.regdate+'</span>'
 	            
-	            + '<div class="generalContent">'+item.content+'</div>'
+	            + '<div style="font-size:14px; margin-bottom:5px;" class="generalContent">'+item.content+'</div>'
 	          	+'</div>'
 		
 	
@@ -583,11 +665,16 @@
 	<div class="header" >
 		<!-- Insert representative photo here -->
 		<div id="headImgDiv"></div>
-		
-		<div id="headTitle"><h1 id="h1-title" style="margin-top: 30px;">${board.title}</h1><span><button id="likeBtn">레시피 저장</button></span></div>
+		<span><button id="likeBtn">♡  찜하기</button></span>
+		<div id="headTitle"><h1 id="h1-title" style="margin-top: 30px;">${board.title}</h1></div>
 		
 		<div id="headIntroDiv">
-		<p>${board.intro }</p>
+
+		<p>${board.intro}</p>
+		</div>
+		
+		<div id="headCookTip">
+		<p>${board.cooktip}</p>
 		</div>
 	</div>
 
@@ -596,7 +683,7 @@
 
 
 	<div class="material margin-T12">
-		<div class="sectionTitle MB40T20"><h3>재료</h3></div>
+		<div class="sectionTitle MB40T20"><h3 class="h3FW800">재료 <span class="italicTitle">Material</span></h3></div>
 		
 
 
@@ -608,7 +695,7 @@
 
 	<!-- 조리 순서 -->
 	<div class="cooking-order margin-T12">
-		<div class="sectionTitle MB40T20"><h3>조리순서</h3></div>
+		<div class="sectionTitle MB40T20"><h3 class="h3FW800">조리순서 <span class="italicTitle">Step</span></h3></div>
 
 		<div class="recipeStep elementsMargin" id="recipeStepDiv">
 		
@@ -623,18 +710,18 @@
 	<!-- 작성자 정보 -->
 
 	<div class="writerInfoDiv margin-T12">
-		<div class="sectionTitle MB40T20"><h3>레시피 작성자</h3></div>
+		<div class="sectionTitle MB40T20"><h3 class="h3FW800">레시피 작성자 <span class="italicTitle">Writer</span></h3></div>
 		<div id="MemberInfoDiv ">${board.nickname}</div>
 	
 	</div>
 
 	<!-- 요리후기  -->
 	<div class="cooking-review margin-T12">
-		<div class="sectionTitle MB40T20"><h3>요리후기 ${replyCnt}건</h3></div>
+		<div class="sectionTitle MB40T20"><h3 class="h3FW800">요리후기 ${replyCnt}건</h3></div>
 		<!-- 포토리뷰 -->
 		<div class="photo-review">
 
-			<h3>포토리뷰</h3>
+			<h3 class="h3FW800">포토리뷰</h3>
 
 			<div id="photoReviewDiv"></div>
 
@@ -663,12 +750,12 @@
 				
 					<input type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);">
 				<div id="image_container"></div>			
-					<input type="text" id="writer" name="writer" value="나는작성자"> 
+					<input type="hidden" id="writer" name="writer" value="나는작성자"> 
 				
 				
 					<textarea id="reply" name="reply" class="form-control"
 						placeholder="다양한 요리 후기를 작성해주세요!"
-						style="height: 100px; width: 60%; resize: none;"></textarea><span ><button style="width:85px; height: 100%;" id="replyPhotoupload_Test" value="나는 후기">작성</button></span>
+						style="height: 100px; width: 60%; resize: none;"></textarea><span ><button class="writeBtn" style="width:85px; height: 100%;" id="replyPhotoupload_Test" value="나는 후기">작성</button></span>
 			
 			</form>	
 		</div>
@@ -678,7 +765,7 @@
 		
 		<div  class="generalReply margin-T12" id="generalReplyContainer">
 			
-			<div class="sectionTitle MB40T20"><h3>댓글</h3></div>
+			<div class="sectionTitle MB40T20"><h3 class="h3FW800">한줄댓글 <span class="italicTitle">Reply</span></h3></div>
 			
 			<div id="generalReplyDiv">
 			
@@ -690,7 +777,7 @@
 				
 				<form id="grForm">
 					
-					<input type="text" id="replyer" name="replyer" value="작성자입력">
+					<input type="hidden" id="replyer" name="replyer" value="작성자입력">
 					<textarea id="content" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!" >
 						댓글작성테스트댓글
 					</textarea>

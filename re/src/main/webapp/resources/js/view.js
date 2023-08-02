@@ -87,8 +87,31 @@ console.log('연결 확인 ===================================================')
 		
 		function viewMaterialList(map){
 				
+			// item을 매개변수로 받아 변수 생성 , html 을 return 하는 함수 작성
+			function materialItemHtml(item) {
+			    let i_no = item.i_no; // 재료번호
+			    let i_name = item.i_name; // 재료이름
+			    let materialCnt = item.materialCnt; // 총 개수
+			 
+			    // Let's take it to the input hidden and make it available when
+				// clicking on it.
+			    // We need to get the picture associated with the comment later.
+			    return (
+			    		
+			    		'<input type="hidden" value="'+i_no+'">'
+		   				+'<li>' + i_name +'&nbsp;<i class="fa-solid fa-circle-info" style="color: #b36b44;" onclick="goModal(' + i_no + ',\''+i_name+ '\')"></i>'
+		   				
+		   				+'<span id="roketBtn"><i class="fa-solid fa-rocket" style="color: #588adf;" onclick=goRoket("'+i_name+'")></i></span>'
+		   				+'<span class="material-span">'+materialCnt+'개</span></li>'
+			    );
+			    
+			  }
+			
+			
+			
 			// console.log('재료정보 map 출력 : ', map);
-			let content = '<div><b>[재료]</b></div>';
+			let content = '<ul><b class="materialB">[재료]</b>';
+							
 			// Controller 에서 map 에 put 할때 지정한 값이 있다면..
 			
 			if(map.materialList.length > 0){
@@ -100,21 +123,19 @@ console.log('연결 확인 ===================================================')
 					// input hidden 으로 가지고 간다음 클릭하면 넘어갈때 가져갈 수 있도록 해보자
 					var i_no = item.i_no;
 					
-					
 						
 				content +=   						
-						
-					'<input type="hidden" value="'+i_no+'">'
-						+'<div>'
 					
-					+'<ul>'
-   				+'<li >' + i_name +'&nbsp;<i class="fa-solid fa-circle-info" style="color: #374967;" onclick="goModal(' + i_no + ',\''+i_name+ '\')"></i>'
-   				+'</i><span class="material-span">'+materialCnt+'개</span>'
-   				+'<span id="roketBtn"><i class="fa-solid fa-rocket" style="color: #588adf;" onclick=goRoket("'+i_name+'")></i></span></li>'
-   				+'</ul>'
-					+'</div>'
+					'<input type="hidden" value="'+i_no+'">'
+				
+   				+'<li><span class="materialName">' + i_name +'</span>&nbsp;<i class="fa-solid fa-circle-info" style="color: #F7863B;" onclick="goModal(' + i_no + ',\''+i_name+ '\')"></i>'
+   				+'<span id="roketBtn"><i class="fa-solid fa-rocket roket" style="color: #588adf;" onclick=goRoket("'+i_name+'")></i></span>'
+   				+'<span class="material-span">'+materialCnt+'개</span></li>'
+   				
+					
 				})
 				
+				content += '</ul>'
 				
 			}else{
 				content='재료 정보를 불러오지 못했습니다.';
@@ -123,6 +144,63 @@ console.log('연결 확인 ===================================================')
 			
 			materialContentDiv.innerHTML = content;
 		}
+		
+		
+		
+		// 재료 출력 테스트
+		function viewMaterialList_Test(map) {
+			  // 항목을 담은 HTML 컨테이너를 반환하는 함수
+			console.log('map.materialList : ', map.materialList)
+			
+			function materialItemHtml(item) {
+			    let i_no = item.i_no; // 재료번호
+			    let i_name = item.i_name; // 재료이름
+			    let materialCnt = item.materialcnt; // 총 개수
+
+			    // 클릭 시 사용할 숨은 입력(hidden)을 만듭니다.
+			    // 나중에 댓글과 연관된 사진을 가져오기 위해 필요합니다.
+			    return (
+			      '<input type="hidden" value="' +
+			      i_no +
+			      '">' +
+			      '<li>' +
+			      i_name +
+			      ' <i class="fa-solid fa-circle-info" style="color: #374967;" onclick="goModal(' +
+			      i_no +
+			      ', \'' +
+			      i_name +
+			      '\')"></i>' +
+			      '<span class="material-span">' +
+			      materialCnt +
+			      '개</span>' +
+			      '<span id="rocketBtn"><i class="fa-solid fa-rocket" style="color: #588adf;" onclick="goRocket(\'' +
+			      i_name +
+			      '\')"></i></span></li>'
+			    );
+			  }
+
+			  let content = '<ul><b class="materialB">[재료]</b>';
+			  // 지도 컨트롤러에서 map에 값을 설정한 경우에만...
+			  if (map.materialList.length > 0) {
+			    // 처음 5개 항목만 표시합니다.
+			    for (let index = 0; index < Math.min(5, map.materialList.length); index++) {
+			      const item = map.materialList[index];
+			      content += materialItemHtml(item);
+			    }
+			    
+			    // 만약 5개보다 더 많은 항목이 있다면, 새로운 <ul>을 생성하여 나머지 항목을 표시합니다.
+			    if (map.materialList.length > 5) {
+			      content += '</ul><span> </span><ul>';
+			      for (let index = 5; index < map.materialList.length; index++) {
+			        const item = map.materialList[index];
+			        content += materialItemHtml(item);
+			      }
+			    }
+			  }
+
+			  content += '</ul>';
+			  materialContentDiv.innerHTML = content;
+			}
 		
 		
 		
@@ -238,7 +316,7 @@ console.log('연결 확인 ===================================================')
 		                	content +=
 			                    '<input type="hidden" value="' + s_no + '">'
 			                    + '<div id="recipeContainer">'
-			                    + '<div class="stepContent stepFont" id="stepContent"><div class="circle-test"></div>'+ step_content +'</div>';
+			                    + '<div class="stepContent stepFont stepFont-Family" id="stepContent"><p class="stepFont-Family">'+ step_content +'</p></div>';
 		                	
 		               
 		                
@@ -249,7 +327,7 @@ console.log('연결 확인 ===================================================')
 		                if (matchedImage) {
 		                    let savePath = encodeURIComponent(matchedImage.savePath);
 		                    content +=
-		                        '<div class="stepContent" id="stepImg"><a><img src="/display?fileName=' + savePath + '"></a></div>';
+		                        '<div class="stepContent" id="stepImg"><a><img class="stepImg" src="/display?fileName=' + savePath + '"></a></div>';
 		                }
 
 		                content += 
@@ -440,7 +518,7 @@ console.log('연결 확인 ===================================================')
 			    		
 			      '<div class="media-body">' +
 			      '<h4 class="media-heading">' +
-			      '<b class="info_name_f">' + writer + '</b>' + replydate + '<div class="test-score1" data-max="5" data-rate="' + star + '"></div>' +
+			      '<b class="info_name_f">' + writer + '</b>' + replydate + '</span><div class="test-score1" data-max="5" data-rate="' + star + '"></div>' +
 			      '</h4>' +
 			      '<p class="reply_list_cont">' + reply + '</p></div>'
 			      
@@ -479,6 +557,8 @@ console.log('연결 확인 ===================================================')
 			    content = 'Failed to load material information.';
 			    generalCommentDiv.innerHTML = content;
 			  }
+			  
+			  
 
 			  let photoReply = '';
 
@@ -607,7 +687,7 @@ console.log('연결 확인 ===================================================')
 				    		
 				      '<div class="media-body">' +
 				      '<h4 class="media-heading">' +
-				      '<b class="info_name_f">' + writer + '</b>' + replydate + '<div class="test-score1" data-max="5" data-rate="' + star + '"></div>' +
+				      '<b class="info_name_f">' + writer + '</b><span class="reply-regdate-star reply-regdate">' + replydate + '</span><div class="test-score1 reply-regdate-star reply-star" data-max="5" data-rate="' + star + '"></div>' +
 				      '</h4>' +
 				      '<p class="reply_list_cont">' + reply + '</p></div>'
 				      

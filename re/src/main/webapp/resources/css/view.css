@@ -2,6 +2,14 @@
 
  <style>
  		
+ 		
+ 		
+ 		.materialName{
+ 			font-weight: 900;
+ 			font-family: 'IBM Plex Sans KR';
+ 		}
+ 		
+ 		
  		.circle-test{
  		
 		  width: 50px;
@@ -30,13 +38,7 @@
  		}
  		/* 요리순서 앞 아이콘 */
  		
- 		.circle-test {
-		      width: 50px;
-		      height: 50px;
-		      border-radius: 50%;
-		      background-color: rgb(233, 129, 118);
-    	}
- 		
+ 				
  		
         /* Add your CSS styles here */
 
@@ -45,33 +47,46 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #345959d9;
         }
 
 
-
+	  	/* 재료관련  */
+		.materialContent {
+			display: flex;
+		}
+		
+		.materialB {
+		 	width : 100%;
+		 	display: block;
+		 	font-family: 'IBM Plex Sans KR';
+		}
 
 
 		.viewContainer {
 			
-			/* padding-left: 300px;
-			padding-right: 300px;
-			 */
-			padding: 0 20%;
-			background-color: #f5e1dc;
+			margin: 0 auto;
+			width: 1200px;
+			background-color: white;
 		}
 
 		
 		ul {
 		    margin-top: 10px;
 		    list-style-type: none;
-		    /* width: 40%; */
+		    width: 100%;
 		    padding: 0px;
+		    line-height: 40px;
 		}
 		
 		li {
 			list-style: none;
-			width: 40%;
-			
+			width: 45%;
+			display: inline-block;
+			margin: 0 18px;
+			border-bottom: 1px solid;
+			border-color: #2d0c064f;
+			padding: 0 7px;
 		}
 		
 		
@@ -86,14 +101,27 @@
 			
 		}
 		
+		#moreButton {
+			width: 50%;
+		    margin-left: 160px;
+		    background-color: #c7897c1a;
+		    color: #00000082;
+		    font-weight: 700;
+		    border-radius: 2px;
+		    padding: 2px;
+		    border-color: #8d8d79;
+		    font-family: 'IBM Plex Sans KR';
+		}
+		
 		.stepContent {
 			width: 50%;
 		}
 		
-		/*.stepImgg {
-			width: 50%;
-		}*/
-
+		.stepImg {
+			float: right;
+		
+		}	
+		
 		.margin-T12{
 			
 			margin-top: 12px;
@@ -110,6 +138,7 @@
             padding: 20px;
             text-align: center;
             border: 1px solid;
+             font-family: 'IBM Plex Sans KR';
         }
 
         .material {
@@ -117,7 +146,9 @@
             background-color: #fff;
             padding: 20px;
             height: 100%;
-            border: 1px solid;
+            border-top: 3px solid;
+            border-bottom: 3px solid;
+           
             
         }
 
@@ -125,7 +156,8 @@
             /* Styles for the cooking order part */
             background-color: #fff;
             padding: 20px;
-             border: 1px solid;
+            border-top: 3px solid;
+            border-bottom: 3px solid;
         }
         
         
@@ -143,14 +175,16 @@
             /* Styles for the cooking review part */
             background-color: #fff;
             padding: 20px;
-             border: 1px solid;
+             border-top: 3px solid;
+            border-bottom: 3px solid;
         }
 
         .recently-viewed {
             /* Styles for the recently viewed section */
             background-color: #fff;
             padding: 20px;
-             border: 1px solid;
+             border-top: 3px solid;
+            border-bottom: 3px solid;
         }
 
         /* Example styles for photo review section */
@@ -158,13 +192,16 @@
             /* Styles for the photo review part */
             background-color: #fff;
             padding: 20px;
-             border: 1px solid;
+             border-top: 3px solid;
+            border-bottom: 3px solid;
         }
         
         .generalReply {
         	background-color: #fff;
             padding: 20px;
-             border: 1px solid;
+           border-top: 3px solid;
+            border-bottom: 3px solid;
+            font-family: 'IBM Plex Sans KR';
         }
 
         .photo-review img {
@@ -180,7 +217,9 @@
             /* Styles for the general comment part */
             background-color: #fff;
             padding: 20px;
-             border: 1px solid;
+             border-top: 3px solid;
+            border-bottom: 3px solid;
+            font-family: 'IBM Plex Sans KR';
         }
 
         /* Example styles for comment writing section */
@@ -188,7 +227,9 @@
             /* Styles for the comment writing part */
             background-color: #fff;
             padding: 20px;
-             border: 1px solid;
+            border-top: 3px solid;
+            border-bottom: 3px solid;
+            font-family: 'IBM Plex Sans KR';
              
         }
         
@@ -197,6 +238,7 @@
         
        		 background-color: #fff;
             padding: 20px;
-             border: 1px solid;
+            border-top: 3px solid;
+            border-bottom: 3px solid;
         }
     </style>
