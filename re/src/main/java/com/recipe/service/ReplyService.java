@@ -20,4 +20,8 @@ public interface ReplyService {
 	public List<GeneralReplyVo> getGeneralReply(int b_no);
 	
 	public int grWrite(GeneralReplyVo vo);
+	
+	public int replyDelete(int r_no);
+
+	public int replyEdit(RecipeReplyVo vo);
 }

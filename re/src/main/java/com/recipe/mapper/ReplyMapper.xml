@@ -45,13 +45,29 @@
 		select *
 		from rec_generalreply
 		where b_no = #{b_no}
+		order by gr_no desc
 	</select>
 
 	<insert id="grWrite">
 
 		insert into rec_generalReply values (seq_gr_no.nextval, #{content},
-		#{replyer}, sysdate, sysdate, 5)
+		#{replyer}, sysdate, sysdate, #{b_no})
 
 	</insert>
+	
+	<delete id="replyDelete">
+		
+		delete rec_reply
+		where r_no = #{r_no}
+		
+	</delete>
+	
+	<update id="replyEdit">
+		
+		update rec_reply
+		set reply = #{reply}
+		where r_no = #{r_no}
+		
+	</update>
 
 </mapper>

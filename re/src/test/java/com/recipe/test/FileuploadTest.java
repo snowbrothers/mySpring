@@ -25,6 +25,12 @@ public class FileuploadTest {
 	@Autowired
 	FileuploadMapper mapper;
 	
+	@Test
+	public void getFinishImg() {
+		
+		assertNotNull(mapper);
+		mapper.getFinishImg(5);
+	}
 	
 		
 	@Test

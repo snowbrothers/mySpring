@@ -50,4 +50,18 @@ public class ReplyServiceImpl implements ReplyService{
 		return replyMapper.grWrite(vo);
 	}
 
+
+	@Override
+	public int replyDelete(int r_no) {
+		// TODO Auto-generated method stub
+		return replyMapper.replyDelete(r_no);
+	}
+
+
+	@Override
+	public int replyEdit(RecipeReplyVo vo) {
+		// TODO Auto-generated method stub
+		return replyMapper.replyEdit(vo);
+	}
+
 }

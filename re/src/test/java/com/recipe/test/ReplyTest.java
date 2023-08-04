@@ -79,4 +79,18 @@ public class ReplyTest {
 		
 		assertEquals(1, res);
 	}
+	
+	@Test
+	public void edit() {
+		
+		RecipeReplyVo vo = new RecipeReplyVo();
+		
+		vo.setR_no(94);
+		vo.setReply("야후");
+		
+		int res = replyMapper.replyEdit(vo);
+		
+		assertEquals(1, res);
+		
+	}
 }

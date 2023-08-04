@@ -62,6 +62,12 @@ public class RecipeServiceImpl implements RecipeService{
 		return mapper.like_Recipe(likevo);
 	}
 
+	@Override
+	public int photoTotalCnt(int b_no) {
+		// TODO Auto-generated method stub
+		return mapper.photoTotalCnt(b_no);
+	}
+
 	
 
 	

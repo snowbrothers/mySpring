@@ -18,342 +18,64 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;500&family=Nanum+Gothic&family=Noto+Sans+KR&family=Orbit&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Nanum+Gothic&family=Orbit&display=swap" rel="stylesheet">
 <style>
-
-	.ingredientImgDiv{
-		width: 100%;
-		height: 100%;
-		margin-top: 30px;
-	}
-
-	.materialName{
- 			
- 		font-weight: 900;
- 		font-family: 'IBM Plex Sans KR';
- 		
- 	}
- 		
-
-	.italicTitle{
+	.recipeFinishImg {
 		
-		font-size: 20px;
-    	font-style: italic;
-    	color: #f7863b61;
-	}
-
-	.writeBtn{
-		width: 100px;
-    	background-color: #F7863B;
-    	height: 100%;
-    	color: white;
-    	font-weight: 800;
-    	border: 1px;
-	}
-
-	.media-body {
-		margin-bottom: 30px;
-		border-bottom: 1px solid;
-		border-color: #00000045;
-	}
-
-	.media-heading{
-		font-size: 15px;
-		
-	}
+		justify-content: center;
+	    display: flex;
+	    margin-bottom: 20px;
+	    padding-top: 20px;
+	    border-top: 2px solid;
+	    border-color: #00000054;
 	
-	.reply-regdate{
-		margin-left: 10px;
-		opacity: 50%
-	}
-	
-	.reply-regdate-star{
-		margin-left: 10px;
-		
-	}
-	
-	.reply-star{
-		font-size: 18px;
-	}
-
-	.info_name_f{
- 			font-size: 18px;
- 			color: #F7863B;
- 		}
- 		
- 	.reply_list_cont{
- 		font-size:13px;
- 	}	
-
-	
-
-<!-- 모달창 포토리스트 -->
-
-	
-	.roket {
-		margin-left: 10px;
-	}
-	
-	.stepFont-Family {
-		font-family: 'IBM Plex Sans KR';
-		
-	}
-	
-	.photoList img{
-            border: 1px solid;
-            width: 100px;
-            height: 80px;
-        }
-
-		.w100{
-		
-			width : 100px;
-			height : 100px;
-		
-		}
-		
-		.w136{
-			width: 136px;
-			height : 136px;
-		}
-		
-		.w20p{
-			width: 20%;
-			height: 100%
-		}
-		
-		.MB40T20{
-			margin-top: 10px;
-			margin-bottom: 40px;
-		}
-		
-		/*안의 요소 들여쓰는 마진*/
-		.elementsMargin{
-			margin: 30px
-		}
-		
-		.ingreModal_wrap{
-			
-			width: 100%;
-			
-		}
-		
-		.ingreModal_img{
-			border-radius: 50%;
-			width: 100px;
-			height: 100px;
-			margin-left: 20px;
-			
-		}
-		
-		.ingreModalName{
-			font-size: 40px;
-			vertical-align: middle;
-		}
-		
-		.ingredientInfoDiv th{
-			   
-		    background: #f7863b8a;
-		    font-weight: 500;
-		    padding: 12px 0 12px 40px;
-		    font-size: 15px;
-		    border-top: 1px solid;
-		    border-color: #995c307d;
-		}
-		
-		.ingredientInfoDiv td {
-		    font-weight: normal;
-		    padding: 12px 20px;
-		    font-size: 15px;
-		}
-		
-		.ingredientInfoDiv{
-			margin-top: 20px;
-   		 	border-top: 1px solid;
-		}
-		
-		
-<!-- 이미지 미리보기 -->
-
-	.bodySection{
-	margin-top: 20px;
-	}
-
-	#image_container{
-    /* Set the container size to match the image size */
-    width: auto;
-    height: auto;
-    max-width: 30%;
-    max-height: 30%;
-	}
-
-/* Set the image to be responsive inside the container */
-	#image_container img {
-	    width: 30%;
-	    height: 30%;
-	    object-fit: contain;
-	}
-
-<!-- ----------------->
-
-
-		#generalReplyContainer{
-			margin-top: 20px;
-		}
-		
-		#viewContainer {
-			margin : 0 auto;
-		}
-			
-		.material-span {
-			/* Add some padding on the right side of the text "Eggs" */
-			padding-left: 0px;
-			float: right;
-			margin-right: 10px;
-			/* Alternatively, you can use margin to create a gap between the text and <span> */
-			/* margin-right: 10px; */
-		}
-		
-		#roketBtn {
-			float: right;
-		}
-		
-		
-		#headIntroDiv {
-			margin-top : 30px;
-			width : 100%;
-		}
-		
-		#headTitle {
-		  display: flex;
-		  align-items: center; /* Align items vertically at the center */
-		  justify-content: center;
-		}
-		
-		#h1-title {
-		  margin: 0; /* Remove default margin for <h1> */
-		  font-family: 'IBM Plex Sans KR', sans-serif;
-		}
-		
-		#likeBtn {
-		  margin-top : 7px;
-		  border: 1px solid;
-		  border-color: #d79587;
-		  font-weight: 600;
-		  color: #F7863B;
-		  font-size: 13px;
-		}
-		
-		.h3FW800 {
- 			font-weight: 800;
- 			font-family: 'IBM Plex Sans KR', sans-serif;
- 		}
-		
-		/* 모달 스타일 */
-			.modal {
-			    display: none;
-			    position: fixed;
-			    z-index: 1;
-			    left: 0;
-			    top: 0;
-			    width: 100%;
-			    height: 100%;
-			    overflow: auto;
-			    background-color: rgba(0, 0, 0, 0.4);
-			    font-family: 'Noto Sans KR';
-			}
-			
-			.modal-content {
-			    display: flex;
-			    flex-wrap: wrap; /* 공간 부족 시 항목을 다음 줄로 랩핑 */
-			    justify-content: space-between; /* 항목을 수평으로 정렬하고 사이에 공간을 추가 */
-			    background-color: #fefefe;
-			    margin: 15% auto;
-			    padding: 20px;
-			    border: 1px solid #888;
-			    width: 500px;
-			    max-height: 80%; /* 모달 내용의 최대 높이 제한 */
-			    overflow-y: auto; /* 내용이 넘칠 경우 수직 스크롤바 추가 */
-			}
-			
-			#container {
-			    flex-basis: 70%; /* 가능한 가로 공간의 70%를 차지 */
-			    max-width: 70%;
-			    height: 100%;
-			}
-			
-			#photoReviewModalList {
-			    flex-basis: 30%; /* 가능한 가로 공간의 30%를 차지 */
-			    max-width: 30%;
-			    height: 100%;
-			    overflow-y: auto; /* 내용이 넘칠 경우 수직 스크롤바 추가 */
-			}
-			
-			.close {
-			    color: #aaa;
-			    font-size: 28px;
-			    font-weight: bold;
-			    align-self: flex-start; /* 닫기 버튼을 상단에 정렬 */
-			    margin-left: 420px;
-			}
-			
-			.close:hover, .close:focus {
-			    color: black;
-			    text-decoration: none;
-			    cursor: pointer;
-			}
-			
-			#photoReviewDiv {
-			    width: 100%;
-			    display: flex;
-			}
-		
-		/*#recipeStepDiv {
-				display: flex;
-				
-			}*/
-	
-	<!-- 요리순서 css -->
-	
-		#recipeStepDiv {
-            background-color: antiquewhite;
-            display: flex;
-        }
-
-        /* Set the container to flex and set the direction to row */
-        #recipeContainer {
-        	font-size: 22px;
-            margin-bottom: 60px;
-            display: flex;
-            flex-direction: row;
-            padding: 40px;
-           font-family: 'Noto Sans KR', sans-serif;
-            /*align-items: center; 텍스트 중앙정렬 */
-        }
-
-        /* Add some margin between the text and the image */
-        #recipeContainer > div:first-child {
-            margin-right: 10px;
-        }
-
-        /* Optional: Add some styles to the image */
-        #recipeContainer img {
-           	border-radius: 30px;
-            
-            width: 300px;
-            height: 200px;
-        }
-        
-        #replyWriteForm {
-        	display: flex;
-        }
-        
-        
+	} 
 </style>
 <script type="text/javascript">
   
 
 	window.addEventListener('load', function(){
   			
-	  
+		const moreButton = document.getElementById('moreButton');
+		  const reduceButton = document.getElementById('reduceBtn');
+		  const cookingReviewSection = document.getElementById('cookingReviewSection'); // 요리 리뷰 부분의 ID를 추가합니다.
+
+		  moreButton.addEventListener('click', function() {
+		    generalCommentDiv.style.display = 'block'; // 댓글 섹션을 보이게 합니다.
+		    moreButton.style.display = 'none'; // "댓글 전체보기" 버튼을 숨깁니다.
+		    reduceButton.style.display = 'block'; // "댓글 줄이기" 버튼을 보이게 합니다.
+		  });
+
+		  reduceButton.addEventListener('click', function() {
+		    moreButton.style.display = 'block'; // "댓글 전체보기" 버튼을 보이게 합니다.
+		    reduceButton.style.display = 'none'; // "댓글 줄이기" 버튼을 숨깁니다.
+			
+			  getRecipeReply();
+
+			  cookingReviewSection.scrollIntoView({ behavior: 'auto' });
+		  });
+		  
+		  // 일반댓글 ==============================================
+		  
+		  const moreGRButton = document.getElementById('moreGRButton');
+		  const reduceGRButton = document.getElementById('reduceGRBtn');
+		  const generalReplyContainer = document.getElementById('generalReplyContainer'); // 요리 리뷰 부분의 ID를 추가합니다.
+
+		  moreGRButton.addEventListener('click', function() {
+			  generalReplyDiv.style.display = 'block'; // 댓글 섹션을 보이게 합니다.
+		    moreGRButton.style.display = 'none'; // "댓글 전체보기" 버튼을 숨깁니다.
+		    reduceGRButton.style.display = 'block'; // "댓글 줄이기" 버튼을 보이게 합니다.
+		  });
+
+		  reduceGRButton.addEventListener('click', function() {
+			  moreGRButton.style.display = 'block'; // "댓글 전체보기" 버튼을 보이게 합니다.
+			  reduceGRButton.style.display = 'none'; // "댓글 줄이기" 버튼을 숨깁니다.
+			
+			  getGeneralReply();
+
+			  generalReplyContainer.scrollIntoView({ behavior: 'auto' });
+		  });
+		  
+		
+		//=========================================================================================
 			
 			// 상단 사진 이미지 출력
 			getFileList();
@@ -366,6 +88,8 @@
 			
 			// 댓글 출력 
 			getRecipeReply();
+			
+			
 			
 			// 별점
 			initializeStarRatings();
@@ -382,6 +106,11 @@
 
 			});
 			
+			/*
+			reduceBtn.addEventListener('click', function(){
+				
+				getRecipeReply();
+			});*/
 			
 			
 			
@@ -393,7 +122,7 @@
 				
 			});*/
 			
-		
+			
 			
 			//파일업로드
 			replyPhotoupload_Test.addEventListener('click', function(){
@@ -656,22 +385,78 @@
 	
 		let content = '';
 		
-		map.generalReply.forEach(function(item, index){
+		 let showAll = false;
+
+		  // Function to generate the HTML content for a single item
+		  function generateHtml(item) {
+		    
+			let gr_no = item.gr_no; // comment number
+		    let regdate = item.regdate; // Date Created
+		    let replyer = item.replyer; // detail
+		    let content = item.content; // Writer
+
+		    // Let's take it to the input hidden and make it available when
+			// clicking on it.
+		    // We need to get the picture associated with the comment later.
+		    return (
+		    		
+	    		'<div class="generalHead margin-B30" style="border-bottom: 1px solid; border-color: #a52a2a52">' 
+	            + '<b style="font-size:17px font-size: 14px; margin-bottom: 5px; ">'+replyer+'</b> | <span style="font-size:14px; color: #0000007a;">'+regdate+'</span>'
+	            
+	            + '<div style="font-size:14px; margin-bottom:5px; margin-top: 10px; margin-left: 5px;" class="generalContent">'+content+'</div>'
+	          	+'</div>'
+		      
+		    );
+		    
+		  }
+
+		  // Function to display all items in map.replyList
+		  function displayGReply() {
+		    showAll = true;
+		    content = '';
+		    map.generalReply.forEach(function (item) {
+		      content += generateHtml(item);
+		    });
+		    generalReplyDiv.innerHTML = content;
+		    
+		  }
+
+		 
+		  
+		  // If there is a value specified when putting it to the map in
+			// the controller...
+		  if (map.generalReply.length > 0) {
+		    // Show the first five items initially
+		    for (let index = 0; index < Math.min(5, map.generalReply.length); index++) {
+		      const item = map.generalReply[index];
+		      content += generateHtml(item);
+		    }
+		    generalReplyDiv.innerHTML = content;
+	
+
+		    // Add event listener to the '더보기' button
+		    const moreGRButton = document.getElementById('moreGRButton');
+		    moreGRButton.addEventListener('click', displayGReply);
+		  } else {
+		    content = '댓글이 없습니다.. 첫번째 후기를 남길 기회에요!';
+		    generalReplyDiv.innerHTML = content;
+		  }
+		
+		
+		
+		/*map.generalReply.forEach(function(item, index){
 							
 				 content +=
 					
 				'<div class="generalHead margin-B30" style="border-bottom: 1px solid; border-color: #a52a2a52">' 
-	            + '<b style="font-size:17px">'+item.replyer+'</b> | <span style="font-size:14px; color: #0000007a;">'+item.regdate+'</span>'
+	            + '<b style="font-size:17px font-size: 14px; margin-bottom: 5px; ">'+item.replyer+'</b> | <span style="font-size:14px; color: #0000007a;">'+item.regdate+'</span>'
 	            
-	            + '<div style="font-size:14px; margin-bottom:5px;" class="generalContent">'+item.content+'</div>'
+	            + '<div style="font-size:14px; margin-bottom:5px; margin-top: 10px; margin-left: 5px;" class="generalContent">'+item.content+'</div>'
 	          	+'</div>'
-		
-	
-	          	
-	         
+		  
 	});
 		
-		 generalReplyDiv.innerHTML = content;
+		 generalReplyDiv.innerHTML = content;*/
 		}
 	
 	
@@ -708,7 +493,7 @@
 
 	<div class="viewContainer bor">
 
-	<input id="m_no" type="text" value="2">
+	<input id="m_no" type="hidden" value="2">
 	
 
 	<!-- 상단 -->
@@ -725,6 +510,10 @@
 		
 		<div id="headCookTip">
 		<p>${board.cooktip}</p>
+		</div>
+		
+		<div class="videoLinkDiv">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/${board.videoCode}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 		</div>
 	</div>
 
@@ -750,6 +539,14 @@
 		<div class="recipeStep elementsMargin" id="recipeStepDiv">
 		
 		</div>
+		
+		
+		<!-- 요리 완성사진 -->
+		<div class="recipeFinishImg" id="recipeFinishImg">
+						
+				
+		</div>
+
 
 		<div class="regdateDiv regDottd" id="regdate">
 			<span style="float:left; margin-top: 10px; margin-left: 10px"><b>작성일</b> : ${board.regdate }&nbsp;<b>|</b>&nbsp;<b>수정일</b> : ${board.updatedate }</span>
@@ -766,24 +563,38 @@
 	</div>
 
 	<!-- 요리후기  -->
-	<div class="cooking-review margin-T12">
-		<div class="sectionTitle MB40T20"><h3 class="h3FW800">요리후기 ${replyCnt}건</h3></div>
+	<div id="cookingReviewSection" class="cooking-review margin-T12">
+		
 		<!-- 포토리뷰 -->
 		<div class="photo-review">
 
-			<h3 class="h3FW800">포토리뷰</h3>
+			<h3 class="h3FW800">포토리뷰 <span id="photoReviewCnt" class="cntClass"></span></h3>
 
-			<div id="photoReviewDiv"></div>
+			<div id="photoReviewDiv">
+			</div>
 
 		</div>
-
+	</div>
 		<!-- 일반 요리 후기 -->
 			
-		<div class="general-comment margin-T12" id="generalCommentDiv">
-		
-		
+			
+		<div class="general-commentContainer margin-T12">	
+		<div style="margin-left: 60px; margin-bottom: 10px;" class="sectionTitle MB40T20"><h3 class="h3FW800">요리후기 <span id="replyCnt" class="cntClass"></span></h3></div>
+			<div class="general-commentContents">
+			<div class="general-comment margin-T12" id="generalCommentDiv"></div>
+			
+			
+			<div class="d-grid gap-2 col-6 mx-auto">
+			  <button id="moreButton" type="button" class="btn btn-success">댓글 전체보기</button>
+			  <button id="reduceBtn" type="button" class="btn btn-success" style="display:none;">댓글 줄이기</button>
+			</div>
+			</div>
+			
+			
+			
 		</div>
-		<div class="d-grid gap-2 col-6 mx-auto "><button id="moreButton" type="button" class="btn btn-success">댓글 더보기</button></div></div>
+		
+		
 		<!-- 댓글 작성 부분, 사진 첨부 추가 -->
 		
 		<!-- <button id="moreButton">더보기</button> -->
@@ -791,21 +602,21 @@
 
 
 			
-			<form id="replyPhotoForm_Test" enctype="multipart/form-data" name="replyPhotoForm_Test">
+			<form style="height:130px;" id="replyPhotoForm_Test" enctype="multipart/form-data" name="replyPhotoForm_Test">
 					
 						
-				<div class="starDiv" data-max="5"></div>
+				<div style="position: absolute; margin-top: 110px;" class="starDiv" data-max="5"></div>
 					<input id="b_no" name ="b_no" type="hidden" value="${board.b_no}">
 					<input type="hidden" id="star">
 				
-					<input type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);">
+					<input style="display:none;" type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);">
 				<div id="image_container"></div>			
 					<input type="hidden" id="writer" name="writer" value="나는작성자"> 
 				
-				
+					<img  src="https://recipe1.ezmember.co.kr/img/pic_none3.gif" alt="파일첨부" width="100" height="100" onclick="document.getElementById('image').click();" style="cursor:pointer; margin-right: 10px;">
 					<textarea id="reply" name="reply" class="form-control"
 						placeholder="다양한 요리 후기를 작성해주세요!"
-						style="height: 100px; width: 60%; resize: none; border-radius: 0px;"></textarea><span ><button class="writeBtn" style="width:85px; height: 100%; " id="replyPhotoupload_Test" value="나는 후기">작성</button></span>
+						style="height: 100px; width: 100%; resize: none; border-radius: 0px;"></textarea><span ><button class="writeBtn" style="width:85px; height: 77%; " id="replyPhotoupload_Test" value="나는 후기">작성</button></span>
 			
 			</form>	
 		</div>
@@ -817,8 +628,10 @@
 			
 			<div class="sectionTitle MB40T20"><h3 class="h3FW800">한줄댓글 <span class="italicTitle">Reply</span></h3></div>
 			
-			<div id="generalReplyDiv">
-			
+			<div id="generalReplyDiv"></div>
+			<div class="d-grid gap-2 col-6 mx-auto">
+			  <button id="moreGRButton" type="button" class="btn btn-success">댓글 전체보기</button>
+			  <button id="reduceGRBtn" type="button" class="btn btn-success" style="display:none;">댓글 줄이기</button>
 			</div>
 		
 		
@@ -826,11 +639,9 @@
 			
 				
 				<form id="grForm">
-					
+					<input id="b_no" name ="b_no" type="hidden" value="${board.b_no}">
 					<input type="hidden" id="replyer" name="replyer" value="작성자입력">
-					<textarea id="content" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!" >
-						댓글작성테스트댓글
-					</textarea>
+					<textarea style="width: 90%; resize: none; border-radius: 1px; border: 1px solid; border-color: #0000004d;" id="content" name="contnet" rows="" cols="" placeholder="댓글을 작성해주세요!" >한줄 댓글을 작성해주세요</textarea>
 				
 					<button id="grBtn" onclick="grWrite()">댓글작성</button>
 			
@@ -842,36 +653,10 @@
 		
 		</div>
 
-<!-- 
-
-		  <form id="replyPhotoForm" method="post"enctype="multipart/form-data" name="replyPhotoForm" >
-			<input id="b_no" name ="b_no" type="text" value="${board.b_no}">
-			<input type="file" name="files">
-			<button type="button" id="replyPhotoupload">Fetch파일업로드</button>
-			
-			<div id="photouploadRes"></div>
-			
-		</form>
-
-		
-			<form id="replyWriteForm"  onsubmit="replyWrite(); return false;" enctype="multipart/form-data" >
-				  작성자 나중엔 세션에서 받아와야함 .... 
-				<input type="text" id="replyer">
-				<textarea id="replyContent" name="replyContent" class="form-control"
-					placeholder="다양한 요리 후기를 작성해주세요!"
-					style="height: 100px; width: 60%; resize: none;"></textarea><span ><button style="width:85px; height: 86px;" id="replyWriteBtn">작성</button></span>
-
-				<input id="b_no" name ="b_no" type="text" value="${board.b_no}">
-				
-				
-			</form>
-		</div>
-	 -->
-	
 	
 	<!-- 모달창 -->
 	<div id="ingredientModal" class="modal">
-		<div class="modal-content">
+		<div style="width: 500px;" class="modal-content ">
 			<span class="close" onclick="closeModal()">&times;</span>
 			<div class="ingreModal_wrap">
 			<div class="ingredientImgDiv" id="ingredientTop">
@@ -887,18 +672,22 @@
 
 
 	<div id="photoReviewModal" class="modal">
-		<div class="modal-content">
-			<span class="close" onclick="closeModal()">&times;</span>
-			<h2>포토리뷰</h2>
+		<div style="padding-top: 0px; "class="modal-content">
+			<span style="margin-left: 1030px; display: inline-block;" class="close" onclick="closeModal()">&times;</span>
+			<div style="display:flex; margin-top: 30px">
+			
 			<div id="container">
-			<div id="photoReviewImgDiv"></div>
+			
+			<div id="photoReviewImgDiv">
+			
+			</div>
 			<div id="photoReviewReplyDiv"></div>
 			</div>
 		
 		
 			<!-- 전체 포토리뷰가 표시되는 부분 -->
 			<div id="photoReviewModalList">
-			
+			</div>	
 			</div>
 			</div>
 		
@@ -916,7 +705,6 @@
 			src="path/to/recipe2.jpg" alt="Recipe 2"></a>
 		<!-- Add more recently viewed recipes if needed -->
 	</div>
-	
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 	

@@ -21,4 +21,8 @@ public interface ReplyMapper {
 	
 	// 일반 댓글 작성
 	public int grWrite(GeneralReplyVo vo);
+	
+	public int replyDelete(int r_no);
+
+	public int replyEdit(RecipeReplyVo vo);
 }

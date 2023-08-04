@@ -15,6 +15,13 @@
 	</select>
 	
 	
+	<select id="photoTotalCnt" resultType="int">
+		select count(*)
+			from rec_file
+			where b_no = #{b_no} and filetype = 'R'
+	</select>
+	
+	
 	<sql id="criteria">
 		<choose>
 			<when test="searchField == 'title'">
@@ -29,9 +36,9 @@
 	
 	<!-- 게시글 한건 조회 -->
 	<select id="getOne" resultType="com.recipe.vo.RecipeBoardVo">
-		select * 
-		  from rec_board
-		 where b_no = #{b_no} 
+		SELECT b_no,title,nickname,regdate,updatedate,boomup,intro,cooktip,viewcnt,star,mno,replycnt, SUBSTR(videoLink, -11) AS videoCode
+		FROM rec_board
+		WHERE b_no = #{b_no}
 	</select>
 	
 	<select id="getMaterial" resultType="com.recipe.vo.MaterialVo">

@@ -24,6 +24,7 @@ public class RecipeBoardVo {
 	private int star;
 	private String tier;
 	private int mno;
+	private String videoCode;
 	
 	// 파일 vo list
 	// private Filelist file;

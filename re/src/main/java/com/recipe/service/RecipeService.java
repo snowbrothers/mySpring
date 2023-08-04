@@ -28,4 +28,6 @@ public interface RecipeService {
 	
 	public int like_Recipe(LikeVo likevo);
 
+	public int photoTotalCnt(int b_no);
+
 }

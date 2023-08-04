@@ -39,18 +39,25 @@ public class FileuploadController {
 	@Autowired
 	ReplyService replyService;
 	
+	/**
+	 * 레시피 상단 이미지 불러들여오는 메서드
+	 * @param bno
+	 * @return
+	 */
 	@GetMapping("file/list/{bno}")
 	public @ResponseBody Map<String, Object> fileuploadList(@PathVariable("bno") int bno){
 		
 		System.err.println("file/list 실행 =============================");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", service.getFileList(7));
-		map.put("fileStepList", service.getRecipeStep(7));
-		
+		map.put("list", service.getFileList(5));
+		map.put("fileStepList", service.getRecipeStep(5));
+		map.put("FinishImgList",service.getFileList(5));
 		
 		return map;
 	}
+	
+	
 	
 	
 //	
@@ -98,6 +105,7 @@ public class FileuploadController {
 	
 	@PostMapping("/file/photoReview_Test")
 	public @ResponseBody Map<String, Object> uploadTest(List<MultipartFile> files
+											,List<MultipartFile> flies2
 											,RecipeReplyVo vo
 											){
 		
